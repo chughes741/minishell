@@ -58,12 +58,12 @@ $(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c
 # Removes objects
 clean:
 	$(HIDE)$(RM) $(OBJS)
-	$(HIDE)$(MAKE) -C $(LDIR) $(MAKE) clean
+#!	$(HIDE)$(MAKE) -C $(LDIR) $(MAKE) clean
 
 # Removes objects and executables
 fclean: clean
 	$(HIDE)$(RM) $(NAME)
-	$(HIDE)$(MAKE) -C $(LDIR) $(MAKE) fclean
+#!	$(HIDE)$(MAKE) -C $(LDIR) $(MAKE) fclean
 
 # Removes objects and executables and remakes
 re: fclean all
