@@ -25,6 +25,8 @@ RM		=	rm -rf
 #*                                LIBRARIES                                    #
 #*-----------------------------------------------------------------------------#
 
+LIBS	=	-lreadline
+
 LDIR	=	libft/
 LIBFT	=	libft.a
 
@@ -47,7 +49,7 @@ OBJS	=	$(patsubst $(SRCDIR)%.c,$(OBJDIR)%.o,$(SRCS))
 all: $(LDIR)/$(LIBFT) $(NAME)
 
 $(NAME): $(OBJS) $(LDIR)/$(LIBFT)
-	$(HIDE)$(CC) $(CFLAGS) $(OBJS) $(LDIR)$(LIBFT) -o $@
+	$(HIDE)$(CC) $(CFLAGS) $(LIBS) $(OBJS) $(LDIR)$(LIBFT) -o $@
 
 $(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c
 	$(HIDE)mkdir -p $(OBJDIR)
