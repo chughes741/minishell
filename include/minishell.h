@@ -34,4 +34,7 @@
 # include <curses.h> // tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
 # include <term.h> // tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
 
+// Libft
+#include "../libft/include/libft.h"
+
 #endif
