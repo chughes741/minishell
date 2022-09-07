@@ -46,7 +46,7 @@ OBJDIR	=	bin/
 SRCS	=	$(wildcard $(SRCDIR)*.c) #! RBS
 OBJS	=	$(patsubst $(SRCDIR)%.c,$(OBJDIR)%.o,$(SRCS))
 
-all: inputrc $(LDIR)/$(LIBFT) $(NAME)
+all: $(LDIR)/$(LIBFT) $(NAME)
 
 $(NAME): $(OBJS) $(LDIR)/$(LIBFT)
 	$(HIDE)$(CC) $(CFLAGS) $(LIBS) $(OBJS) $(LDIR)$(LIBFT) -o $@
@@ -54,9 +54,6 @@ $(NAME): $(OBJS) $(LDIR)/$(LIBFT)
 $(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c
 	$(HIDE)mkdir -p $(OBJDIR)
 	$(HIDE)$(CC) $(CFLAGS) -c $< -o $@
-
-inputrc:
-	$(HIDE)cp .inputrc ~/
 
 # Removes objects
 clean:
@@ -66,7 +63,6 @@ clean:
 # Removes objects and executables
 fclean: clean
 	$(HIDE)$(RM) $(NAME)
-	$(HIDE)$(RM) ~/.inputrc
 #!	$(HIDE)$(MAKE) -C $(LDIR) $(MAKE) fclean
 
 # Removes objects and executables and remakes

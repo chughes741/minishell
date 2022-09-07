@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/01 11:30:00 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/07 16:22:22 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	main()
 	{
 		if (!ft_strncmp(cmd, "^D", 2))
 			exit(0);
-		//TODO Handle \\ and ^C exits, might need to use .inputrc and ENV for this
 		printf("%s\n", cmd);
 		free(cmd);
 		cmd = readline("> ");
