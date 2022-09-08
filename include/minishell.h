@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/08 12:06:17 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/08 12:13:27 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@
 typedef struct s_data {
 	int	nothing;
 }		t_data;
+
+typedef struct s_params {
+	char	*path;
+	char	**exec_arg;
+	char	**envp;
+	int		fd_in;
+	int		fd_out;
+}			t_params;
 
 // Data struct functions
 void	init_data(void);
