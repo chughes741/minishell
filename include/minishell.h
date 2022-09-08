@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/01 11:30:00 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/08 12:02:07 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,14 @@
 
 // Libft
 #include "../libft/include/libft.h"
+
+typedef struct s_data {
+	int	nothing;
+}		t_data;
+
+// Data struct functions
+void	init_data(void);
+t_data	*get_data(void);
+void	del_data(void);
 
 #endif
