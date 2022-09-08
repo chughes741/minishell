@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:32:35 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/08 12:32:53 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/08 12:49:09 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*get_path(char **paths, char *command)
 }
 
 // Returns a new string with the PATH from envp
-char	**find_path(char *envp[])
+char	**split_paths(char *envp[])
 {
 	char	*path;
 	char	**paths;

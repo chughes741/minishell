@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/08 12:41:51 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/08 12:49:26 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 #include "../libft/include/libft.h"
 
 typedef struct s_data {
-	int	nothing;
+	char	**paths;
 }		t_data;
 
 typedef struct s_params {
@@ -50,7 +50,7 @@ typedef struct s_params {
 }			t_params;
 
 // Data struct functions
-void	init_data(void);
+void	init_data(char	*envp[]);
 t_data	*get_data(void);
 void	del_data(void);
 
@@ -61,8 +61,8 @@ void	exit_error(char *message);
 void	signal_handler(int signal);
 
 // Exec setup functions
+char	**split_paths(char *envp[]);
 char	*get_path(char **paths, char *command);
-char	**find_path(char *envp[]);
 int		exe(t_params *params);
 
 #endif

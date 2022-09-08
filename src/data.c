@@ -6,15 +6,19 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:58:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/08 12:03:40 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/08 12:49:37 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 // Initializes data struct
-void	init_data(void)
+void	init_data(char *envp[])
 {
+	t_data	*data;
+
+	data = get_data();
+	data->paths = split_paths(envp);
 	return ;
 }
 
