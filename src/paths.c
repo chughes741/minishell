@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:32:35 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/08 12:49:09 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/08 14:02:16 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ char	*get_path(char **paths, char *command)
 			return (path);
 		free(path);
 	}
-	exit_error("Cannot find path to program: ");
 	return (NULL);
 }
 
