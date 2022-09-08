@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/08 12:04:48 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/08 12:06:17 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,8 @@ void	del_data(void);
 
 // Error handling
 void	exit_error(char *message);
+
+// Signal handling
+void	signal_handler(int signal);
 
 #endif
