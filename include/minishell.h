@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/08 13:59:14 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/09 19:51:16 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_data {
 }		t_data;
 
 typedef struct s_params {
+	pid_t	id;
 	char	*path;
 	char	**exec_arg;
 	char	**envp;
@@ -67,5 +68,7 @@ char		*get_path(char **paths, char *command);
 int			exe(t_params *params);
 t_params	*cmd_parse(char *line);
 
+// I/O functions
+void	open_pipe(void);
 
 #endif
