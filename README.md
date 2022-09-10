@@ -46,3 +46,18 @@ The `readline()` function can cause memory leaks. You don’t have to fix them. 
 > You should limit yourself to the subject description. Anything that is not asked is not required. If you have any doubt about a requirement, take bash as a reference.
 
 ---
+
+## Notes
+Process sequence for running chained programs:
+- Parse inputs into `s_params` struct
+	- `envp` is cloned from `t_data`
+	- `exec_arg` is parsed from readline
+	- `path` is found with `t_data->paths` and `exec_arg`
+- Setup pipes and files for I/O
+	- `open()` called for any files that need to be opened
+	- Pipe fd's are copied into `s_params`
+- Call exe
+	- `s_params->id` is set once `fork()` is called
+	- `dup2` used to clone pipe ends to **STDIN** and **STDOUT**
+	- `waitpid()` for host process
+	- `execve()` called for child
