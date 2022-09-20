@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/20 14:00:40 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/20 14:52:36 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,14 @@
 // Libft
 #include "../libft/include/libft.h"
 
+// Linked list for storing session variables
 typedef struct s_var {
 	char	*name;
 	char	*val;
 	t_var	*next;
 }		t_var;
 
-typedef struct s_data {
-	char	**envp;
-	char	**paths;
-	t_var	*vars;
-}		t_data;
-
+// Struct for storing initialization info for exec
 typedef struct s_params {
 	pid_t	id;
 	char	*path;
@@ -57,6 +53,14 @@ typedef struct s_params {
 	int		fd_in;
 	int		fd_out;
 }			t_params;
+
+// Singleton struct for program data
+typedef struct s_data {
+	char		**envp;
+	char		**paths;
+	t_var		*vars;
+	t_params	*params;
+}		t_data;
 
 // Data struct functions
 void	init_data(char	*envp[]);
@@ -89,4 +93,4 @@ t_var	*t_var_search(char *name);
 void	t_var_del_all(void);
 
 
-#endif
+#endif // MINISHELL_H
