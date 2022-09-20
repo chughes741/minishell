@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/20 12:58:45 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/20 13:17:34 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 typedef struct s_var {
 	char	*name;
 	char	*val;
+	t_var	*next;
 }		t_var;
 
 typedef struct s_data {
@@ -79,6 +80,11 @@ void	open_pipe(void);
 
 // LibC functions
 char	*strcdup(char *basestr, char *matchchrs);
+
+// t_var functions
+void	t_var_new_node(char *name, char *val);
+t_var	*t_var_search(char *name);
+void	t_var_del_all(void);
 
 
 #endif
