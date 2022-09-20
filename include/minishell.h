@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/09 19:51:16 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/20 12:58:45 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,15 @@
 // Libft
 #include "../libft/include/libft.h"
 
+typedef struct s_var {
+	char	*name;
+	char	*val;
+}		t_var;
+
 typedef struct s_data {
 	char	**envp;
 	char	**paths;
+	t_var	*vars;
 }		t_data;
 
 typedef struct s_params {
@@ -70,5 +76,9 @@ t_params	*cmd_parse(char *line);
 
 // I/O functions
 void	open_pipe(void);
+
+// LibC functions
+char	*strcdup(char *basestr, char *matchchrs);
+
 
 #endif
