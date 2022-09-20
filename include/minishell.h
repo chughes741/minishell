@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/20 13:17:34 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/20 14:00:40 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ t_params	*cmd_parse(char *line);
 
 // I/O functions
 void	open_pipe(void);
+void	here_doc_filler(int output_fd, char *key);
+void	write_str(char *str, int fd);
 
 // LibC functions
 char	*strcdup(char *basestr, char *matchchrs);
