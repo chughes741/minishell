@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/20 15:31:01 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/21 12:38:47 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,10 @@
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	init_data(envp);
-	runtime();
-	cleanup();
-	
-	exit(0);
-}
+	t_data	*data;
 
-void	runtime(void)
-{
+	data = get_data();
+	init_data(envp);
 	while (1)
 	{
 		prompter();
@@ -30,8 +25,11 @@ void	runtime(void)
 		{
 			parse_args();
 			exe();
-			wait();
+			waitpid(data->params->id, &data->exit_status, 0);
+			if (WIFEXITED(data->exit_status) != 0)
+				error_handler();
 		}
 	}
-	return ;
+	cleanup();
+	exit(0);
 }

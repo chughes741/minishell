@@ -18,6 +18,7 @@ endif
 # Compiler and flags
 CC		=	gcc
 CFLAGS	=	-Wall -Werror -Wextra
+DFLAG	=	-D DEBUG -Wall -Werror -Wextra
 RM		=	rm -rf
 
 
@@ -41,6 +42,7 @@ $(LDIR)/$(LIBFT):
 
 # Dir and file names
 NAME	=	minishell
+DEBUG	=	minishell_debug
 SRCDIR	=	src/
 OBJDIR	=	bin/
 SRCS	=	$(wildcard $(SRCDIR)*.c) #! RBS
@@ -71,3 +73,14 @@ fclean: clean
 
 # Removes objects and executables and remakes
 re: fclean all
+
+
+#*-----------------------------------------------------------------------------#
+#*                                TESTING                                      #
+#*-----------------------------------------------------------------------------#
+
+$(DEBUG): fclean
+	$(HIDE)$(CC) $(DFLAG) -o $(DEBUG) $(SRCS) $(LDIR)$(LIBFT)
+
+debug: $(DEBUG)
+

@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/21 11:00:10 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/21 12:44:30 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@
 # include <termios.h> // tcsetattr, tcgetattr
 # include <curses.h> // tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
 # include <term.h> // tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
+
+# include <errno.h> // errno
+# include <fcntl.h> // open, close
 
 // Libft
 #include "../libft/include/libft.h"
@@ -71,6 +74,7 @@ void	del_data(void);
 
 // Error handling
 void	exit_error(char *message);
+void	error_handler(void);
 
 // Signal handling
 void	signal_handler(int signal);
@@ -78,7 +82,7 @@ void	signal_handler(int signal);
 // Exec setup functions
 char		**split_paths(char *envp[]);
 char		*get_path(char **paths, char *command);
-int			exe(t_params *params);
+int			exe(void);
 t_params	*cmd_parse(char *line);
 
 // I/O functions
