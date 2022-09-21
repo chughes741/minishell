@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/21 18:32:21 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/21 18:39:34 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@
 // Libft
 #include "../libft/include/libft.h"
 
+// Prompt Macro
+#define PROMPT "> "
+
 // Linked list for storing session variables
 typedef struct s_var {
 	char			*name;
@@ -63,8 +66,9 @@ typedef struct s_data {
 	char		**paths;
 	t_var		*vars;
 	t_params	*params;
-	int			exit_status;
+	char		*last_cmd;
 	int			n_cmds;
+	int			exit_status;
 }		t_data;
 
 

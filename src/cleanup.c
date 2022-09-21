@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:52:59 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/21 17:53:19 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/21 18:33:33 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 void	cleanup(void)
 {
+	del_data();
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/21 17:55:20 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/21 18:33:09 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char *argv[], char *envp[])
 		exit(1); //! Used to get rid of compile errors
 	data = get_data();
 	init_data(envp);
-	while (1)
+	while (0) //! 0 used to skip
 	{
 		prompter();
 		parse_args();
