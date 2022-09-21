@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/21 17:56:01 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/21 18:32:21 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 typedef struct s_var {
 	char			*name;
 	char			*val;
-	struct t_var	*next;
+	struct s_var	*next;
 }		t_var;
 
 // Struct for storing initialization info for exec
