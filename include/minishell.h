@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/21 12:44:30 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/21 13:43:49 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_data {
 	t_var		*vars;
 	t_params	*params;
 	int			exit_status;
+	int			n_cmds;
 }		t_data;
 
 
