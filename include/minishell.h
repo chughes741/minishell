@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/21 13:43:49 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/21 17:44:57 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,11 @@ void	error_handler(void);
 
 // Signal handling
 void	signal_handler(int signal);
+
+// Parsing functions
+
+// Runtime loop functions
+void	prompter(void);
 
 // Exec setup functions
 char		**split_paths(char *envp[]);
