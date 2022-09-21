@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/20 14:52:36 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/21 11:00:10 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ typedef struct s_data {
 	char		**paths;
 	t_var		*vars;
 	t_params	*params;
+	int			exit_status;
 }		t_data;
+
 
 // Data struct functions
 void	init_data(char	*envp[]);
