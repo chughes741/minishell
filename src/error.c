@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:04:12 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/21 17:49:24 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/21 18:53:53 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	error_handler(void)
 	perror("Testing");
 	#ifdef DEBUG
 		int	error_log;
-		error_log = open("debug.log", O_RDWR | O_APPEND);
+		error_log = open("log/debug.log", O_RDWR | O_APPEND);
 		fprintf(error_log, "%i\n", perror(""));
 		close(error_log);
 	#endif

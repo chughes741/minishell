@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/21 18:39:34 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/21 18:51:15 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@
 # include <string.h> // strerror
 # include <sys/ioctl.h> // ioctl
 # include <termios.h> // tcsetattr, tcgetattr
-# include <curses.h> // tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
-# include <term.h> // tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
 
 # include <errno.h> // errno
 # include <fcntl.h> // open, close
