@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:04:12 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/21 12:50:00 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/21 17:49:24 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	error_handler(void)
 	t_data	*data;
 
 	data = get_data();
-	perror(strerror());
+	perror("Testing");
 	#ifdef DEBUG
 		int	error_log;
 		error_log = open("debug.log", O_RDWR | O_APPEND);

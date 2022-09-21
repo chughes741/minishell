@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/21 17:46:57 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/21 17:56:01 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@
 
 // Linked list for storing session variables
 typedef struct s_var {
-	char	*name;
-	char	*val;
-	t_var	*next;
+	char			*name;
+	char			*val;
+	struct t_var	*next;
 }		t_var;
 
 // Struct for storing initialization info for exec
@@ -72,13 +72,17 @@ typedef struct s_data {
 void	init_data(char	*envp[]);
 t_data	*get_data(void);
 void	del_data(void);
+void	cleanup(void);
 
 // Error handling
 void	exit_error(char *message);
 void	error_handler(void);
 
 // Signal handling
-void	signal_handler(int signal);
+void	init_signals(void);
+void	handle_interupt(int signum);
+void	handle_quit(int signum);
+void	handle_abort(int signum);
 
 // Parsing functions
 void	parse_args(void);
