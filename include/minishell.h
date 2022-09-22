@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/21 18:51:15 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/22 14:30:55 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ typedef struct s_data {
 	char		*last_cmd;
 	int			n_cmds;
 	int			exit_status;
+	int			rl_history_fd;
+	int			error_log_fd;
 }		t_data;
 
 
@@ -91,6 +93,8 @@ void	parse_args(void);
 
 // Runtime loop functions
 void	prompter(void);
+void	log_history(char *cmd);
+void	load_history(void);
 
 // Exec setup functions
 char		**split_paths(char *envp[]);

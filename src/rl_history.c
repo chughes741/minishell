@@ -1,34 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   rl_history.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/08 12:04:12 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/22 14:34:38 by chughes          ###   ########.fr       */
+/*   Created: 2022/09/22 14:04:49 by chughes           #+#    #+#             */
+/*   Updated: 2022/09/22 14:39:11 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-// Writes message to stderr and exits
-void	exit_error(char *message)
+// Loads and adds rl_history from log file
+void	load_history(void)
 {
-	del_data();
-	perror(message);
-	exit(1);
+	t_data	*data;
+	char	*log_str;
+
+	data = get_data();
+	log_str = get_next_line(data->rl_history_fd);
+	while (log_str)
+	{
+		add_history(log_str);
+		free(log_str);
+		log_str = get_next_line(data->rl_history_fd);
+	}
+	return ;
 }
 
-// Manages errors from children, writes to debug file
-void	error_handler(void)
+// Adds cmd to rl_history and history log
+void	log_history(char *cmd)
 {
 	t_data	*data;
 
 	data = get_data();
-	perror("Testing");
-	#ifdef DEBUG
-		fprintf(data->error_log_fd, "%i\n", perror(""));
-	#endif
+	add_history(cmd);
+	fprintf(data->rl_history_fd, "%s\n", cmd); //! Can't use fprintf for this
 	return ;
 }
