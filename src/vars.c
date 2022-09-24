@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 13:02:35 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/20 13:23:26 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/23 22:28:23 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,8 @@ static void	t_var_add(t_var *new_node)
 // Adds new node to list or modifies existing node with name
 void	t_var_new_node(char *name, char *val)
 {
-	t_data	*data;
 	t_var	*node;
 
-	data = get_data();
 	if (t_var_search(name))
 	{
 		node = t_var_search(name);

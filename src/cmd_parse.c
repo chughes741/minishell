@@ -6,12 +6,13 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 13:51:33 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/08 14:00:05 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/23 19:39:52 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+// Parses commands into struct ready to be executed
 t_params	*cmd_parse(char *line)
 {
 	t_data		*data;

@@ -8,7 +8,7 @@ DEFAULT_GOAL: all
 .PHONY: all bonus clean fclean re
 
 # Hide calls
-export VERBOSE	=	FALSE
+export VERBOSE	=	TRUE
 ifeq ($(VERBOSE),TRUE)
 	HIDE =
 else
@@ -84,3 +84,13 @@ $(DEBUG): fclean
 
 debug: $(DEBUG)
 
+
+TEST	=	minishell_test
+
+$(TSRCS):
+	$(HIDE)$(MAKE) -C $(SRCDIR)test
+
+test: $(OBJS) $(TSRCS)
+	$(HIDE)$(CC) $(CLAGS) $(LIBS) $(OBJS) $(LDIR)$(LIBFT) src/test/*.o -o $(TEST)
+	$(HIDE)./$(TEST)
+	
