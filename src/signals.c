@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:05:28 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/21 18:31:15 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/27 15:56:34 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	handle_interupt(int signum)
 
 	(void)signum;
 	data = get_data();
-	if (data->params->id != 0)
-		kill(data->params->id, 0); //TODO check leaks from killed child
+	if (data->params[0]->id != 0) //! Need a different way to check if child
+		kill(data->params[0]->id, 0); //TODO check leaks from killed child
 	return ; //TODO Handle how this returns prompt
 }
 
