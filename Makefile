@@ -68,6 +68,7 @@ clean:
 # Removes objects and executables
 fclean: clean
 	$(HIDE)$(RM) $(NAME)
+	$(HIDE)$(RM) $(DEBUG)
 	$(HIDE)$(RM) ~/.inputrc
 #!	$(HIDE)$(MAKE) -C $(LDIR) $(MAKE) fclean
 
