@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/22 14:30:55 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/27 11:23:32 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,9 @@
 # include <dirent.h> // opendir, readdir, closedir
 # include <string.h> // strerror
 # include <sys/ioctl.h> // ioctl
-# include <termios.h> // tcsetattr, tcgetattr
 
+// Extra includes
 # include <errno.h> // errno
-# include <fcntl.h> // open, close
 
 // Libft
 #include "../libft/include/libft.h"
@@ -63,7 +62,7 @@ typedef struct s_data {
 	char		**envp;
 	char		**paths;
 	t_var		*vars;
-	t_params	*params;
+	t_params	*params; //TODO Needs to be linked list or array
 	char		*last_cmd;
 	int			n_cmds;
 	int			exit_status;
