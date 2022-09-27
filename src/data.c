@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:58:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/22 14:37:30 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/27 15:19:33 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_data(char *envp[])
 	t_data	*data;
 
 	data = get_data();
+	data->run = true;
 	data->paths = split_paths(envp);
 	data->envp = envp;
 	data->rl_history_fd = open(RL_HIST, O_RDWR | O_APPEND | O_CREAT);

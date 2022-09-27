@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/27 11:23:32 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/27 15:18:33 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 
 // Extra includes
 # include <errno.h> // errno
+# include <stdbool.h>
 
 // Libft
 #include "../libft/include/libft.h"
@@ -59,6 +60,7 @@ typedef struct s_params {
 
 // Singleton struct for program data
 typedef struct s_data {
+	bool		run;
 	char		**envp;
 	char		**paths;
 	t_var		*vars;
