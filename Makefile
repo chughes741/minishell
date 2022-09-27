@@ -83,14 +83,3 @@ $(DEBUG): fclean
 	$(HIDE)$(CC) $(DFLAG) -o $(DEBUG) $(SRCS) $(LDIR)$(LIBFT)
 
 debug: $(DEBUG)
-
-
-TEST	=	minishell_test
-
-$(TSRCS):
-	$(HIDE)$(MAKE) -C $(SRCDIR)test
-
-test: $(OBJS) $(TSRCS)
-	$(HIDE)$(CC) $(CLAGS) $(LIBS) $(OBJS) $(LDIR)$(LIBFT) src/test/*.o -o $(TEST)
-	$(HIDE)./$(TEST)
-	
