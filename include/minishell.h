@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/27 15:18:33 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/27 15:22:31 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ typedef struct s_data {
 	bool		run;
 	char		**envp;
 	char		**paths;
+	t_params	**params;
 	t_var		*vars;
-	t_params	*params; //TODO Needs to be linked list or array
 	char		*last_cmd;
 	int			n_cmds;
 	int			exit_status;
