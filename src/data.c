@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:58:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/27 15:19:33 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/27 15:53:51 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ void	init_data(char *envp[])
 	data->run = true;
 	data->paths = split_paths(envp);
 	data->envp = envp;
-	data->rl_history_fd = open(RL_HIST, O_RDWR | O_APPEND | O_CREAT);
 	#ifdef DEBUG
+	data->rl_history_fd = open(RL_HIST, O_RDWR | O_APPEND | O_CREAT);
 	data->error_log_fd = open(ERROR_LOG, O_RDONLY | O_APPEND | O_CREAT);
+	load_history();
 	#endif
 	return ;
 }
@@ -47,8 +48,8 @@ void	del_data(void)
 	t_data	*data;
 
 	data = get_data();
-	close(data->rl_history_fd);
 	#ifdef DEBUG
+	close(data->rl_history_fd);
 	close(data->error_log_fd);
 	#endif
 	if (data)
