@@ -80,6 +80,6 @@ re: fclean all
 #*-----------------------------------------------------------------------------#
 
 $(DEBUG): fclean
-	$(HIDE)$(CC) $(DFLAG) -o $(DEBUG) $(SRCS) $(LDIR)$(LIBFT)
+	$(HIDE)$(CC) $(DFLAG) $(LIBS) -o $(DEBUG) $(SRCS) $(LDIR)$(LIBFT)
 
 debug: $(DEBUG)
