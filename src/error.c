@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:04:12 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/23 22:27:37 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/27 15:58:13 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	error_handler(void)
 	perror("Testing");
 	#ifdef DEBUG
 	t_data	*data = get_data();
-	dprintf(data->error_log_fd, "%i\n", perror(""));
+	dprintf(data->error_log_fd, "%i\n", data->exit_status);
 	#endif
 	return ;
 }
