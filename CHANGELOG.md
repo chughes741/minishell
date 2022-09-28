@@ -17,4 +17,4 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Minor changed, check git log (Marc + Cole)
 
 ## [0.0.1] 2022-09-28
-- Added xfree (Cole)
+- Added xfree and xrealloc (Cole)

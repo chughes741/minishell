@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/28 13:01:55 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/28 16:20:52 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,6 @@ void	t_var_del_all(void);
 // Standard Library like functions
 char	*strcdup(char *basestr, char *matchchrs);
 void	xfree(void *ptr);
+void	*xrealloc(void *ptr, size_t size);
 
 #endif // MINISHELL_H
