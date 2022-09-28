@@ -15,3 +15,6 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [0.0.1] 2022-09-27
 - Minor changed, check git log (Marc + Cole)
+
+## [0.0.1] 2022-09-28
+- Added xfree (Cole)
