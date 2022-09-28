@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/27 15:29:10 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/28 12:48:51 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,13 @@ void	open_pipe(void);
 void	here_doc_filler(int output_fd, char *key);
 void	write_str(char *str, int fd);
 
-// LibC functions
-char	*strcdup(char *basestr, char *matchchrs);
-
 // t_var functions
 void	t_var_new_node(char *name, char *val);
 t_var	*t_var_search(char *name);
 void	t_var_del_all(void);
 
+// Standard Library like functions
+char	*strcdup(char *basestr, char *matchchrs);
+void	xfree(void *ptr);
 
 #endif // MINISHELL_H

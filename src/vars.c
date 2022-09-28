@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 13:02:35 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/23 22:28:23 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/28 12:55:56 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	t_var_new_node(char *name, char *val)
 	if (t_var_search(name))
 	{
 		node = t_var_search(name);
-		free(node->val);
+		xfree(node->val);
 		node->val = val;
 		return ;
 	}
@@ -70,9 +70,9 @@ void	t_var_del_all(void)
 	temp = head;
 	while (head)
 	{
-		free(temp->name);
-		free(temp->val);
+		xfree(temp->name);
+		xfree(temp->val);
 		head = temp->next;
-		free(temp);
+		xfree(temp);
 	}
 }

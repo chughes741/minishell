@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:04:49 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/23 22:27:25 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/28 12:55:30 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	load_history(void)
 	while (log_str)
 	{
 		add_history(log_str);
-		free(log_str);
+		xfree(log_str);
 		log_str = get_next_line(data->rl_history_fd);
 	}
 	return ;
