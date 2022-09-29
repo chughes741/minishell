@@ -18,3 +18,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [0.0.1] 2022-09-28
 - Added xfree and xrealloc (Cole)
+
+## [0.0.1] 2022-09-29
+- Added unit tests (Cole)
+- Removed inputrc from Makefile (Cole)
+- Added some builtin functions (Cole)
