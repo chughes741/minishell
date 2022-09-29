@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/29 17:31:15 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/29 17:43:45 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int argc, char *argv[], char *envp[])
 		data->run = false;
 	while (data->run == true)
 	{
+		data->n_cmds = 0;
 		data->last_cmd = prompter();
 		data->params = parse_args(data->last_cmd);
 		i = -1;
@@ -32,8 +33,8 @@ int	main(int argc, char *argv[], char *envp[])
 			{
 				exe(data->params[i]);
 				waitpid(data->params[i]->id, &data->exit_status, 0);
-				if (WIFEXITED(data->exit_status) != 0)
-					error_handler();
+				// if (WIFEXITED(data->exit_status) != 0)
+					// error_handler();
 			}
 		}
 	}
