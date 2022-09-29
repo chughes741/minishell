@@ -5,7 +5,7 @@
 # Special variables
 DEFAULT_GOAL: all
 .DELETE_ON_ERROR: $(NAME)
-.PHONY: all bonus clean fclean re
+.PHONY: all bonus clean fclean re debug test
 
 # Hide calls
 export VERBOSE	=	TRUE
@@ -84,3 +84,6 @@ $(DEBUG): fclean
 	$(HIDE)$(CC) $(DFLAG) $(LIBS) -o $(DEBUG) $(SRCS) $(LDIR)$(LIBFT)
 
 debug: $(DEBUG)
+
+test:
+	$(HIDE)$(MAKE) -C test
