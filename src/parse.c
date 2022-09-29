@@ -6,13 +6,14 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/21 17:46:44 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/29 17:02:42 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	parse_args(void)
+t_params	**parse_args(char *cmd)
 {
-	return ;
+	(void)cmd;
+	return (NULL);
 }

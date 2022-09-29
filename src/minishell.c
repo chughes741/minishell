@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/27 15:29:34 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/29 17:01:42 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	main(int argc, char *argv[], char *envp[])
 		data->run = false;
 	while (data->run == true)
 	{
-		prompter();
-		parse_args();
+		data->last_cmd = prompter();
+		data->params = parse_args(data->last_cmd);
 		i = -1;
 		while (++i < data->n_cmds)
 		{
