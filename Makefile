@@ -48,17 +48,16 @@ OBJDIR	=	bin/
 SRCS	=	$(wildcard $(SRCDIR)*.c) #! RBS
 OBJS	=	$(patsubst $(SRCDIR)%.c,$(OBJDIR)%.o,$(SRCS))
 
-all: inputrc $(LDIR)/$(LIBFT) $(NAME)
+all: $(LDIR)/$(LIBFT) $(NAME)
 
 $(NAME): $(OBJS) $(LDIR)/$(LIBFT)
 	$(HIDE)$(CC) $(CFLAGS) $(LIBS) $(OBJS) $(LDIR)$(LIBFT) -o $@
 
-$(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c
-	$(HIDE)mkdir -p $(OBJDIR)
+$(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c $(OBJDIR)
 	$(HIDE)$(CC) $(CFLAGS) -c $< -o $@
 
-inputrc:
-	$(HIDE)cp .inputrc ~/
+$(OBJDIR):
+	$(HIDE)mkdir -p $(OBJDIR)
 
 # Removes objects
 clean:
