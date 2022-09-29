@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/28 16:20:52 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/29 16:23:34 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,9 @@ void	t_var_del_all(void);
 char	*strcdup(char *basestr, char *matchchrs);
 void	xfree(void *ptr);
 void	*xrealloc(void *ptr, size_t size);
+
+// Builtins
+char	*builtin_pwd(void);
+
 
 #endif // MINISHELL_H

@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/29 16:20:30 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/29 16:23:10 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	builtin_cd(char *new_dir)
 }
 
 // Replicated the UNIX command pwd
-void	builtin_pwd(void)
+char	*builtin_pwd(void)
 {
 	char	*buf;
 	int		size;
@@ -46,9 +46,7 @@ void	builtin_pwd(void)
 		buf = ft_calloc(size, sizeof(char));
 		getcwd(buf, size);
 	}
-	printf("%s\n", buf);
-	xfree(buf);
-	return ;
+	return (buf);
 }
 
 // Replicates variable exporting
