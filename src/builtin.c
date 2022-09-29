@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/29 17:50:53 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/29 17:52:55 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	builtin_cd(char *new_dir)
 
 	success = chdir(new_dir);
 	if (success == -1)
-	{ // cd: no such file or directory: $new_dir
-		perror("cd: no such file or directory: "); //TODO handle cd errors
+	{
+		perror("cd: ");
 	}
 	return ;
 }
