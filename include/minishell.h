@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/29 17:02:55 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/29 17:11:48 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ void	xfree(void *ptr);
 void	*xrealloc(void *ptr, size_t size);
 
 // Builtins
+bool	run_builtin(t_params *params);
 char	*builtin_pwd(void);
 
 
