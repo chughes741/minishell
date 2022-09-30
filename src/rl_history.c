@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:04:49 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/30 11:42:09 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/30 18:04:46 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@ void	load_history(void)
 	return ;
 }
 
-// Adds cmd to rl_history and history log
+// Adds cmd to rl_history and history log if in debug
 void	log_history(char *cmd)
 {
+	#ifdef DEBUG
 	t_data	*data;
 
 	data = get_data();
-	add_history(cmd);
-	#ifdef DEBUG
 	dprintf(data->rl_history_fd, "%s\n", cmd); //! Can't use dprintf for this
 	#endif
+	add_history(cmd);
 	return ;
 }
