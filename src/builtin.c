@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/29 17:52:55 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/30 12:02:39 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,15 @@ void	builtin_unset(char *var_name)
 // Replicates the UNIX command env
 void	builtin_env(void)
 {
+	t_data	*data;
+	int		i;
+
+	data = get_data();
+	i = -1;
+	while (data->envp[++i])
+	{
+		printf("%s\n", data->envp[i]);
+	}
 	return ;
 }
 
