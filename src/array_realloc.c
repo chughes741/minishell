@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   xrealloc.c                                         :+:      :+:    :+:   */
+/*   array_realloc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:54:59 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/30 11:24:20 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/30 12:14:36 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-// Reallocates new array of void* of size bytes
-void	*xrealloc(void *ptr, size_t size)
+// Allocs new array of void* of size bytes and copies ptrs from **ptr
+void	**array_realloc(void **ptr, int size)
 {
-	void	*new_array;
+	void	**new_array;
+	int		i;
 
-	new_array = (void*)ft_calloc(size, sizeof(void *));	
-	ft_memcpy(new_array, ptr, sizeof(void*));
+	new_array = ft_calloc(size + 1, sizeof(void *));	
+	i = -1;
+	while (ptr[++i] && i < size)
+		new_array[i] = ptr[i];
+	ptr = xfree(ptr);
 	return (new_array);
 }

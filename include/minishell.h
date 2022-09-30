@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/30 11:55:00 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/30 12:14:42 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void		write_str(char *str, int fd);
 // Standard Library like functions
 char		*strcdup(char *basestr, char *matchchrs);
 void		*xfree(void *ptr);
-void		*xrealloc(void *ptr, size_t size);
+void		**array_realloc(void **ptr, int size);
 
 // Builtins
 bool		run_builtin(t_params *params);
