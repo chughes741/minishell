@@ -6,15 +6,15 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 12:48:27 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/28 12:51:55 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/30 11:23:29 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	xfree(void *ptr)
+void	*xfree(void *ptr)
 {
 	if (ptr)
 		free(ptr);
-	return ;
+	return (NULL);
 }

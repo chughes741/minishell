@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:58:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/28 12:56:33 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/30 11:39:39 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	del_data(void)
 	close(data->rl_history_fd);
 	close(data->error_log_fd);
 	#endif
-	t_var_del_all();
 	//TODO Loop to xfree params array
 	xfree(data->last_cmd);
 	xfree(data);

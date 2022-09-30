@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:04:49 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/28 12:55:30 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/30 11:42:09 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	log_history(char *cmd)
 
 	data = get_data();
 	add_history(cmd);
+	#ifdef DEBUG
 	dprintf(data->rl_history_fd, "%s\n", cmd); //! Can't use dprintf for this
+	#endif
 	return ;
 }

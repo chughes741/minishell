@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_parse.c                                        :+:      :+:    :+:   */
+/*   array_realloc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/08 13:51:33 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/23 19:39:52 by chughes          ###   ########.fr       */
+/*   Created: 2022/09/28 15:54:59 by chughes           #+#    #+#             */
+/*   Updated: 2022/09/30 12:14:36 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-// Parses commands into struct ready to be executed
-t_params	*cmd_parse(char *line)
+// Allocs new array of void* of size bytes and copies ptrs from **ptr
+void	**array_realloc(void **ptr, int size)
 {
-	t_data		*data;
-	t_params	*params;
+	void	**new_array;
+	int		i;
 
-	data = get_data();
-	params = ft_calloc(1, sizeof(t_params));
-	params->exec_arg = ft_split(line, ' ');
-	params->path = get_path(data->paths, ft_strdup(params->exec_arg[0]));
-	params->envp = 	data->envp;
-	params->fd_in = STDIN_FILENO;
-	params->fd_out = STDOUT_FILENO;
-	
-	return (params);
+	new_array = ft_calloc(size + 1, sizeof(void *));	
+	i = -1;
+	while (ptr[++i] && i < size)
+		new_array[i] = ptr[i];
+	ptr = xfree(ptr);
+	return (new_array);
 }
