@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:32:35 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/28 12:55:15 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/30 13:29:03 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,8 @@ char	**split_paths(char *envp[])
 {
 	char	*path;
 	char	**paths;
-	int		i;
 
-	i = 0;
-	while (ft_strncmp(envp[i], "PATH=", 5))
-		i++;
-	path = ft_strdup(&envp[i][5]);
+	path = getenv("PATH");
 	paths = ft_split(path, ':');
 	xfree(path);
 	return (paths);
