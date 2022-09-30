@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/29 17:29:45 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/30 11:39:12 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,6 @@
 // Prompt Macro
 #define PROMPT "> "
 
-// Linked list for storing session variables
-typedef struct s_var {
-	char			*name;
-	char			*val;
-	struct s_var	*next;
-}		t_var;
 
 // Struct for storing initialization info for exec
 typedef struct s_params {
@@ -65,7 +59,6 @@ typedef struct s_data {
 	char		**envp;
 	char		**paths;
 	t_params	**params;
-	t_var		*vars;
 	char		*last_cmd;
 	int			n_cmds;
 	int			exit_status;
@@ -109,14 +102,9 @@ void	open_pipe(void);
 void	here_doc_filler(int output_fd, char *key);
 void	write_str(char *str, int fd);
 
-// t_var functions
-void	t_var_new_node(char *name, char *val);
-t_var	*t_var_search(char *name);
-void	t_var_del_all(void);
-
 // Standard Library like functions
 char	*strcdup(char *basestr, char *matchchrs);
-void	xfree(void *ptr);
+void	*xfree(void *ptr);
 void	*xrealloc(void *ptr, size_t size);
 
 // Builtins
