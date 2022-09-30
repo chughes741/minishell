@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:32:35 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/30 18:07:18 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/30 18:55:42 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,5 @@ char	**split_paths(void)
 
 	path = getenv("PATH");
 	paths = ft_split(path, ':');
-	xfree(path);
 	return (paths);
 }
