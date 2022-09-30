@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/30 11:40:30 by chughes          ###   ########.fr       */
+/*   Updated: 2022/09/30 11:56:18 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_params	*cmd_parse(char *line)
 	params->envp = 	data->envp;
 	params->fd_in = STDIN_FILENO;
 	params->fd_out = STDOUT_FILENO;
+	params->fd_err = STDERR_FILENO;
 	
 	return (params);
 }
