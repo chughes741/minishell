@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/01 18:31:53 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/01 18:43:18 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,21 @@ int	**open_pipes(int n_pipes)
 		pipe(fd_pipes[i]);
 	}
 	return (fd_pipes);
+}
+
+void	close_pipes(int **fd_pipes)
+{
+	t_data	*data;
+	int		i;
+
+	data = get_data();
+	if (data->n_cmds < 2)
+		return ;
+	i = -1;
+	while (fd_pipes[++i])
+	{
+		close(fd_pipes[i][0]);
+		close(fd_pipes[i][1]);
+	}
+	free_array((void **)fd_pipes);
 }
