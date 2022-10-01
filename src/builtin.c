@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/30 12:02:39 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/01 14:06:16 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,19 @@ char	*builtin_pwd(void)
 // Replicates variable exporting
 void	builtin_export(char *new_var)
 {
-	printf("%s\n", new_var); //TODO set env var
+	t_data	*data;
+	if (!new_var)
+	{
+		builtin_env(); //TODO print env with "declare -x" at the start of each line
+	}
+	data = get_data();
+	data->envp = (char**)array_realloc((void**)data->envp, arraylen(data->envp) + 1);
+	data->envp[arraylen(data->envp) - 1] = ft_strdup(new_var);
 	return ;
 }
 
+
+//? Unsets from both env and export, 
 // Replicates variable unset
 void	builtin_unset(char *var_name)
 {
