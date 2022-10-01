@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 12:16:09 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/01 12:26:54 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/01 12:41:51 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int arraylen(char **array)
 	len = 0;
 	while (array[len])
 		len++;
-	return 0;
+	return (len);
 }
 
 // Returns clone of array
@@ -31,7 +31,7 @@ char	**arraydup(char **array)
 
 	if (array == NULL)
 		return (NULL);
-	newarray = (char**)ft_calloc(arraylen(array) + 1, sizeof(char*));
+	newarray = ft_calloc(arraylen(array) + 1, sizeof(char*));
 	i = -1;
 	while (array[++i])
 		newarray[i] = ft_strdup(array[i]);
