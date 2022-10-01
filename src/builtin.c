@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/01 15:28:22 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/01 16:03:05 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ bool	run_builtin(t_params *params)
 // Replicates the UNIX program echo
 void	builtin_echo(char *str, char *opt)
 {
-	printf("%s", str);
-	if (opt == NULL)
-		printf("\n");
+	if (opt)
+		printf("%s", opt);
+	else
+		printf("%s\n", str);
 	return ;
 }
 
@@ -73,6 +74,24 @@ char	*builtin_pwd(void)
 	return (buf);
 }
 
+// Checks is variable name is valid
+static bool	valid_name(char *name)
+{
+	int	i;
+
+	if (!ft_isalpha(name[0]) && name[0] != '_')
+		return (false);
+	i = 1;
+	while (name[i] != '=')
+	{
+		if (ft_isalnum(name[i]) || name[i] == '_')
+			i++;
+		else
+			return (false);
+	}
+	return (true);
+}
+
 // Replicates variable exporting
 void	builtin_export(char *new_var)
 {
@@ -80,6 +99,11 @@ void	builtin_export(char *new_var)
 
 	if (!new_var)
 		builtin_env();
+	if (!valid_name(new_var))
+	{
+		perror("Not a valid variable name: ");
+		return ;
+	}
 	d = get_data();
 	d->envp = (char **)array_realloc((void **)d->envp, arraylen(d->envp) + 1);
 	d->envp[arraylen(d->envp) - 1] = ft_strdup(new_var);
@@ -99,7 +123,7 @@ void	builtin_unset(char *var_name)
 		pos++;
 	if (pos >= arraylen(data->envp))
 		return ;
-	data->envp = array_del_one(data->envp, pos);
+	data->envp = (char **)array_del_one((void **)data->envp, pos);
 	return ;
 }
 
