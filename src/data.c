@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:58:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/01 12:25:51 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/01 12:27:55 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	del_data(void)
 	close(data->error_log_fd);
 	#endif
 	//TODO Loop to xfree params array
-	free_array(data->envp);
+	free_array((void**)data->envp);
 	xfree(data->last_cmd);
 	xfree(data);
 	return ;
