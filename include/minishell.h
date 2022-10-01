@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/01 14:44:03 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/01 15:27:34 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void		**array_del_one(void **array, int position);
 
 // Builtins
 bool		run_builtin(t_params *params);
-void		builtin_echo(char *str);
+void		builtin_echo(char *str, char *opt);
 void		builtin_cd(char *new_dir);
 char		*builtin_pwd(void);
 void		builtin_export(char *new_var);

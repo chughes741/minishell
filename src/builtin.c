@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/01 14:52:04 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/01 15:28:22 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 bool	run_builtin(t_params *params)
 {
 	if (ft_strncmp(params->exec_arg[0], "echo", 5) == 0)
-		builtin_echo(params->exec_arg[1]);
+		builtin_echo(params->exec_arg[1], params->exec_arg[2]);
 	else if (ft_strncmp(params->exec_arg[0], "cd", 3) == 0)
 		builtin_cd(params->exec_arg[1]);
 	else if (ft_strncmp(params->exec_arg[0], "pwd", 4) == 0)
@@ -34,9 +34,11 @@ bool	run_builtin(t_params *params)
 }
 
 // Replicates the UNIX program echo
-void	builtin_echo(char *str)
+void	builtin_echo(char *str, char *opt)
 {
-	printf("%s\n", str);
+	printf("%s", str);
+	if (opt == NULL)
+		printf("\n");
 	return ;
 }
 
