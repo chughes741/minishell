@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/01 16:46:36 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/01 17:11:50 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef struct s_params {
 	char	**envp;
 	int		fd_in;
 	int		fd_out;
-	int		fd_err;
 }			t_params;
 
 // Singleton struct for program data
