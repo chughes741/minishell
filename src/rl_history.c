@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:04:49 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/30 18:04:46 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/01 19:11:38 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	load_history(void)
 	char	*log_str;
 
 	data = get_data();
-	log_str = get_next_line(data->rl_history_fd);
+	log_str = get_next_line(data->fd_rl_history);
 	while (log_str)
 	{
 		add_history(log_str);
 		xfree(log_str);
-		log_str = get_next_line(data->rl_history_fd);
+		log_str = get_next_line(data->fd_rl_history);
 	}
 	return ;
 }
