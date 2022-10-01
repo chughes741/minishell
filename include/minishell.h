@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/30 18:07:51 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/01 12:22:39 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ char		*strcdup(char *basestr, char *matchchrs);
 void		*xfree(void *ptr);
 void		**array_realloc(void **ptr, int size);
 void		*free_array(void **array);
+int 		arraylen(char **array);
+char		**arraydup(char **array);
 
 // Builtins
 bool		run_builtin(t_params *params);
