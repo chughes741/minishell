@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:58:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/01 12:27:55 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/01 14:53:02 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	init_data(char *envp[])
 // Singleton constructor for data struct
 t_data	*get_data(void)
 {
-	static	t_data	*data = NULL;
+	static t_data	*data = NULL;
 
 	if (data == NULL)
 		data = ft_calloc(1, sizeof(t_data));
@@ -53,7 +53,7 @@ void	del_data(void)
 	close(data->error_log_fd);
 	#endif
 	//TODO Loop to xfree params array
-	free_array((void**)data->envp);
+	free_array((void **)data->envp);
 	xfree(data->last_cmd);
 	xfree(data);
 	return ;
