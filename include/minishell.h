@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/01 15:27:34 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/01 16:46:36 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ typedef struct s_params {
 typedef struct s_data {
 	bool		run;
 	char		**envp;
-	char		**paths;
 	t_params	**params;
 	char		*last_cmd;
 	int			n_cmds;
@@ -90,7 +89,7 @@ void		load_history(void);
 
 // Exec setup functions
 char		**split_paths(void);
-char		*get_path(char **paths, char *command);
+char		*get_path(char *command);
 int			exe(t_params *params);
 t_params	*cmd_parse(char *line);
 

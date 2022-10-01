@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/01 14:53:52 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/01 16:45:22 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_params	*cmd_parse(char *line)
 	temp = ft_strtrim(line, " ");
 	params->exec_arg = ft_split(temp, ' ');
 	xfree(temp);
-	params->path = get_path(data->paths, ft_strdup(params->exec_arg[0]));
+	params->path = get_path(params->exec_arg[0]);
 	params->envp = data->envp;
 	params->fd_in = STDIN_FILENO;
 	params->fd_out = STDOUT_FILENO;
