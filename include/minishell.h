@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/01 18:35:41 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/01 19:11:02 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ typedef struct s_data {
 	int			n_cmds;
 	int			**fd_pipes;
 	int			exit_status;
-	int			rl_history_fd; //TODO change to fd_*
-	int			error_log_fd; //TODO change to fd_*
+	int			fd_rl_history;
+	int			fd_error_log;
 }		t_data;
 
 // Data struct functions
