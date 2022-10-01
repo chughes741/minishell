@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/01 14:06:16 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/01 14:52:04 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,23 +74,30 @@ char	*builtin_pwd(void)
 // Replicates variable exporting
 void	builtin_export(char *new_var)
 {
-	t_data	*data;
+	t_data	*d;
+
 	if (!new_var)
-	{
-		builtin_env(); //TODO print env with "declare -x" at the start of each line
-	}
-	data = get_data();
-	data->envp = (char**)array_realloc((void**)data->envp, arraylen(data->envp) + 1);
-	data->envp[arraylen(data->envp) - 1] = ft_strdup(new_var);
+		builtin_env();
+	d = get_data();
+	d->envp = (char **)array_realloc((void **)d->envp, arraylen(d->envp) + 1);
+	d->envp[arraylen(d->envp) - 1] = ft_strdup(new_var);
 	return ;
 }
 
-
-//? Unsets from both env and export, 
 // Replicates variable unset
 void	builtin_unset(char *var_name)
 {
-	printf("%s\n", var_name); //TODO unset env var
+	t_data	*data;
+	int		pos;
+
+	data = get_data();
+	pos = 0;
+	while (data->envp[pos]
+		&& ft_strncmp(var_name, data->envp[pos], ft_strlen(var_name)))
+		pos++;
+	if (pos >= arraylen(data->envp))
+		return ;
+	data->envp = array_del_one(data->envp, pos);
 	return ;
 }
 
