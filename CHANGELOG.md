@@ -23,3 +23,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Added unit tests (Cole)
 - Removed inputrc from Makefile (Cole)
 - Added some builtin functions (Cole)
+
+## [0.0.1] 2022-10-01
+- Added some fns to open pipes (Cole)
+- Added array fns (Cole)
+- Fixed builtins & handling for env variables (Cole)
