@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/01 17:48:54 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/01 18:31:53 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,21 @@ t_params	**parse_args(char *cmd)
 
 	data = get_data();
 	cmds = ft_split(cmd, '|');
-	data->n_cmds = 0;
-	while (cmds[data->n_cmds])
-		++data->n_cmds;
+	data->n_cmds = arraylen(cmds);
+	data->fd_pipes = open_pipes(data->n_cmds - 1);
 	params = ft_calloc(data->n_cmds + 1, sizeof(t_params *));
 	i = 0;
 	while (cmds[i])
 	{
 		params[i] = cmd_parse(cmds[i]);
+		if (i == 0)
+			params[i]->fd_in = STDIN_FILENO;
+		else
+			params[i]->fd_in = data->fd_pipes[i - 1][0];
+		if (i == data->n_cmds - 1)
+			params[i]->fd_out = STDOUT_FILENO;
+		else
+			params[i]->fd_out = data->fd_pipes[i][1];
 		i++;
 	}
 	return (params);
@@ -49,7 +56,23 @@ t_params	*cmd_parse(char *line)
 	xfree(temp);
 	params->path = get_path(params->exec_arg[0]);
 	params->envp = data->envp;
-	params->fd_in = STDIN_FILENO;
-	params->fd_out = STDOUT_FILENO;
 	return (params);
+}
+
+// Returns an array with the fds of n pipes
+int	**open_pipes(int n_pipes)
+{
+	int	**fd_pipes;
+	int	i;
+
+	if (n_pipes < 1)
+		return (NULL);
+	fd_pipes = (int **)ft_calloc(n_pipes + 1, sizeof(int *));
+	i = -1;
+	while (++i < n_pipes)
+	{
+		fd_pipes[i] = (int *)ft_calloc(2, sizeof(int));
+		pipe(fd_pipes[i]);
+	}
+	return (fd_pipes);
 }

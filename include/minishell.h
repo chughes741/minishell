@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/01 17:11:50 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/01 18:27:41 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ typedef struct s_data {
 	t_params	**params;
 	char		*last_cmd;
 	int			n_cmds;
+	int			**fd_pipes;
 	int			exit_status;
-	int			rl_history_fd;
-	int			error_log_fd;
+	int			rl_history_fd; //TODO change to fd_*
+	int			error_log_fd; //TODO change to fd_*
 }		t_data;
 
 // Data struct functions
@@ -93,7 +94,7 @@ int			exe(t_params *params);
 t_params	*cmd_parse(char *line);
 
 // I/O functions
-void		open_pipe(void);
+int			**open_pipes(int n_pipes);
 void		here_doc_filler(int output_fd, char *key);
 void		write_str(char *str, int fd);
 
