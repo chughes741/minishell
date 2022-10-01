@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 12:16:09 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/01 12:25:02 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/01 12:26:54 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,20 @@ char	**arraydup(char **array)
 	while (array[++i])
 		newarray[i] = ft_strdup(array[i]);
 	return (newarray);
+}
+
+// Allocs new array of void* of size bytes and copies ptrs from **ptr
+void	**array_realloc(void **ptr, int size)
+{
+	void	**new_array;
+	int		i;
+
+	new_array = ft_calloc(size + 1, sizeof(void *));	
+	i = -1;
+	while (ptr[++i] && i < size)
+		new_array[i] = ptr[i];
+	ptr = xfree(ptr);
+	return (new_array);
 }
 
 // Frees all pointers in array and array
