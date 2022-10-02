@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/02 17:29:13 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/02 18:02:13 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,22 @@ t_params	**parse_args(char *cmd)
 	return (params);
 }
 
+// Removes any files from cmd line
+char**	remove_files(char **args)
+{
+	int	i;
+
+	i = 0;
+	while (args[i])
+	{
+		if (ft_strchr(args[i], '>') || ft_strchr(args[i], '<'))
+			args = (char **)array_del_one((void **)args, i);
+		else
+			++i;
+	}
+	return (args);
+}
+
 // Parses commands into struct ready to be executed
 t_params	*cmd_parse(char *line)
 {
@@ -45,11 +61,14 @@ t_params	*cmd_parse(char *line)
 	data = get_data();
 	params = ft_calloc(1, sizeof(t_params));
 	temp = ft_strtrim(line, " ");
+	if (ft_strchr(temp, '<'))
+		params->in_path = strcdup(ft_strchr(temp, '<') + 1, " ");
+	if (ft_strchr(temp, '>'))
+		params->out_path = strcdup(ft_strchr(temp, '>') + 1, " ");
 	params->exec_arg = ft_split(temp, ' ');
+	params->exec_arg = remove_files(params->exec_arg);
 	xfree(temp);
 	params->path = get_path(params->exec_arg[0]);
 	params->envp = data->envp;
-	params->in_path = NULL; //TODO Figure out infile parsing
-	params->out_path = NULL; //TODO Figure out outfile parsing
 	return (params);
 }

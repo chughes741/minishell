@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 16:40:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/02 17:27:54 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/02 17:53:55 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ void	set_child_io(t_params *param, int i_child)
 	if (param->in_path)
 	{
 		close(data->fd_io[i_child * 2]);
-		param->fd_in = open(param->in_path, O_RDWR | O_CREAT);
+		param->fd_in = open(param->in_path, O_RDONLY);
 	}
 	else
 		param->fd_in = data->fd_io[i_child * 2];
 	if (param->out_path)
 	{
 		close(data->fd_io[(i_child * 2) + 1]);
-		param->fd_out = open(param->out_path, O_RDWR | O_CREAT);
+		param->fd_out = open(param->out_path, O_WRONLY | O_CREAT | O_APPEND);
 	}
 	else
 		param->fd_out = data->fd_io[(i_child * 2) + 1];
