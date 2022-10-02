@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 16:40:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/02 16:43:20 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/02 16:48:51 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	*setup_io(int n_cmds, int *fd_io)
 	return (fd_io);
 }
 
-// Closes all fds except those used by child[i]
+// Closes all fds except those used by child[i] and any STD IN, OUT, ERR
 void	close_io(int *fd_io, int n_cmds, int i_child)
 {
 	t_data	*data;
@@ -45,23 +45,6 @@ void	close_io(int *fd_io, int n_cmds, int i_child)
 	while (i < n_cmds * 2)
 	{
 		if (fd_io[i] > 2 && (i != (i_child * 2) && i != (i_child * 2) + 1))
-			close(fd_io[i]);
-		++i;
-	}
-	return ;
-}
-
-// Closes all fds, except STDIN, STDOUT, STDERR
-void	close_io_all(int *fd_io, int n_cmds)
-{
-	t_data	*data;
-	int		i;
-
-	data = get_data();
-	i = 0;
-	while (i < n_cmds * 2)
-	{
-		if (fd_io[i] > 3)
 			close(fd_io[i]);
 		++i;
 	}
