@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 12:44:50 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/20 12:55:06 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/02 17:51:07 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ char	*strcdup(char *basestr, char *matchchrs)
 	int		i;
 
 	i = 0;
-	while (ft_strchr(matchchrs, basestr[i]) == 0)
+	while (ft_strchr(matchchrs, basestr[i]) == NULL)
 		++i;
 	dupstr = (char *)ft_calloc(i + 1, sizeof(char));
-	ft_strlcpy(dupstr, basestr, i);
+	ft_strlcpy(dupstr, basestr, i + 1);
 	return (dupstr);
 }
