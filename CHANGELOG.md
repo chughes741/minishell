@@ -28,3 +28,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Added some fns to open pipes (Cole)
 - Added array fns (Cole)
 - Fixed builtins & handling for env variables (Cole)
+
+## [0.0.1] 2022-10-02
+- Added IO for child processes (Cole)
+- Added basic file opening (Cole)
