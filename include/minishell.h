@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/02 21:47:02 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/03 14:03:49 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,9 @@ void		*free_array(void **array);
 int 		arraylen(char **array);
 char		**arraydup(char **array);
 void		**array_del_one(void **array, int position);
-
+void		find_and_replace(char *str, char *chrs, char replace, int len);
+int			find_first(char *str, char *chrs);
+int			find_last(char *str, char *chrs);
 
 // Builtins
 bool		run_builtin(t_params *params);
