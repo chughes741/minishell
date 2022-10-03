@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/02 17:28:25 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/02 21:47:02 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ t_params	*cmd_parse(char *line);
 
 // I/O functions
 int			*init_io(int n_cmds, int *fd_io);
-void		set_child_io(t_params *param, int i_child);
 void		close_io(int *fd_io, int n_cmds, int i_child);
 void		here_doc_filler(int output_fd, char *key);
 void		write_str(char *str, int fd);

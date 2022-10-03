@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/02 18:02:13 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/02 21:46:33 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ t_params	**parse_args(char *cmd)
 	while (cmds[i])
 	{
 		params[i] = cmd_parse(cmds[i]);
-		set_child_io(params[i], i);
+		params[i]->fd_in = data->fd_io[i * 2];
+		params[i]->fd_out = data->fd_io[(i * 2) + 1];
 		i++;
 	}
 	return (params);

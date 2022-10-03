@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 16:40:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/02 21:19:08 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/02 21:46:43 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,6 @@ int	*init_io(int n_cmds, int *fd_io)
 	fd_io[0] = STDIN_FILENO;
 	fd_io[(i * 2) - 1] = STDOUT_FILENO;
 	return (fd_io);
-}
-
-// Opens and closes I/O for a child 
-void	set_child_io(t_params *param, int i_child)
-{
-	t_data	*data;
-
-	data = get_data();
-	if (param->in_path)
-	{
-		close(data->fd_io[i_child * 2]);
-		param->fd_in = open(param->in_path, O_RDONLY);
-	}
-	else
-		param->fd_in = data->fd_io[i_child * 2];
-	if (param->out_path)
-	{
-		close(data->fd_io[(i_child * 2) + 1]);
-		param->fd_out = open(param->out_path, O_WRONLY | O_CREAT | O_APPEND);
-	}
-	else
-		param->fd_out = data->fd_io[(i_child * 2) + 1];
-	return ;
 }
 
 // Closes all fds except those used by child[i] and any STD IN, OUT, ERR
