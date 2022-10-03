@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 16:40:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/02 17:53:55 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/02 21:19:08 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,8 @@ void	set_child_io(t_params *param, int i_child)
 // Closes all fds except those used by child[i] and any STD IN, OUT, ERR
 void	close_io(int *fd_io, int n_cmds, int i_child)
 {
-	t_data	*data;
-	int		i;
+	int	i;
 
-	data = get_data();
 	i = 0;
 	while (i < n_cmds * 2)
 	{
