@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/03 14:03:49 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/03 16:17:02 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void		handle_abort(int signum);
 
 // Parsing functions
 t_params	**parse_args(char *cmd);
+int			find_next(char *str, char *chr);
+char		**split_args(char *str);
 
 // Runtime loop functions
 char		*prompter(void);
