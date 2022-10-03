@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/03 17:08:52 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/03 17:09:12 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ t_params	*cmd_parse(char *line)
 	params = ft_calloc(1, sizeof(t_params));
 	params->exec_arg = split_args(line);
 	//TODO Setup files and remove from exec_args
-	//TODO Split on $, insert variables, rejoin together, trim quotes
-	insert_vars(params->exec_arg);
+	insert_vars(params->exec_arg); //TODO Split on $, insert variables, rejoin together, trim quotes
 	params->path = get_path(params->exec_arg[0]);
 	params->envp = data->envp;
 	return (params);
