@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/03 16:57:28 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/03 17:08:52 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@ t_params	**parse_args(char *cmd)
 	return (params);
 }
 
+// Inserts env variables into arguments
+void	insert_vars(char **args)
+{
+	(void)args;
+	return ;
+}
+
 // Parses commands into struct ready to be executed
 t_params	*cmd_parse(char *line)
 {
@@ -47,11 +54,13 @@ t_params	*cmd_parse(char *line)
 	params->exec_arg = split_args(line);
 	//TODO Setup files and remove from exec_args
 	//TODO Split on $, insert variables, rejoin together, trim quotes
+	insert_vars(params->exec_arg);
 	params->path = get_path(params->exec_arg[0]);
 	params->envp = data->envp;
 	return (params);
 }
 
+// Returns index of next chr match in str
 int	find_next(char *str, char *chr)
 {
 	int i;
@@ -62,6 +71,7 @@ int	find_next(char *str, char *chr)
 	return (i);
 }
 
+// Splits arguments keeping quoted sections together
 char	**split_args(char *str)
 {
 	char	**rtn;
