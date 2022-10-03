@@ -6,11 +6,12 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 11:38:39 by malord            #+#    #+#             */
-/*   Updated: 2022/09/30 13:28:41 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/03 17:01:12 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/include/libft.h"
+#include "../include/minishell.h"
 
 // Returns the number of sub strings in between sep chars for calloc
 static int	wordcount(char const *str, char *metas)
@@ -41,72 +42,89 @@ static int	wordcount(char const *str, char *metas)
 }
 
 // Returns the length of a sub string for calloc
-/*static int	ft_wordlen(char const *s, char *metas, int cpt)
+static int	wordlen(char const *str, char *metas, int cpt)
 {
 	int	len;
+	int	i;
 
 	len = 0;
-	while (s[cpt] != metas && s[cpt] != '\0')
+	while (str[cpt])
 	{
+		i = 0;
+		while (metas[i])
+		{
+			if (str[cpt] == metas[i])
+				return (len);
+			else
+				i++;
+		}
 		len++;
 		cpt++;
 	}
 	return (len);
-}*/
+}
 
 // Returns the sub string itself
-static	char	*ft_trimword(char const *s, char *metas, int cpt)
+static	char	*ft_trimword(char const *str, char *metas, int cpt)
 {
 	int		j;
+	int		i;
+	int		flag;
 	char	*nstr;
 
-	j = 0;
-	nstr = ft_calloc(ft_wordlen(s, metas, cpt) + 1, sizeof(char));
+	i = 0;
+	flag = 0;
+	nstr = ft_calloc(wordlen(str, metas, cpt) + 1, sizeof(char));
 	if (!nstr)
 		return (NULL);
-	while (s[cpt])
+	while (str[cpt])
 	{
-		if (s[cpt] != metas)
+		j = 0;
+		while (metas[j])
 		{
-			nstr[j] = s[cpt];
-			if (s[cpt + 1] == metas || s[cpt + 1] == '\0')
-				break ;
+			if (str[cpt] != metas[j])
+				j++;
 			else
 			{
-				cpt++;
-				j++;
-			}	
+				flag = 1;
+				break ;
+			}
 		}
-		else
-			cpt++;
+		if (flag == 1)
+			break ;
+		nstr[i] = str[cpt];
+		i++;
+		cpt++;
 	}
+	nstr = ft_strtrim(nstr, " ");
 	return (nstr);
 }
 
 /* Takes a string and return a 2D array, containing each string contained
 	between one separating character contained in a charset*/
-char	**split_metas(char const *s, char *metas)
+char	**split_metas(char const *str, char *metas)
 {
 	char	**result;
 	int		i;
 	int		j;
 	int		index;
 
-	if (!s)
+	if (!str)
 		return (NULL);
-	result = ft_calloc(sizeof(char *), ft_wordcount(s, metas));
+	result = ft_calloc(sizeof(char *), wordcount(str, metas) + 1);
 	i = 0;
 	j = 0;
 	index = -1;
 	if (!result)
 		return (NULL);
-	while (i <= (int)ft_strlen(s))
+	while (i <= (int)ft_strlen(str))
 	{
-		if (s[i] != metas && index < 0)
+		if (!ft_strchr(metas, str[i]) && index < 0)
 			index = i;
-		else if ((s[i] == metas || i == (int)ft_strlen(s)) && index >= 0)
+		if (ft_strchr(metas, str[i])
+			|| (i == (int)ft_strlen(str) && index >= 0))
 		{
-			result[j++] = ft_trimword(s, metas, index);
+			result[j++] = ft_trimword(str, metas, index);
 			index = -1;
 		}
 		i++;
@@ -116,13 +134,12 @@ char	**split_metas(char const *s, char *metas)
 
 int main(void)
 {
-	char	*str = "echo f > file # bonjour";
-	char	**result;
-	result = split_metas(str);
-	int i = 0;
-	while (result[i])
+	char	*str = "fuck | teawith milk\" minishellIhateyou";
+	int		i = 0;
+	char	 **split = split_metas(str, "|>\"");
+	while (split[i])
 	{
-		printf("Contenu de result[i] = %s\n", result[i]);
+		printf("contenu de split[i] = %s\n", split[i]);
 		i++;
 	}
 }
