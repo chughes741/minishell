@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 14:00:25 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/04 18:27:31 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,4 @@ int	main(int argc, char *argv[], char *envp[])
 		}
 		data->exit_status = wait_all(data);
 	}
-	del_data();
-	exit(0);
 }

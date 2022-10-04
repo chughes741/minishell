@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 15:15:45 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/04 18:32:54 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,18 @@ void	builtin_echo(char **args, int fd_write)
 	
 	i = 0;
 	newline = true;
-	if (!ft_strncmp(args[1], "-n\0", 3))
+	if (args[1] != NULL && ft_strncmp(args[1], "-n\0", 3) == 0)
 	{
 		newline = false;
 		i += 1;
 	}
-	while (args[++i])
+	while (args[++i] != NULL)
 	{
 		ft_putstr_fd(args[i], fd_write);
-		if (args[i + 1])
+		if (args[i + 1] != NULL)
 			ft_putchar_fd(' ', fd_write);
 	}
-	if (newline)
+	if (newline == true)
 		ft_putchar_fd('\n', fd_write);
 	return ;
 }
@@ -64,10 +64,7 @@ void	builtin_echo(char **args, int fd_write)
 // Replicates the UNIX command cd
 void	builtin_cd(char *new_dir)
 {
-	int	success;
-
-	success = chdir(new_dir);
-	if (success == -1)
+	if (chdir(new_dir) == -1)
 	{
 		perror("cd: ");
 	}
@@ -118,9 +115,9 @@ void	builtin_export(char *new_var)
 {
 	t_data	*d;
 
-	if (!new_var)
+	if (new_var == NULL)
 		builtin_env(STDOUT_FILENO);
-	if (!valid_name(new_var))
+	if (valid_name(new_var) == false)
 	{
 		perror("Not a valid variable name: ");
 		return ;
@@ -139,7 +136,7 @@ void	builtin_unset(char *var_name)
 
 	data = get_data();
 	pos = 0;
-	while (data->envp[pos]
+	while (data->envp[pos] != NULL
 		&& ft_strncmp(var_name, data->envp[pos], ft_strlen(var_name)))
 		pos++;
 	if (pos >= arraylen((void **)data->envp))
@@ -156,7 +153,7 @@ void	builtin_env(int fd_write)
 
 	data = get_data();
 	i = -1;
-	while (data->envp[++i])
+	while (data->envp[++i] != NULL)
 	{
 		ft_putstr_fd(data->envp[i], fd_write);
 		ft_putchar_fd('\n', fd_write);
@@ -166,9 +163,6 @@ void	builtin_env(int fd_write)
 
 void	builtin_exit(void)
 {
-	t_data	*data;
-
-	data = get_data();
-	data->run = false;
-	return ;
+	del_data();
+	exit(0);
 }
