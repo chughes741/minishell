@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 18:27:31 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/04 18:44:12 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char *argv[], char *envp[])
 
 	data = get_data();
 	init_data(envp);
-	if (argc != 1 || !argv[0])
+	if (argc != 1 || argv[0] == NULL)
 		data->run = false;
 	while (data->run == true)
 	{

@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 13:49:18 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/04 18:47:32 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_params	**parse_args(char *cmd)
 	data->fd_io = init_io(data->n_cmds, data->fd_io);
 	params = ft_calloc(data->n_cmds + 1, sizeof(t_params *));
 	i = 0;
-	while (cmds[i])
+	while (cmds[i] != NULL)
 	{
 		params[i] = cmd_parse(cmds[i]);
 		params[i]->fd_in = data->fd_io[i * 2];
@@ -70,7 +70,7 @@ t_params	*cmd_parse(char *line)
 	t_params	*params;
 
 	data = get_data();
-	params = ft_calloc(1, sizeof(t_params));
+	params = (t_params *)ft_calloc(1, sizeof(t_params));
 	params->exec_arg = split_args(line);
 	//TODO Setup files and remove from exec_args
 	insert_vars(params->exec_arg);
@@ -85,7 +85,7 @@ int	find_next(char *str, char *chr)
 	int i;
 
 	i = 0;
-	while(str[i] && !ft_strchr(chr, str[i]))
+	while(str[i] != NULL && ft_strchr(chr, str[i]) == NULL)
 		++i;
 	return (i);
 }
@@ -100,15 +100,15 @@ char	**split_args(char *str)
 	rtn = (char **)ft_calloc(1, sizeof(char *));
 	start = 0;
 	str = ft_strtrim(str, " ");
-	while (str[start])
+	while (str[start] != NULL)
 	{
-		if (!ft_strchr(" \"\'", str[start]))
+		if (ft_strchr(" \"\'", str[start]) == NULL)
 			end = find_next(&str[start], " ") + start;
 		else if (str[start] == ' ')
 			;
-		else if (ft_strchr("\'", str[start]))
+		else if (ft_strchr("\'", str[start]) != NULL)
 			end = find_next(&str[start + 1], "\'") + start + 2;
-		else if (ft_strchr("\"", str[start]))
+		else if (ft_strchr("\"", str[start]) != NULL)
 			end = find_next(&str[start + 1], "\"") + start + 2;
 		else
 			end = ft_strlen(&str[start] - 1);

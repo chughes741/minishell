@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 15:14:00 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/04 18:49:44 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,10 @@ void		handle_quit(int signum);
 void		handle_abort(int signum);
 
 // Parsing functions
+char		*prompter(void);
 t_params	**parse_args(char *cmd);
 int			find_next(char *str, char *chr);
 char		**split_args(char *str);
-
-// Runtime loop functions
-char		*prompter(void);
-void		log_history(char *cmd);
-void		load_history(void);
 
 // Exec setup functions
 char		**split_paths(void);

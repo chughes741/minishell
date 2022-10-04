@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:32:35 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 15:10:36 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/04 18:48:30 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_path(char *command)
 		return (command);
 	i = -1;
 	paths = split_paths();
-	while (paths[++i])
+	while (paths[++i] != NULL)
 	{
 		path = ft_strjoin(paths[i], "/");
 		path = str_append(path, command);
@@ -43,12 +43,12 @@ char	**split_paths(void)
 
 	data = get_data();
 	i = -1;
-	while (data->envp[++i])
+	while (data->envp[++i] != NULL)
 	{
 		if (ft_strncmp(data->envp[i], "PATH=", 5) == 0)
 			paths = ft_split(data->envp[i], ':');
 	}
-	if (paths)
+	if (paths != NULL)
 	{
 		paths = (char **)array_realloc((void **)paths, arraylen((void **)paths) + 1);
 		// paths[arraylen((void **)paths)] = builtin_pwd(); Not sure if we should do this

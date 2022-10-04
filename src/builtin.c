@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 18:32:54 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/04 18:37:28 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ bool	run_builtin(t_params *params)
 		builtin_exit();
 	else
 		return (false);
-	if (params->fd_in > 2)
+	if (params->fd_in > STDERR_FILENO)
 		close(params->fd_in);
-	if (params->fd_out > 2)
+	if (params->fd_out > STDERR_FILENO)
 		close(params->fd_out);
 	return (true);
 }
@@ -78,13 +78,13 @@ void	builtin_pwd(int fd_write)
 	int		size;
 
 	buf = NULL;
-	size = 0;
-	buf = ft_calloc(size, sizeof(char));
+	size = 1;
+	buf = (char *)ft_calloc(size, sizeof(char));
 	while (getcwd(buf, size) == NULL)
 	{
 		xfree(buf);
 		size++;
-		buf = ft_calloc(size, sizeof(char));
+		buf = (char *)ft_calloc(size, sizeof(char));
 	}
 	ft_putstr_fd(buf, fd_write);
 	ft_putchar_fd('\n', fd_write);
@@ -97,12 +97,12 @@ static bool	valid_name(char *name)
 {
 	int	i;
 
-	if (!ft_isalpha(name[0]) && name[0] != '_')
+	if (ft_isalpha(name[0]) == false && name[0] != '_')
 		return (false);
 	i = 1;
 	while (name[i] != '=')
 	{
-		if (ft_isalnum(name[i]) || name[i] == '_')
+		if (ft_isalnum(name[i]) == true || name[i] == '_')
 			i++;
 		else
 			return (false);

@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 12:48:27 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/30 11:23:29 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/04 18:50:14 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*xfree(void *ptr)
 {
-	if (ptr)
+	if (ptr != NULL)
 		free(ptr);
 	return (NULL);
 }

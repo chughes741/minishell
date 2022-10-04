@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:43:50 by chughes           #+#    #+#             */
-/*   Updated: 2022/09/30 11:42:17 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/04 18:49:13 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ char	*prompter(void)
 	char	*cmd;
 
 	cmd = readline(PROMPT);
-	log_history(cmd);
+	add_history(cmd);
 	return (cmd);
 }
