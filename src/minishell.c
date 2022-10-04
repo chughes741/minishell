@@ -6,11 +6,25 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 13:52:02 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/04 14:00:25 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int	wait_all(t_data	*data)
+{
+	int	exit_status;
+	int i;
+
+	i = 0;
+	while (++i < data->n_cmds)
+	{
+		waitpid(data->params[i]->id, &exit_status, 0);
+		++i;
+	}
+	return (exit_status);
+}
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -30,14 +44,10 @@ int	main(int argc, char *argv[], char *envp[])
 		while (i < data->n_cmds)
 		{
 			if (run_builtin(data->params[i]) == false)
-			{
 				exe(data->params[i], i);
-				// if (WIFEXITED(data->exit_status) != 0)
-					// error_handler();
-			}
 			++i;
 		}
-		wait(&data->exit_status);
+		data->exit_status = wait_all(data);
 	}
 	del_data();
 	exit(0);
