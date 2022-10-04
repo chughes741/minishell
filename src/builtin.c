@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 12:26:20 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/04 12:32:54 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 bool	run_builtin(t_params *params)
 {
 	if (ft_strncmp(params->exec_arg[0], "echo", 5) == 0)
-		builtin_echo(params->exec_arg);
+		builtin_echo(params->exec_arg, params->fd_out);
 	else if (ft_strncmp(params->exec_arg[0], "cd", 3) == 0)
 		builtin_cd(params->exec_arg[1]);
 	else if (ft_strncmp(params->exec_arg[0], "pwd", 4) == 0)
@@ -34,7 +34,7 @@ bool	run_builtin(t_params *params)
 }
 
 // Replicates the UNIX program echo
-void	builtin_echo(char **args)
+void	builtin_echo(char **args, int fd_write)
 {
 	bool	newline;
 	int		i;
@@ -48,12 +48,12 @@ void	builtin_echo(char **args)
 	}
 	while (args[++i])
 	{
-		printf("%s", args[i]);
+		ft_putstr_fd(args[i], fd_write);
 		if (args[i + 1])
-			printf(" ");
+			ft_putchar_fd(' ', fd_write);
 	}
 	if (newline)
-		printf("\n");
+		ft_putchar_fd('\n', fd_write);
 	return ;
 }
 
