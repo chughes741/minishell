@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/03 16:17:02 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/03 20:34:19 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # include "../libft/include/libft.h"
 
 // Prompt Macro
-# define PROMPT "> "
+# define PROMPT "minishell> "
 
 // Struct for storing initialization info for exec
 typedef struct s_params {
