@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/01 16:03:05 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/03 21:27:01 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ void	builtin_export(char *new_var)
 		return ;
 	}
 	d = get_data();
-	d->envp = (char **)array_realloc((void **)d->envp, arraylen(d->envp) + 1);
-	d->envp[arraylen(d->envp) - 1] = ft_strdup(new_var);
+	d->envp = (char **)array_realloc((void **)d->envp, arraylen((void **)d->envp) + 1);
+	d->envp[arraylen((void **)d->envp) - 1] = ft_strdup(new_var);
 	return ;
 }
 
@@ -121,7 +121,7 @@ void	builtin_unset(char *var_name)
 	while (data->envp[pos]
 		&& ft_strncmp(var_name, data->envp[pos], ft_strlen(var_name)))
 		pos++;
-	if (pos >= arraylen(data->envp))
+	if (pos >= arraylen((void **)data->envp))
 		return ;
 	data->envp = (char **)array_del_one((void **)data->envp, pos);
 	return ;

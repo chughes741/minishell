@@ -6,14 +6,14 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 12:16:09 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/01 14:49:24 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/03 21:25:59 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 // Returns number of elements in array
-int	arraylen(char **array)
+int	arraylen(void **array)
 {
 	int	len;
 
@@ -24,18 +24,18 @@ int	arraylen(char **array)
 }
 
 // Returns clone of array
-char	**arraydup(char **array)
+void	**arraydup(void **array)
 {
 	char	**newarray;
 	int		i;
 
 	if (array == NULL)
 		return (NULL);
-	newarray = ft_calloc(arraylen(array) + 1, sizeof(char *));
+	newarray = (char **)ft_calloc(arraylen(array) + 1, sizeof(void *));
 	i = -1;
 	while (array[++i])
 		newarray[i] = ft_strdup(array[i]);
-	return (newarray);
+	return ((void **)newarray);
 }
 
 // Allocs new array of void* of size bytes and copies ptrs from **ptr
@@ -59,9 +59,9 @@ void	**array_del_one(void **array, int position)
 	int		i;
 	int		j;
 
-	new_array = ft_calloc(arraylen((char **)array), sizeof(void *));
+	new_array = (void **)ft_calloc(arraylen(array), sizeof(void *));
 	if (position < 0)
-		position += arraylen((char **)array) - 1;
+		position += arraylen(array) - 1;
 	i = 0;
 	j = 0;
 	while (array[i])

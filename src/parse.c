@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/03 17:34:19 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/03 21:29:03 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_params	**parse_args(char *cmd)
 
 	data = get_data();
 	cmds = ft_split(cmd, '|');
-	data->n_cmds = arraylen(cmds);
+	data->n_cmds = arraylen((void **)cmds);
 	data->fd_io = init_io(data->n_cmds, data->fd_io);
 	params = ft_calloc(data->n_cmds + 1, sizeof(t_params *));
 	i = 0;
@@ -42,6 +42,8 @@ void	sub_vars(char *arg)
 	t_data	*data;
 
 	data = get_data();
+	(void)data;
+	(void)arg;
 	return ;
 }
 
@@ -111,8 +113,8 @@ char	**split_args(char *str)
 			end = ft_strlen(&str[start] - 1);
 		if (end > start && start < (int)ft_strlen(str) - 1)
 		{
-			rtn = (char **)array_realloc((void **)rtn, arraylen(rtn) + 1);
-			rtn[arraylen(rtn)] = ft_substr(str, start, end - start);
+			rtn = (char **)array_realloc((void **)rtn, arraylen((void **)rtn) + 1);
+			rtn[arraylen((void **)rtn)] = ft_substr(str, start, end - start);
 		}
 		start = end + 1;
 	}

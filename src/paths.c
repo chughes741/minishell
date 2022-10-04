@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:32:35 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/01 16:45:03 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/03 21:30:13 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*get_path(char *command)
 	while (paths[++i])
 	{
 		path = ft_strjoin(paths[i], "/");
-		path = ft_str_prepend(path, command);
+		path = str_append(path, command);
 		if (access(path, F_OK) == 0)
 			return (path);
 		xfree(path);
@@ -50,8 +50,8 @@ char	**split_paths(void)
 	}
 	if (paths)
 	{
-		paths = (char **)array_realloc((void **)paths, arraylen(paths) + 1);
-		paths[arraylen(paths)] = builtin_pwd();
+		paths = (char **)array_realloc((void **)paths, arraylen((void **)paths) + 1);
+		paths[arraylen((void **)paths)] = builtin_pwd();
 		return (paths);
 	}
 	return (NULL);
