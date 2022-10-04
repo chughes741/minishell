@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 13:00:21 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/04 15:12:47 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	run_builtin(t_params *params)
 	else if (ft_strncmp(params->exec_arg[0], "cd", 3) == 0)
 		builtin_cd(params->exec_arg[1]);
 	else if (ft_strncmp(params->exec_arg[0], "pwd", 4) == 0)
-		printf("%s\n", builtin_pwd());
+		builtin_pwd(params->fd_out);
 	else if (ft_strncmp(params->exec_arg[0], "export", 7) == 0)
 		builtin_export(params->exec_arg[1]);
 	else if (ft_strncmp(params->exec_arg[0], "unset", 6) == 0)
@@ -75,7 +75,7 @@ void	builtin_cd(char *new_dir)
 }
 
 // Replicated the UNIX command pwd
-char	*builtin_pwd(void)
+void	builtin_pwd(int fd_write)
 {
 	char	*buf;
 	int		size;
@@ -89,7 +89,10 @@ char	*builtin_pwd(void)
 		size++;
 		buf = ft_calloc(size, sizeof(char));
 	}
-	return (buf);
+	ft_putstr_fd(buf, fd_write);
+	ft_putchar_fd('\n', fd_write);
+	xfree(buf);
+	return ;
 }
 
 // Checks is variable name is valid
