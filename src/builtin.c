@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 15:12:47 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/04 15:15:45 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool	run_builtin(t_params *params)
 	else if (ft_strncmp(params->exec_arg[0], "unset", 6) == 0)
 		builtin_unset(params->exec_arg[1]);
 	else if (ft_strncmp(params->exec_arg[0], "env", 4) == 0)
-		builtin_env();
+		builtin_env(params->fd_out);
 	else if (ft_strncmp(params->exec_arg[0], "exit", 5) == 0)
 		builtin_exit();
 	else
@@ -119,7 +119,7 @@ void	builtin_export(char *new_var)
 	t_data	*d;
 
 	if (!new_var)
-		builtin_env();
+		builtin_env(STDOUT_FILENO);
 	if (!valid_name(new_var))
 	{
 		perror("Not a valid variable name: ");
@@ -149,7 +149,7 @@ void	builtin_unset(char *var_name)
 }
 
 // Replicates the UNIX command env
-void	builtin_env(void)
+void	builtin_env(int fd_write)
 {
 	t_data	*data;
 	int		i;
@@ -158,7 +158,8 @@ void	builtin_env(void)
 	i = -1;
 	while (data->envp[++i])
 	{
-		printf("%s\n", data->envp[i]);
+		ft_putstr_fd(data->envp[i], fd_write);
+		ft_putchar_fd('\n', fd_write);
 	}
 	return ;
 }
