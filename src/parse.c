@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/03 21:29:03 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/04 13:49:18 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ char	**split_args(char *str)
 
 	rtn = (char **)ft_calloc(1, sizeof(char *));
 	start = 0;
+	str = ft_strtrim(str, " ");
 	while (str[start])
 	{
 		if (!ft_strchr(" \"\'", str[start]))
