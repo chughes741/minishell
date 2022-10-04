@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 18:52:33 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/04 19:02:39 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,34 @@ void	insert_vars(char **args)
 	return ;
 }
 
+// Sets file paths from arguments
+void setup_files(t_params *param)
+{
+	int	i;
+
+	i = 0;
+	while (param->exec_arg[i] != NULL)
+	{
+		if (param->exec_arg[i][0] == '<' 
+			|| param->exec_arg[i][ft_strlen(param->exec_arg[i]) - 1] == '<')
+		{
+			xfree(param->in_path);
+			param->in_path = ft_strdup(param->exec_arg[i]);
+			param->exec_arg = (char **)array_del_one((void **)param->exec_arg, i);
+		}
+		else if (param->exec_arg[i][0] == '>' 
+			|| param->exec_arg[i][ft_strlen(param->exec_arg[i]) - 1] == '>')
+		{
+			xfree(param->out_path);
+			param->out_path = ft_strdup(param->exec_arg[i]);
+			param->exec_arg = (char **)array_del_one((void **)param->exec_arg, i);	
+		}
+		else
+			++i;
+	}
+	return ;
+}
+
 // Parses commands into struct ready to be executed
 t_params	*cmd_parse(char *line)
 {
@@ -72,7 +100,7 @@ t_params	*cmd_parse(char *line)
 	data = get_data();
 	params = (t_params *)ft_calloc(1, sizeof(t_params));
 	params->exec_arg = split_args(line);
-	//TODO Setup files and remove from exec_args
+	setup_files(params);
 	insert_vars(params->exec_arg);
 	params->path = get_path(params->exec_arg[0]);
 	params->envp = data->envp;
