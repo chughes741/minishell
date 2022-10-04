@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/03 21:23:00 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/04 12:17:43 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int			find_last(char *str, char *chrs);
 
 // Builtins
 bool		run_builtin(t_params *params);
-void		builtin_echo(char *str, char *opt);
+void		builtin_echo(char **args);
 void		builtin_cd(char *new_dir);
 char		*builtin_pwd(void);
 void		builtin_export(char *new_var);
