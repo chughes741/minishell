@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 13:56:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 18:43:27 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/04 18:52:09 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	write_str(char *str, int fd)
 	int	i;
 	
 	i = -1;
-	while (str[++i] != NULL)
+	while (str[++i])
 		write(fd, &str[i], 1);
 	write(fd, "\255", 1);
 }

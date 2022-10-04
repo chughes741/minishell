@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 18:47:32 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/04 18:52:33 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	find_next(char *str, char *chr)
 	int i;
 
 	i = 0;
-	while(str[i] != NULL && ft_strchr(chr, str[i]) == NULL)
+	while(str[i] && ft_strchr(chr, str[i]) == NULL)
 		++i;
 	return (i);
 }
@@ -100,7 +100,7 @@ char	**split_args(char *str)
 	rtn = (char **)ft_calloc(1, sizeof(char *));
 	start = 0;
 	str = ft_strtrim(str, " ");
-	while (str[start] != NULL)
+	while (str[start])
 	{
 		if (ft_strchr(" \"\'", str[start]) == NULL)
 			end = find_next(&str[start], " ") + start;

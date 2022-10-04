@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 13:55:39 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 18:43:16 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/04 18:51:58 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	find_and_replace(char *str, char *chrs, char replace, int len)
 	int	i;
 	
 	i = 0;
-	while (str[i] != NULL && i < len)
+	while (str[i] && i < len)
 	{
 		if (ft_strchr(chrs, str[i]) != NULL)
 			str[i] = replace;
@@ -33,7 +33,7 @@ int	find_first(char *str, char *chrs)
 	int	i;
 
 	i = 0;
-	while (str[i] != NULL && ft_strchr(chrs, str[i]) == NULL)
+	while (str[i] && ft_strchr(chrs, str[i]) == NULL)
 		++i;
 	return (i);
 }
