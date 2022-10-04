@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 19:02:39 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/04 19:19:35 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_params	**parse_args(char *cmd)
 		params[i] = cmd_parse(cmds[i]);
 		params[i]->fd_in = data->fd_io[i * 2];
 		params[i]->fd_out = data->fd_io[(i * 2) + 1];
+		setup_files(params[i]);
 		i++;
 	}
 	return (params);
@@ -75,18 +76,30 @@ void setup_files(t_params *param)
 			|| param->exec_arg[i][ft_strlen(param->exec_arg[i]) - 1] == '<')
 		{
 			xfree(param->in_path);
-			param->in_path = ft_strdup(param->exec_arg[i]);
+			param->in_path = ft_strtrim(param->exec_arg[i], "<");
 			param->exec_arg = (char **)array_del_one((void **)param->exec_arg, i);
 		}
 		else if (param->exec_arg[i][0] == '>' 
 			|| param->exec_arg[i][ft_strlen(param->exec_arg[i]) - 1] == '>')
 		{
 			xfree(param->out_path);
-			param->out_path = ft_strdup(param->exec_arg[i]);
+			param->out_path = ft_strtrim(param->exec_arg[i], ">");
 			param->exec_arg = (char **)array_del_one((void **)param->exec_arg, i);	
 		}
 		else
 			++i;
+	}
+	if (param->in_path != NULL)
+	{
+		if (param->fd_in > STDERR_FILENO)
+			close(param->fd_in);
+		param->fd_in = open(param->in_path, O_RDONLY);
+	}
+	if (param->out_path != NULL)
+	{
+		if (param->fd_out > STDERR_FILENO)
+			close(param->fd_out);
+		param->fd_out = open(param->out_path, WRFLAGS, WRMODE);
 	}
 	return ;
 }
@@ -100,7 +113,6 @@ t_params	*cmd_parse(char *line)
 	data = get_data();
 	params = (t_params *)ft_calloc(1, sizeof(t_params));
 	params->exec_arg = split_args(line);
-	setup_files(params);
 	insert_vars(params->exec_arg);
 	params->path = get_path(params->exec_arg[0]);
 	params->envp = data->envp;

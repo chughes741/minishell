@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 18:49:44 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/04 19:19:57 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,6 @@
 // Libft
 # include "../libft/include/libft.h"
 
-// Prompt Macro
-# define PROMPT "minishell> "
-
 // Struct for storing initialization info for exec
 typedef struct s_params {
 	pid_t	id;
@@ -67,6 +64,11 @@ typedef struct s_data {
 	int			fd_error_log;
 }		t_data;
 
+// Macros
+# define PROMPT "minishell> "
+# define WRFLAGS O_WRONLY | O_TRUNC | O_CREAT
+# define WRMODE S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH
+
 // Data struct functions
 void		init_data(char	*envp[]);
 t_data		*get_data(void);
@@ -86,6 +88,7 @@ char		*prompter(void);
 t_params	**parse_args(char *cmd);
 int			find_next(char *str, char *chr);
 char		**split_args(char *str);
+void		setup_files(t_params *param);
 
 // Exec setup functions
 char		**split_paths(void);
