@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 12:32:54 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/04 13:00:21 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ bool	run_builtin(t_params *params)
 		builtin_exit();
 	else
 		return (false);
+	if (params->fd_in > 2)
+		close(params->fd_in);
+	if (params->fd_out > 2)
+		close(params->fd_out);
 	return (true);
 }
 
