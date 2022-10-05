@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 20:01:24 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/05 12:34:59 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ typedef struct s_data {
 }		t_data;
 
 // Macros
-# define PROMPT "minishell> "
+# define MSH_PROMPT "msh > "
+# define HD_PROMPT "> "
 # define WRFLAGS O_WRONLY | O_TRUNC | O_CREAT
 # define WRMODE S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH
 

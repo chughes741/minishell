@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 13:56:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 18:52:09 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/05 12:34:09 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	here_doc_filler(int output_fd, char *key)
 {
 	char	*line;
 
-	line = readline(">>");
+	line = readline(HD_PROMPT);
 	if (ft_strncmp(line, key, ft_strlen(line)) != 0)
 		write_str(line, output_fd);
 }
