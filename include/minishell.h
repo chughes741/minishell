@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/05 15:27:31 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/05 16:26:58 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_data {
 # define MSH_PROMPT "msh > "
 # define HD_PROMPT "> "
 # define WRFLAGS O_WRONLY | O_TRUNC | O_CREAT
+# define WRAPPEND O_WRONLY | O_CREAT | O_APPEND
 # define WRMODE S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH
 
 // Data struct functions
@@ -119,7 +120,7 @@ bool		run_builtin(t_params *params);
 void		builtin_echo(char **args, int fd_write);
 void		builtin_cd(char *new_dir);
 void		builtin_pwd(int fd_write);
-void		builtin_export(char *new_var);
+void		builtin_export(char **new_vars);
 void		builtin_unset(char *var_name);
 void		builtin_env(int fd_write);
 void		builtin_exit(void);
