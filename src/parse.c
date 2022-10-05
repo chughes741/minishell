@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/05 14:24:31 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/05 15:19:32 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_params	**parse_args(char *cmd)
 
 	data = get_data();
 	cmds = ft_split(cmd, '|');
-	data->n_cmds = arraylen((void **)cmds);
+	data->n_cmds = arraylen(cmds);
 	data->fd_io = init_io(data->n_cmds, data->fd_io);
 	params = ft_calloc(data->n_cmds + 1, sizeof(t_params *));
 	i = 0;
@@ -108,14 +108,14 @@ void setup_files(t_params *param)
 		{
 			xfree(param->in_path);
 			param->in_path = ft_strtrim(param->exec_arg[i], "<");
-			param->exec_arg = (char **)array_del_one((void **)param->exec_arg, i);
+			param->exec_arg = array_del_one(param->exec_arg, i);
 		}
 		else if (param->exec_arg[i][0] == '>' 
 			|| param->exec_arg[i][ft_strlen(param->exec_arg[i]) - 1] == '>')
 		{
 			xfree(param->out_path);
 			param->out_path = ft_strtrim(param->exec_arg[i], ">");
-			param->exec_arg = (char **)array_del_one((void **)param->exec_arg, i);	
+			param->exec_arg = array_del_one(param->exec_arg, i);	
 		}
 		else
 			++i;
@@ -185,8 +185,8 @@ char	**split_args(char *str)
 			end = ft_strlen(&str[start] - 1);
 		if (end > start && start < (int)ft_strlen(str) - 1)
 		{
-			rtn = (char **)array_realloc((void **)rtn, arraylen((void **)rtn) + 1);
-			rtn[arraylen((void **)rtn)] = ft_substr(str, start, end - start);
+			rtn = array_realloc(rtn, arraylen(rtn) + 1);
+			rtn[arraylen(rtn)] = ft_substr(str, start, end - start);
 		}
 		start = end + 1;
 	}

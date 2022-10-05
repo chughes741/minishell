@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:32:35 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 18:48:30 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/05 15:16:12 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,5 @@ char	**split_paths(void)
 		if (ft_strncmp(data->envp[i], "PATH=", 5) == 0)
 			paths = ft_split(data->envp[i], ':');
 	}
-	if (paths != NULL)
-	{
-		paths = (char **)array_realloc((void **)paths, arraylen((void **)paths) + 1);
-		// paths[arraylen((void **)paths)] = builtin_pwd(); Not sure if we should do this
-		return (paths);
-	}
-	return (NULL);
+	return (paths);
 }

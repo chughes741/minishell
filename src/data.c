@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:58:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 18:40:59 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/05 15:12:35 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_data(char *envp[])
 
 	data = get_data();
 	data->run = true;
-	data->envp = (char **)arraydup((void **)envp);
+	data->envp = arraydup(envp);
 	return ;
 }
 
@@ -43,7 +43,7 @@ void	del_data(void)
 
 	data = get_data();
 	//TODO Loop to xfree params array
-	free_array((void **)data->envp);
+	free_array(data->envp);
 	xfree(data->last_cmd);
 	xfree(data);
 	return ;
