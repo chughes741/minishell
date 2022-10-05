@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 19:19:35 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/04 19:59:24 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,46 @@ t_params	**parse_args(char *cmd)
 	return (params);
 }
 
-// Finds and substitutes variables from envp
-void	sub_vars(char *arg)
+// Gets the value of a variable from envp
+char	*find_var(char *var_name)
 {
 	t_data	*data;
+	char	*var_value;
+	int		pos;
 
 	data = get_data();
-	(void)data;
-	(void)arg;
-	return ;
+	while (data->envp[pos] != NULL
+		&& ft_strncmp(var_name, data->envp[pos], ft_strlen(var_name)))
+		pos++;
+	if (data->envp[pos] == NULL)
+		return (NULL);
+	return (ft_strdup(&data->envp[pos][ft_strlen(var_name) + 1]));
+}
+
+// Finds and substitutes variables from envp
+char	*sub_vars(char *arg)
+{
+	char	**split_tokens;
+	char	*var_name;
+	char	*var_value;
+	char	*result_str;
+	int		i;
+
+	i = 1;
+	if (arg[0] == '$')
+		i = 0;
+	split_tokens = ft_split(arg, '$');
+	xfree(arg);
+	while (split_tokens[i])
+	{
+		//TODO Get var name
+		var_value = find_var(var_name);
+		//TODO Remove var name from split_tokens[i]
+		split_tokens[i] = join_free_both(var_value, split_tokens[i]);
+		++i;
+	}
+	result_str = array_join(split_tokens);
+	return (result_str);
 }
 
 // Inserts env variables into arguments
@@ -58,7 +89,7 @@ void	insert_vars(char **args)
 		else
 		{
 			ft_strtrim(args[i], "\"");
-			sub_vars(args[i]);
+			args[i] = sub_vars(args[i]);
 		}
 	}
 	return ;
