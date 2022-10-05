@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 18:44:12 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/05 15:22:32 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int	main(int argc, char *argv[], char *envp[])
 	while (data->run == true)
 	{
 		data->n_cmds = 0;
-		data->last_cmd = prompter();
+		data->last_cmd = readline(MSH_PROMPT);
+		add_history(data->last_cmd);
 		data->params = parse_args(data->last_cmd);
 		i = 0;
 		while (i < data->n_cmds)
