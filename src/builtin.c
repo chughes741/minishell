@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/05 12:59:20 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/05 15:17:54 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	builtin_echo(char **args, int fd_write)
 {
 	bool	newline;
 	int		i;
-	
+
 	i = 0;
 	newline = true;
 	if (args[1] != NULL && ft_strncmp(args[1], "-n\0", 3) == 0)
@@ -114,16 +114,30 @@ static bool	valid_name(char *name)
 void	builtin_export(char *new_var)
 {
 	t_data	*d;
+	int		i;
 
 	if (new_var == NULL)
+	{
 		builtin_env(STDOUT_FILENO);
+		return ;
+	}
 	if (valid_name(new_var) == false)
 	{
 		perror("Not a valid variable name: ");
 		return ;
 	}
 	d = get_data();
-	d->envp = (char **)array_realloc((void **)d->envp, arraylen((void **)d->envp) + 1);
+	d->envp = array_realloc(d->envp, arraylen(d->envp) + 1);
+	while (d->envp[i])
+	{
+		if (ft_strncmp(new_var, d->envp[i], ft_strlen_until(new_var, '=')) == 0)
+		{
+			free(d->envp[i]);
+			d->envp[i] = ft_strdup(new_var);
+			return ;
+		}
+		i++;
+	}
 	d->envp[arraylen((void **)d->envp) - 1] = ft_strdup(new_var);
 	return ;
 }

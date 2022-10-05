@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 19:59:24 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/05 14:24:31 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_params	**parse_args(char *cmd)
 }
 
 // Gets the value of a variable from envp
-char	*find_var(char *var_name)
+/*char	*find_var(char *var_name)
 {
 	t_data	*data;
 	char	*var_value;
@@ -51,10 +51,10 @@ char	*find_var(char *var_name)
 	if (data->envp[pos] == NULL)
 		return (NULL);
 	return (ft_strdup(&data->envp[pos][ft_strlen(var_name) + 1]));
-}
+}*/
 
 // Finds and substitutes variables from envp
-char	*sub_vars(char *arg)
+/*char	*sub_vars(char *arg)
 {
 	char	**split_tokens;
 	char	*var_name;
@@ -77,10 +77,10 @@ char	*sub_vars(char *arg)
 	}
 	result_str = array_join(split_tokens);
 	return (result_str);
-}
+}*/
 
 // Inserts env variables into arguments
-void	insert_vars(char **args)
+/*void	insert_vars(char **args)
 {
 	for (int i = 0; args[i]; ++i)
 	{
@@ -93,7 +93,7 @@ void	insert_vars(char **args)
 		}
 	}
 	return ;
-}
+}*/
 
 // Sets file paths from arguments
 void setup_files(t_params *param)
@@ -144,7 +144,7 @@ t_params	*cmd_parse(char *line)
 	data = get_data();
 	params = (t_params *)ft_calloc(1, sizeof(t_params));
 	params->exec_arg = split_args(line);
-	insert_vars(params->exec_arg);
+	//insert_vars(params->exec_arg);
 	params->path = get_path(params->exec_arg[0]);
 	params->envp = data->envp;
 	return (params);
