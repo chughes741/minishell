@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/05 12:34:59 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/05 12:45:53 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ t_params	*cmd_parse(char *line);
 // I/O functions
 int			*init_io(int n_cmds, int *fd_io);
 void		close_io(int *fd_io, int n_cmds, int i_child);
-void		here_doc_filler(int output_fd, char *key);
-void		write_str(char *str, int fd);
 
 // Standard Library like functions
 char		*strcdup(char *basestr, char *matchchrs);
@@ -125,5 +123,6 @@ void		builtin_export(char *new_var);
 void		builtin_unset(char *var_name);
 void		builtin_env(int fd_write);
 void		builtin_exit(void);
+void		here_doc(int output_fd, char *key);
 
 #endif // MINISHELL_H

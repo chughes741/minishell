@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 18:37:28 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/05 12:45:45 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,4 +165,26 @@ void	builtin_exit(void)
 {
 	del_data();
 	exit(0);
+}
+
+// Writes here_doc input to fd
+void	here_doc(int output_fd, char *key)
+{
+	char	*line;
+
+	while (1)
+	{
+		line = readline(HD_PROMPT);
+		if (ft_strncmp(line, key, ft_strlen(line)) != 0)
+		{
+			ft_putstr_fd(line, output_fd);
+			xfree(line);
+		}
+		else
+		{
+			xfree(line);
+			break ;
+		}
+	}
+	return ;
 }
