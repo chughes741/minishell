@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/05 12:59:32 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/05 15:11:29 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,11 @@ void		close_io(int *fd_io, int n_cmds, int i_child);
 // Standard Library like functions
 char		*strcdup(char *basestr, char *matchchrs);
 void		*xfree(void *ptr);
-void		**array_realloc(void **ptr, int size);
-void		*free_array(void **array);
-int 		arraylen(void **array);
-void		**arraydup(void **array);
-void		**array_del_one(void **array, int position);
+char		**array_realloc(char **ptr, int size);
+char		*free_array(char **array);
+int 		arraylen(char **array);
+char		**arraydup(char **array);
+char		**array_del_one(char **array, int position);
 void		find_and_replace(char *str, char *chrs, char replace, int len);
 int			find_first(char *str, char *chrs);
 int			find_last(char *str, char *chrs);
