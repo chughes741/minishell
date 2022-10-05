@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/05 15:22:59 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/05 15:27:31 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ t_params	*cmd_parse(char *line);
 // I/O functions
 int			*init_io(int n_cmds, int *fd_io);
 void		close_io(int *fd_io, int n_cmds, int i_child);
+void		close_file(int fd);
 
 // Standard Library like functions
 char		*strcdup(char *basestr, char *matchchrs);

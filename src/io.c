@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 16:40:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/02 21:46:43 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/05 15:28:30 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	close_io(int *fd_io, int n_cmds, int i_child)
 	i = 0;
 	while (i < n_cmds * 2)
 	{
-		if (fd_io[i] > 2 && (i != (i_child * 2) && i != (i_child * 2) + 1))
-			close(fd_io[i]);
+		if ((i != (i_child * 2) && i != (i_child * 2) + 1))
+			close_file(fd_io[i]);
 		++i;
 	}
 	return ;

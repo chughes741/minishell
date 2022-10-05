@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/05 15:19:32 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/05 15:31:34 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,14 +122,12 @@ void setup_files(t_params *param)
 	}
 	if (param->in_path != NULL)
 	{
-		if (param->fd_in > STDERR_FILENO)
-			close(param->fd_in);
+		close_file(param->fd_in);
 		param->fd_in = open(param->in_path, O_RDONLY);
 	}
 	if (param->out_path != NULL)
 	{
-		if (param->fd_out > STDERR_FILENO)
-			close(param->fd_out);
+		close_file(param->fd_out);
 		param->fd_out = open(param->out_path, WRFLAGS, WRMODE);
 	}
 	return ;
