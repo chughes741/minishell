@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/05 12:45:53 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/05 12:59:32 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,6 @@ void		builtin_export(char *new_var);
 void		builtin_unset(char *var_name);
 void		builtin_env(int fd_write);
 void		builtin_exit(void);
-void		here_doc(int output_fd, char *key);
+void		here_doc(char *key, int output_fd);
 
 #endif // MINISHELL_H
