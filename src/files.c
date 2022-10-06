@@ -6,12 +6,13 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 20:28:51 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/06 13:42:57 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 16:21:26 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+// Checks if a file is accessible
 bool	check_file_perm(char *file, int access)
 {
 	if (access(files, access) != 0)
@@ -22,6 +23,7 @@ bool	check_file_perm(char *file, int access)
 	return (false);
 }
 
+// Opens all output files needed by program to be run
 void	open_outfiles(t_params *param)
 {
 	int	i;
@@ -49,6 +51,7 @@ void	open_outfiles(t_params *param)
 	return ;
 }
 
+// Opens all input files needed by program to be run
 void	open_infiles(t_params *param)
 {
 	int	i;
