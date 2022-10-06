@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:58:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/06 16:10:49 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 16:19:23 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,10 @@ void	del_data(void)
 	t_data	*data;
 
 	data = get_data();
-	//TODO Loop to xfree params array
 	free_array(data->envp);
+	free_params(data->params);
+	xfree(data->last_cmd);
+	xfree(data->fd_io);
 	free_array(data->cmd_names);
 	xfree(data->last_cmd);
 	xfree(data);
