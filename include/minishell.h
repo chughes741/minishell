@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/06 13:54:00 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 15:36:54 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_data {
 	int			n_cmds;
 	int			*fd_io;
 	int			exit_status;
+	void		(*run_cmd[9])(t_params *);
 }		t_data;
 
 // Macros
@@ -116,15 +117,14 @@ int			find_last(char *str, char *chrs);
 char		*join_free_both(char *s1, char *s2);
 
 // Builtins
-bool		is_builtin(char *arg);
-void		run_builtin(t_params *params);
-void		builtin_echo(char **args, int fd_write);
-void		builtin_cd(char *new_dir);
-void		builtin_pwd(int fd_write);
-void		builtin_export(char **new_vars);
-void		builtin_unset(char *var_name);
-void		builtin_env(int fd_write);
-void		builtin_exit(void);
-void		here_doc(char *key, int output_fd);
+unsigned	is_builtin(char *arg);
+void		builtin_echo(t_params *params);
+void		builtin_cd(t_params *params);
+void		builtin_pwd(t_params *params);
+void		builtin_export(t_params *params);
+void		builtin_unset(t_params *params);
+void		builtin_env(t_params *params);
+void		builtin_exit(t_params *params);
+void		here_doc(t_params *params);
 
 #endif // MINISHELL_H

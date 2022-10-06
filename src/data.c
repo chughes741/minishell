@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:58:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/05 15:12:35 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 15:37:22 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@ void	init_data(char *envp[])
 	t_data	*data;
 
 	data = get_data();
+	data->run_cmd[0] = exe;
+	data->run_cmd[1] = builtin_echo;
+	data->run_cmd[2] = builtin_cd;
+	data->run_cmd[3] = builtin_pwd;
+	data->run_cmd[4] = builtin_export;
+	data->run_cmd[5] = builtin_unset;
+	data->run_cmd[6] = builtin_env;
+	data->run_cmd[7] = builtin_exit;
+	data->run_cmd[8] = here_doc;
 	data->run = true;
 	data->envp = arraydup(envp);
 	return ;
