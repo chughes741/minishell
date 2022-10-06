@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/06 16:31:21 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/06 16:32:44 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	run_builtin(t_params *params)
 		here_doc(params->exec_arg[1], params->fd_out);
 	close_file(params->fd_in);
 	close_file(params->fd_out);
-	return;
+	return ;
 }
 
 // Replicates the UNIX program echo
