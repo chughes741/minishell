@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/05 20:02:22 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/05 20:28:48 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,44 +95,6 @@ t_params	**parse_args(char *cmd)
 	return ;
 }*/
 
-// Sets file paths from arguments
-void setup_files(t_params *param)
-{
-	int	i;
-
-	i = 0;
-	while (param->exec_arg[i] != NULL)
-	{
-		if (param->exec_arg[i][0] == '<' 
-			|| param->exec_arg[i][ft_strlen(param->exec_arg[i]) - 1] == '<')
-		{
-			xfree(param->in_path);
-			param->in_path = ft_strtrim(param->exec_arg[i], "<");
-			param->exec_arg = array_del_one(param->exec_arg, i);
-		}
-		else if (param->exec_arg[i][0] == '>' 
-			|| param->exec_arg[i][ft_strlen(param->exec_arg[i]) - 1] == '>')
-		{
-			xfree(param->out_path);
-			param->out_path = ft_strtrim(param->exec_arg[i], ">");
-			param->exec_arg = array_del_one(param->exec_arg, i);	
-		}
-		else
-			++i;
-	}
-	if (param->in_path != NULL)
-	{
-		close_file(param->fd_in);
-		param->fd_in = open(param->in_path, O_RDONLY);
-	}
-	if (param->out_path != NULL)
-	{
-		close_file(param->fd_out);
-		param->fd_out = open(param->out_path, WRFLAGS, WRMODE);
-	}
-	return ;
-}
-
 // Parses commands into struct ready to be executed
 t_params	*cmd_parse(char *line)
 {
@@ -169,7 +131,7 @@ char	**split_args(char *str)
 	while (str[start])
 	{
 		if (ft_strchr(" \"\'", str[start]) == NULL)
-			end = find_next(&str[start], " ") + start;
+			end = find_next(&str[start], " <>") + start;
 		else if (str[start] == ' ')
 			;
 		else if (ft_strchr("\'", str[start]) != NULL)
