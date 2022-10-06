@@ -6,78 +6,59 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/06 13:53:56 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 15:46:56 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-bool	is_builtin(char *arg)
+unsigned	cmd_index(char *arg)
 {
-	if (ft_strncmp(arg, "echo", 5) == 0
-		|| ft_strncmp(arg, "cd", 3) == 0
-		|| ft_strncmp(arg, "pwd", 4) == 0
-		|| ft_strncmp(arg, "export", 7) == 0
-		|| ft_strncmp(arg, "unset", 6) == 0
-		|| ft_strncmp(arg, "env", 4) == 0
-		|| ft_strncmp(arg, "exit", 5) == 0
-		|| ft_strncmp(arg, ">>", 3) == 0)
-		return (true);
-	else
-		return (false);
-}
+	t_data	*data;
+	int		i;
 
-void	run_builtin(t_params *params)
-{
-	if (ft_strncmp(params->exec_arg[0], "echo", 5) == 0)
-		builtin_echo(params->exec_arg, params->fd_out);
-	else if (ft_strncmp(params->exec_arg[0], "cd", 3) == 0)
-		builtin_cd(params->exec_arg[1]);
-	else if (ft_strncmp(params->exec_arg[0], "pwd", 4) == 0)
-		builtin_pwd(params->fd_out);
-	else if (ft_strncmp(params->exec_arg[0], "export", 7) == 0)
-		builtin_export(params->exec_arg);
-	else if (ft_strncmp(params->exec_arg[0], "unset", 6) == 0)
-		builtin_unset(params->exec_arg[1]);
-	else if (ft_strncmp(params->exec_arg[0], "env", 4) == 0)
-		builtin_env(params->fd_out);
-	else if (ft_strncmp(params->exec_arg[0], "exit", 5) == 0)
-		builtin_exit();
-	else if (ft_strncmp(params->exec_arg[0], ">>", 3) == 0)
-		here_doc(params->exec_arg[1], params->fd_out);
-	close_file(params->fd_in);
-	close_file(params->fd_out);
-	return;
+	data = get_data();
+	i = 0;
+	while (data->cmd_names[i])
+	{
+		if (ft_strncmp(arg, data->cmd_names[i], strlen(data->cmd_names[i] + 1)))
+			break ;
+		++i;
+	}
+	return (i);
 }
 
 // Replicates the UNIX program echo
-void	builtin_echo(char **args, int fd_write)
+void	builtin_echo(t_params *params)
 {
 	bool	newline;
 	int		i;
 
 	i = 0;
 	newline = true;
-	if (args[1] != NULL && ft_strncmp(args[1], "-n\0", 3) == 0)
+	if (params->exec_arg[1] != NULL
+		&& ft_strncmp(params->exec_arg[1], "-n\0", 3) == 0)
 	{
 		newline = false;
 		i += 1;
 	}
-	while (args[++i] != NULL)
+	while (params->exec_arg[++i] != NULL)
 	{
-		ft_putstr_fd(args[i], fd_write);
-		if (args[i + 1] != NULL)
-			ft_putchar_fd(' ', fd_write);
+		ft_putstr_fd(params->exec_arg[i], params->fd_out);
+		if (params->exec_arg[i + 1] != NULL)
+			ft_putchar_fd(' ', params->fd_out);
 	}
 	if (newline == true)
-		ft_putchar_fd('\n', fd_write);
+		ft_putchar_fd('\n', params->fd_out);
+	close_file(params->fd_in);
+	close_file(params->fd_out);
 	return ;
 }
 
 // Replicates the UNIX command cd
-void	builtin_cd(char *new_dir)
+void	builtin_cd(t_params *params)
 {
-	if (chdir(new_dir) == -1)
+	if (chdir(params->exec_arg[1]) == -1)
 	{
 		perror("cd: ");
 	}
@@ -85,7 +66,7 @@ void	builtin_cd(char *new_dir)
 }
 
 // Replicated the UNIX command pwd
-void	builtin_pwd(int fd_write)
+void	builtin_pwd(t_params *params)
 {
 	char	*buf;
 	int		size;
@@ -99,8 +80,10 @@ void	builtin_pwd(int fd_write)
 		size++;
 		buf = (char *)ft_calloc(size, sizeof(char));
 	}
-	ft_putstr_fd(buf, fd_write);
-	ft_putchar_fd('\n', fd_write);
+	ft_putstr_fd(buf, params->fd_out);
+	ft_putchar_fd('\n', params->fd_out);
+	close_file(params->fd_in);
+	close_file(params->fd_out);
 	xfree(buf);
 	return ;
 }
@@ -124,7 +107,7 @@ void	builtin_pwd(int fd_write)
 }*/
 
 // Replicates variable exporting
-void	builtin_export(char **new_vars)
+void	builtin_export(t_params *params)
 {
 	t_data	*d;
 	int		i;
@@ -133,7 +116,7 @@ void	builtin_export(char **new_vars)
 
 	i = 0;
 	new_position = 0;
-	if (new_vars == NULL)
+	if (params->exec_arg == NULL)
 	{
 		builtin_env(STDOUT_FILENO);
 		return ;
@@ -148,12 +131,12 @@ void	builtin_export(char **new_vars)
 	while (d->envp[i])
 	{
 		j = 1;
-		while (new_vars[j])
+		while (params->exec_arg[j])
 		{
-			if (ft_strncmp(new_vars[j], d->envp[i], ft_strlen_until(new_vars[j], '=')) == 0)
+			if (ft_strncmp(params->exec_arg[j], d->envp[i], ft_strlen_until(params->exec_arg[j], '=')) == 0)
 			{
 				free(d->envp[i]);
-				d->envp[i] = ft_strdup(new_vars[j]);
+				d->envp[i] = ft_strdup(params->exec_arg[j]);
 				new_position = j + 1;
 				break ;
 			}
@@ -163,21 +146,23 @@ void	builtin_export(char **new_vars)
 	}
 	i = arraylen(d->envp) - 1;
 	j = new_position;
-	while (new_vars[j])
+	while (params->exec_arg[j])
 	{
-		d->envp[i] = ft_strdup(new_vars[j]);
+		d->envp[i] = ft_strdup(params->exec_arg[j]);
 		j++;
-		if (new_vars[j])
+		if (params->exec_arg[j])
 		{
 			d->envp = array_realloc(d->envp, arraylen(d->envp) + 1);
 			i++;
 		}
 	}
+	close_file(params->fd_in);
+	close_file(params->fd_out);
 	return ;
 }
 
 // Replicates variable unset
-void	builtin_unset(char *var_name)
+void	builtin_unset(t_params *params)
 {
 	t_data	*data;
 	int		pos;
@@ -185,16 +170,18 @@ void	builtin_unset(char *var_name)
 	data = get_data();
 	pos = 0;
 	while (data->envp[pos] != NULL
-		&& ft_strncmp(var_name, data->envp[pos], ft_strlen(var_name)))
+		&& ft_strncmp(params->exec_arg[1], data->envp[pos], ft_strlen(params->exec_arg[1])))
 		pos++;
 	if (pos >= arraylen(data->envp))
 		return ;
 	data->envp = array_del_one(data->envp, pos);
+	close_file(params->fd_in);
+	close_file(params->fd_out);
 	return ;
 }
 
 // Replicates the UNIX command env
-void	builtin_env(int fd_write)
+void	builtin_env(t_params *params)
 {
 	t_data	*data;
 	int		i;
@@ -203,30 +190,33 @@ void	builtin_env(int fd_write)
 	i = -1;
 	while (data->envp[++i] != NULL)
 	{
-		ft_putstr_fd(data->envp[i], fd_write);
-		ft_putchar_fd('\n', fd_write);
+		ft_putstr_fd(data->envp[i], params->fd_out);
+		ft_putchar_fd('\n', params->fd_out);
 	}
+	close_file(params->fd_in);
+	close_file(params->fd_out);
 	return ;
 }
 
-void	builtin_exit(void)
+void	builtin_exit(t_params *params)
 {
+	(void)params;
 	del_data();
 	exit(0);
 }
 
 // Writes here_doc input to fd
-void	here_doc(char *key, int output_fd)
+void	here_doc(t_params *params)
 {
 	char	*line;
 
 	while (1)
 	{
 		line = readline(HD_PROMPT);
-		if (ft_strncmp(line, key, ft_strlen(line)) != 0)
+		if (ft_strncmp(line, params->exec_arg[1], ft_strlen(line)) != 0)
 		{
-			if (output_fd > 2)
-				ft_putstr_fd(line, output_fd);
+			if (params->fd_out > 2)
+				ft_putstr_fd(line, params->fd_out);
 			xfree(line);
 		}
 		else
@@ -235,5 +225,7 @@ void	here_doc(char *key, int output_fd)
 			break ;
 		}
 	}
+	close_file(params->fd_in);
+	close_file(params->fd_out);
 	return ;
 }
