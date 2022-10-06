@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 20:28:51 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/06 10:52:38 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 13:42:57 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	check_file_perm(char *file, int access)
 {
-	if (access(files[i], access) != 0)
+	if (access(files, access) != 0)
 	{
 		perror(path);
 		return (true);
