@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 20:28:51 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/05 21:05:38 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/05 21:07:46 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	open_outfiles(t_params *param, char	**args)
 			param->out_path = ft_strtrim(param->exec_arg[i], ">");
 			param->exec_arg = array_del_one(param->exec_arg, i);
 			close_file(param->fd_out);
-			if (param->exec_arg[i][1] != '>')
+			if (param->exec_arg[i][1] == '>')
 				param->fd_out = open(param->out_path, WRAPPEND, WRMODE);
 			else
 				param->fd_out = open(param->out_path, WRFLAGS, WRMODE);
