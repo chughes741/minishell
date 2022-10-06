@@ -6,32 +6,31 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:42:42 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/05 20:01:47 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 16:25:12 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-// Executes program specified in params
-int	exe(t_params *params, int i_child)
+// Executes program specified in param
+void	exe(t_params *param)
 {
 	t_data	*data;
 
-	params->id = fork();
+	param->id = fork();
 	data = get_data();
-	if (params->id != 0)
+	if (param->id != 0)
 	{
-		close_file(data->fd_io[i_child * 2]);
-		close_file(data->fd_io[i_child * 2] + 1);
-		return (0);
+		close_file(param->fd_in);
+		close_file(param->fd_out);
+		return ;
 	}
-	if (params->in_path != NULL)
-		params->fd_in = open(params->in_path, O_RDONLY);
-	if (params->out_path != NULL)
-		params->fd_out = open(params->out_path, O_WRONLY | O_CREAT | O_APPEND);
-	close_io(data->fd_io, data->n_cmds, i_child);
-	dup2(params->fd_in, STDIN_FILENO);
-	dup2(params->fd_out, STDOUT_FILENO);
-	execve(params->path, params->exec_arg, data->envp);
-	return (1);
+	if (param->in_path != NULL)
+		param->fd_in = open(param->in_path, O_RDONLY);
+	if (param->out_path != NULL)
+		param->fd_out = open(param->out_path, O_WRONLY | O_CREAT | O_APPEND);
+	close_io(data->fd_io, data->n_cmds, param->fd_in, param->fd_out);
+	dup2(param->fd_in, STDIN_FILENO);
+	dup2(param->fd_out, STDOUT_FILENO);
+	execve(param->path, param->exec_arg, data->envp);
 }

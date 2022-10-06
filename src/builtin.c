@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/06 15:46:56 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 16:22:17 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	builtin_export(t_params *params)
 	new_position = 0;
 	if (params->exec_arg == NULL)
 	{
-		builtin_env(STDOUT_FILENO);
+		builtin_env(params);
 		return ;
 	}
 	/*if (valid_name(new_vars) == false)

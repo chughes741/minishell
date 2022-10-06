@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/06 16:17:51 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 16:27:15 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,12 @@ void		setup_files(t_params *param);
 // Exec setup functions
 char		**split_paths(void);
 char		*get_path(char *command);
-int			exe(t_params *params, int i_child);
+void		exe(t_params *params);
 t_params	*cmd_parse(char *line);
 
 // I/O functions
 int			*init_io(int n_cmds, int *fd_io);
-void		close_io(int *fd_io, int n_cmds, int i_child);
+void		close_io(int *fd_io, int n_cmds, int fd_in, int fd_out);
 void		close_file(int fd);
 void		open_outfiles(t_params *param);
 void		open_infiles(t_params *param);

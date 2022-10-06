@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 16:40:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/05 15:28:30 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 16:26:15 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ int	*init_io(int n_cmds, int *fd_io)
 }
 
 // Closes all fds except those used by child[i] and any STD IN, OUT, ERR
-void	close_io(int *fd_io, int n_cmds, int i_child)
+void	close_io(int *fd_io, int n_cmds, int fd_in, int fd_out)
 {
 	int	i;
 
 	i = 0;
 	while (i < n_cmds * 2)
 	{
-		if ((i != (i_child * 2) && i != (i_child * 2) + 1))
+		if (fd_io[i] != fd_in && fd_io[i] != fd_out)
 			close_file(fd_io[i]);
 		++i;
 	}
