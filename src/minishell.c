@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/06 13:55:15 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 15:38:15 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	wait_all(t_data	*data)
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_data	*data;
-	int		i;
 
+	int		i;
 	data = get_data();
 	init_data(envp);
 	if (argc != 1 || argv[0] == NULL)
@@ -43,13 +43,7 @@ int	main(int argc, char *argv[], char *envp[])
 		data->params = parse_args(data->last_cmd);
 		i = 0;
 		while (i < data->n_cmds)
-		{
-			if (is_builtin(data->params[i]))
-				run_builtin(data->params[i]);
-			else
-				exe(data->params[i], i);
-			++i;
-		}
+			data->run_cmd[cmd_index(data->params[i]->exec_arg[0])](data->params);
 		data->exit_status = wait_all(data);
 	}
 }
