@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/05 21:11:51 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 10:38:49 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,12 @@ typedef struct s_data {
 	int			n_cmds;
 	int			*fd_io;
 	int			exit_status;
-	int			fd_rl_history;
-	int			fd_error_log;
 }		t_data;
 
 // Macros
 # define MSH_PROMPT "msh > "
 # define HD_PROMPT "> "
-# define WRFLAGS O_WRONLY | O_TRUNC | O_CREAT
+# define WRFLAGS O_WRONLY | O_CREAT |O_TRUNC
 # define WRAPPEND O_WRONLY | O_CREAT | O_APPEND
 # define WRMODE S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH
 
