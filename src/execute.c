@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:42:42 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/05 15:29:57 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/05 20:01:47 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ int	exe(t_params *params, int i_child)
 	close_io(data->fd_io, data->n_cmds, i_child);
 	dup2(params->fd_in, STDIN_FILENO);
 	dup2(params->fd_out, STDOUT_FILENO);
-	execve(params->path, params->exec_arg, params->envp);
+	execve(params->path, params->exec_arg, data->envp);
 	return (1);
 }

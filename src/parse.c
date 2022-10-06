@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/05 15:31:34 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/05 20:02:22 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,15 +136,12 @@ void setup_files(t_params *param)
 // Parses commands into struct ready to be executed
 t_params	*cmd_parse(char *line)
 {
-	t_data		*data;
 	t_params	*params;
 
-	data = get_data();
 	params = (t_params *)ft_calloc(1, sizeof(t_params));
 	params->exec_arg = split_args(line);
 	//insert_vars(params->exec_arg);
 	params->path = get_path(params->exec_arg[0]);
-	params->envp = data->envp;
 	return (params);
 }
 
