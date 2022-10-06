@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/06 15:36:54 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 15:59:14 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_data {
 	int			*fd_io;
 	int			exit_status;
 	void		(*run_cmd[9])(t_params *);
+	char		**cmd_names;
 }		t_data;
 
 // Macros
@@ -72,6 +73,7 @@ typedef struct s_data {
 
 // Data struct functions
 void		init_data(char	*envp[]);
+char		**init_cmd_names(void);
 t_data		*get_data(void);
 void		del_data(void);
 
