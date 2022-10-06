@@ -6,12 +6,13 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/06 15:38:15 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 16:17:08 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+// Waits for all children to return
 int	wait_all(t_data	*data)
 {
 	int	exit_status;
@@ -45,5 +46,6 @@ int	main(int argc, char *argv[], char *envp[])
 		while (i < data->n_cmds)
 			data->run_cmd[cmd_index(data->params[i]->exec_arg[0])](data->params);
 		data->exit_status = wait_all(data);
+		free_params(data->params);
 	}
 }
