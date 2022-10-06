@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/06 16:30:57 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 16:32:27 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int			find_last(char *str, char *chrs);
 char		*join_free_both(char *s1, char *s2);
 
 // Builtins
-unsigned	is_builtin(char *arg);
+unsigned	cmd_index(char *arg);
 void		builtin_echo(t_params *params);
 void		builtin_cd(t_params *params);
 void		builtin_pwd(t_params *params);
