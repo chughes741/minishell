@@ -6,18 +6,18 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 20:28:51 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/06 16:21:26 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 16:30:36 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 // Checks if a file is accessible
-bool	check_file_perm(char *file, int access)
+bool	check_file_perm(char *file, int access_type)
 {
-	if (access(files, access) != 0)
+	if (access(file, access_type) != 0)
 	{
-		perror(path);
+		perror(file);
 		return (true);
 	}
 	return (false);
@@ -34,7 +34,7 @@ void	open_outfiles(t_params *param)
 		if (param->exec_arg[i][0] == '>'
 			|| param->exec_arg[i][ft_strlen(param->exec_arg[i]) - 1] == '>')
 		{
-			if (check_file_perm(param->exec_arg[i], W_OK) == true);
+			if (check_file_perm(param->exec_arg[i], W_OK) == true)
 				param->err = true;
 			xfree(param->out_path);
 			param->out_path = ft_strtrim(param->exec_arg[i], ">");
@@ -62,7 +62,7 @@ void	open_infiles(t_params *param)
 		if (param->exec_arg[i][0] == '<'
 			|| param->exec_arg[i][ft_strlen(param->exec_arg[i]) - 1] == '<')
 		{
-			if (check_file_perm(param->exec_arg, R_OK) == true)
+			if (check_file_perm(param->exec_arg[0], R_OK) == true)
 				param->err = true;
 			xfree(param->in_path);
 			param->in_path = ft_strtrim(param->exec_arg[i], "<");
