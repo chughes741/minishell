@@ -6,13 +6,28 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/06 16:05:39 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/06 16:31:21 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-bool	run_builtin(t_params *params)
+bool	is_builtin(char *arg)
+{
+	if (ft_strncmp(arg, "echo", 5) == 0
+		|| ft_strncmp(arg, "cd", 3) == 0
+		|| ft_strncmp(arg, "pwd", 4) == 0
+		|| ft_strncmp(arg, "export", 7) == 0
+		|| ft_strncmp(arg, "unset", 6) == 0
+		|| ft_strncmp(arg, "env", 4) == 0
+		|| ft_strncmp(arg, "exit", 5) == 0
+		|| ft_strncmp(arg, ">>", 3) == 0)
+		return (true);
+	else
+		return (false);
+}
+
+void	run_builtin(t_params *params)
 {
 	if (ft_strncmp(params->exec_arg[0], "echo", 5) == 0)
 		builtin_echo(params->exec_arg, params->fd_out);
@@ -28,11 +43,11 @@ bool	run_builtin(t_params *params)
 		builtin_env(params->fd_out);
 	else if (ft_strncmp(params->exec_arg[0], "exit", 5) == 0)
 		builtin_exit();
-	else
-		return (false);
+	else if (ft_strncmp(params->exec_arg[0], ">>", 3) == 0)
+		here_doc(params->exec_arg[1], params->fd_out);
 	close_file(params->fd_in);
-	close_file(params->fd_in);
-	return (true);
+	close_file(params->fd_out);
+	return;
 }
 
 // Replicates the UNIX program echo

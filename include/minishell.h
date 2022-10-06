@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/05 21:11:51 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 13:54:00 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_params {
 	char	*out_path;
 	int		fd_in;
 	int		fd_out;
+	bool	err;
 }			t_params;
 
 // Singleton struct for program data
@@ -59,14 +60,12 @@ typedef struct s_data {
 	int			n_cmds;
 	int			*fd_io;
 	int			exit_status;
-	int			fd_rl_history;
-	int			fd_error_log;
 }		t_data;
 
 // Macros
 # define MSH_PROMPT "msh > "
 # define HD_PROMPT "> "
-# define WRFLAGS O_WRONLY | O_TRUNC | O_CREAT
+# define WRFLAGS O_WRONLY | O_CREAT |O_TRUNC
 # define WRAPPEND O_WRONLY | O_CREAT | O_APPEND
 # define WRMODE S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH
 
@@ -117,7 +116,8 @@ int			find_last(char *str, char *chrs);
 char		*join_free_both(char *s1, char *s2);
 
 // Builtins
-bool		run_builtin(t_params *params);
+bool		is_builtin(char *arg);
+void		run_builtin(t_params *params);
 void		builtin_echo(char **args, int fd_write);
 void		builtin_cd(char *new_dir);
 void		builtin_pwd(int fd_write);

@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/05 15:22:32 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 13:55:15 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ int	main(int argc, char *argv[], char *envp[])
 		i = 0;
 		while (i < data->n_cmds)
 		{
-			if (run_builtin(data->params[i]) == false)
+			if (is_builtin(data->params[i]))
+				run_builtin(data->params[i]);
+			else
 				exe(data->params[i], i);
 			++i;
 		}
