@@ -3,7 +3,7 @@
 #*-----------------------------------------------------------------------------#
 
 # Special variables
-DEFAULT_GOAL: all
+DEFAULT_GOAL: debug
 .DELETE_ON_ERROR: $(NAME)
 .PHONY: all bonus clean fclean re debug test
 
@@ -18,7 +18,7 @@ endif
 # Compiler and flags
 CC		=	gcc
 CFLAGS	=	-Wall -Werror -Wextra
-DFLAG	=	-D DEBUG -Wall -Werror -Wextra
+DFLAG	=	-g -D DEBUG -Wall -Werror -Wextra
 RM		=	rm -rf
 
 
@@ -82,6 +82,7 @@ $(DEBUG): fclean
 	$(HIDE)$(CC) $(DFLAG) $(LIBS) -o $(DEBUG) $(SRCS) $(LDIR)$(LIBFT)
 
 debug: $(DEBUG)
+	$(HIDE)leaks --atExit -- ./$(DEBUG)
 
 test:
 	$(HIDE)$(MAKE) -C test
