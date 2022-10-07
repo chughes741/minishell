@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/07 15:15:57 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/07 15:35:43 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_params	**parse_args(char *cmd)
 		open_infiles(params[i]);
 		i++;
 	}
-	free_array(cmds);
+	// free_array(cmds);
 	return (params);
 }
 
