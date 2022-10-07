@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/06 21:32:04 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/07 14:53:46 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-unsigned	cmd_index(char *arg)
+
+int	cmd_index(char *arg)
 {
 	t_data	*data;
 	int		i;
@@ -87,7 +88,7 @@ void	builtin_pwd(t_params *params)
 	xfree(buf);
 	return ;
 }
-/*
+
 // Checks is variable name is valid
 static bool	valid_name(char *name)
 {
@@ -105,77 +106,66 @@ static bool	valid_name(char *name)
 	}
 	return (true);
 }
-*/
-bool	env_var_exists(char *new_var, int i)
+
+// Returns position of var in envp, -1 if it does not exist
+int	env_var_exists(char *new_var)
 {
 	t_data	*data;
+	int		pos;
 
 	data = get_data();
-	if (ft_strncmp(data->envp[i], new_var, ft_strlen_until(new_var, '=')) == 0)
-		return (true);
-	return (false);
+	pos = 0;
+	while (data->envp[pos])
+	{
+		if (ft_strncmp(data->envp[pos], new_var,
+				ft_strlen_until(new_var, '=')) == 0)
+		{
+			printf("pos dans fonction = %d\n", pos);
+			return (pos);
+		}
+		pos++;
+	}
+	return (-1);
 }
 
-void	insert_new_var(char *new_var)
+// Inserts new_var at pos, appends if pos is -1
+void	insert_new_var(char *new_var, int pos)
 {
 	t_data	*data;
-	int		i;
 
 	data = get_data();
-	i = arraylen(data->envp);
-	data->envp = array_realloc(data->envp, i + 1);
-	data->envp[i] = ft_strdup(new_var);
+	if (pos == -1)
+	{
+		pos = arraylen(data->envp);
+		data->envp = array_realloc(data->envp, pos + 1);
+	}
+	else
+		xfree(data->envp[pos]);
+	data->envp[pos] = ft_strdup(new_var);
 }
 
 // Replicates variable exporting
 void	builtin_export(t_params *params)
 {
-	t_data	*d;
 	int		i;
-	int		j;
-	int		new_position;
+	int		pos;
 
-	i = 0;
-	new_position = 0;
 	if (params->exec_arg[1] == NULL)
 	{
 		builtin_env(params);
 		return ;
 	}
-	/*if (valid_name(new_vars) == false)
+	i = 1;
+	while (params->exec_arg[i])
 	{
-		perror("Not a valid variable name: ");
-		return ;
-	}*/
-	d = get_data();
-	d->envp = array_realloc(d->envp, arraylen(d->envp) + 1);
-	while (d->envp[i])
-	{
-		j = 1;
-		while (params->exec_arg[j])
+		if (valid_name(params->exec_arg[i]) == false)
 		{
-			if (ft_strncmp(params->exec_arg[j], d->envp[i], ft_strlen_until(params->exec_arg[j], '=')) == 0)
-			{
-				free(d->envp[i]);
-				d->envp[i] = ft_strdup(params->exec_arg[j]);
-				new_position = j + 1;
-				break ;
-			}
-			j++;
+			perror("Not a valid variable name: ");
+			break ;
 		}
-		i++;
-	}
-	i = arraylen(d->envp) - 1;
-	j = new_position;
-	while (params->exec_arg[j])
-	{
-		d->envp[i] = ft_strdup(params->exec_arg[j]);
-		j++;
-		if (params->exec_arg[j])
-		{
-			d->envp = array_realloc(d->envp, arraylen(d->envp) + 1);
-			i++;
-		}
+		pos = env_var_exists(params->exec_arg[i]);
+		insert_new_var(params->exec_arg[i], pos);
+		++i;
 	}
 	close_file(params->fd_in);
 	close_file(params->fd_out);
@@ -187,17 +177,24 @@ void	builtin_unset(t_params *params)
 {
 	t_data	*data;
 	int		pos;
+	int		i;
 
 	data = get_data();
-	pos = 0;
-	while (data->envp[pos] != NULL
-		&& ft_strncmp(params->exec_arg[1], data->envp[pos], ft_strlen(params->exec_arg[1])))
-		pos++;
-	if (pos >= arraylen(data->envp))
+	i = 1;
+	if (params->exec_arg[1] == NULL)
 		return ;
-	data->envp = array_del_one(data->envp, pos);
-	close_file(params->fd_in);
-	close_file(params->fd_out);
+	while (params->exec_arg[i])
+	{
+		printf("params->exec_arg[i] = %s\n", params->exec_arg[i]);
+		if (valid_name(params->exec_arg[i]) == false)
+		{
+			perror("Not a valid variable name: ");
+			break ;
+		}
+		pos = env_var_exists(params->exec_arg[i]);
+		data->envp = array_del_one(data->envp, pos);
+		++i;
+	}
 	return ;
 }
 
