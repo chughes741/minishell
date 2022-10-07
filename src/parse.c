@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/07 15:35:43 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/07 15:39:09 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_params	**parse_args(char *cmd)
 		open_infiles(params[i]);
 		i++;
 	}
-	// free_array(cmds);
+	free_array(cmds);
 	return (params);
 }
 
@@ -124,30 +124,32 @@ int	find_next(char *str, char *chr)
 char	**split_args(char *str)
 {
 	char	**rtn;
+	char	*temp;
 	int		start;
 	int		end;
 
 	rtn = (char **)ft_calloc(1, sizeof(char *));
 	start = 0;
-	str = ft_strtrim_free(str, " ");
-	while (str[start])
+	temp = ft_strtrim(str, " ");
+	while (temp[start])
 	{
-		if (ft_strchr(" \"\'", str[start]) == NULL)
-			end = find_next(&str[start], " <>") + start;
-		else if (str[start] == ' ')
+		if (ft_strchr(" \"\'", temp[start]) == NULL)
+			end = find_next(&temp[start], " <>") + start;
+		else if (temp[start] == ' ')
 			;
-		else if (ft_strchr("\'", str[start]) != NULL)
-			end = find_next(&str[start + 1], "\'") + start + 2;
-		else if (ft_strchr("\"", str[start]) != NULL)
-			end = find_next(&str[start + 1], "\"") + start + 2;
+		else if (ft_strchr("\'", temp[start]) != NULL)
+			end = find_next(&temp[start + 1], "\'") + start + 2;
+		else if (ft_strchr("\"", temp[start]) != NULL)
+			end = find_next(&temp[start + 1], "\"") + start + 2;
 		else
-			end = ft_strlen(&str[start] - 1);
-		if (end > start && start < (int)ft_strlen(str) - 1)
+			end = ft_strlen(&temp[start] - 1);
+		if (end > start && start < (int)ft_strlen(temp) - 1)
 		{
 			rtn = array_realloc(rtn, arraylen(rtn) + 1);
-			rtn[arraylen(rtn)] = ft_substr(str, start, end - start);
+			rtn[arraylen(rtn)] = ft_substr(temp, start, end - start);
 		}
 		start = end + 1;
 	}
+	xfree(temp);
 	return (rtn);
 }
