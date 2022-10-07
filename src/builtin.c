@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/06 21:12:00 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 21:18:16 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	builtin_pwd(t_params *params)
 }
 
 // Checks is variable name is valid
-/*static bool	valid_name(char *name)
+static bool	valid_name(char *name)
 {
 	int	i;
 
@@ -104,7 +104,28 @@ void	builtin_pwd(t_params *params)
 			return (false);
 	}
 	return (true);
-}*/
+}
+
+bool	env_var_exists(char *new_var, int i)
+{
+	t_data	*data;
+
+	data = get_data();
+	if (ft_strncmp(data->envp[i], new_var, ft_strlen_until(new_var, '=')) == 0)
+		return (true);
+	return (false);
+}
+
+void	insert_new_var(char *new_var)
+{
+	t_data	*data;
+	int		i;
+
+	data = get_data();
+	i = arraylen(data->envp);
+	data->envp = array_realloc(data->envp, i + 1);
+	data->envp[i] = ft_strdup(new_var);
+}
 
 // Replicates variable exporting
 void	builtin_export(t_params *params)
@@ -112,7 +133,6 @@ void	builtin_export(t_params *params)
 	t_data	*d;
 	int		i;
 	int		j;
-	int		new_position;
 
 	i = 0;
 	new_position = 0;
@@ -121,40 +141,39 @@ void	builtin_export(t_params *params)
 		builtin_env(params);
 		return ;
 	}
-	/*if (valid_name(new_vars) == false)
-	{
-		perror("Not a valid variable name: ");
-		return ;
-	}*/
 	d = get_data();
-	d->envp = array_realloc(d->envp, arraylen(d->envp) + 1);
 	while (d->envp[i])
 	{
 		j = 1;
 		while (params->exec_arg[j])
 		{
-			if (ft_strncmp(params->exec_arg[j], d->envp[i], ft_strlen_until(params->exec_arg[j], '=')) == 0)
+			if (valid_name(new_vars[j]) == false)
+			{
+				perror("Not a valid variable name: ");
+				return ;
+			}
+			if (env_var_exists(new_vars[j], i) == true)
 			{
 				free(d->envp[i]);
-				d->envp[i] = ft_strdup(params->exec_arg[j]);
-				new_position = j + 1;
-				break ;
+				d->envp[i] = ft_strdup(new_vars[j]);
+				i++;
 			}
 			j++;
 		}
 		i++;
 	}
-	i = arraylen(d->envp) - 1;
-	j = new_position;
-	while (params->exec_arg[j])
+	i = 0;
+	j = 1;
+	while (new_vars[j])
 	{
-		d->envp[i] = ft_strdup(params->exec_arg[j]);
-		j++;
-		if (params->exec_arg[j])
+		i = 0;
+		while (env_var_exists(new_vars[j], i) == false)
 		{
-			d->envp = array_realloc(d->envp, arraylen(d->envp) + 1);
 			i++;
+			if (d->envp[i] == NULL)
+				insert_new_var(new_vars[j]);
 		}
+		j++;
 	}
 	close_file(params->fd_in);
 	close_file(params->fd_out);
