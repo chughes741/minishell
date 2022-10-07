@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:58:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/06 21:14:50 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 21:30:08 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	del_data(void)
 
 	data = get_data();
 	free_array(data->envp);
-	// free_params(data->params);
+	free_params(data->params);
 	xfree(data->last_cmd);
 	xfree(data->fd_io);
 	free_array(data->cmd_names);

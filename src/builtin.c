@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/06 21:28:08 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 21:32:04 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	builtin_pwd(t_params *params)
 	xfree(buf);
 	return ;
 }
-
+/*
 // Checks is variable name is valid
 static bool	valid_name(char *name)
 {
@@ -105,7 +105,7 @@ static bool	valid_name(char *name)
 	}
 	return (true);
 }
-
+*/
 bool	env_var_exists(char *new_var, int i)
 {
 	t_data	*data;
@@ -139,7 +139,7 @@ void	builtin_export(t_params *params)
 	new_position = 0;
 	if (params->exec_arg[1] == NULL)
 	{
-		builtin_env(STDOUT_FILENO);
+		builtin_env(params);
 		return ;
 	}
 	/*if (valid_name(new_vars) == false)

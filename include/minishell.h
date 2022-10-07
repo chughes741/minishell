@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/06 20:17:33 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 21:32:26 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ bool		check_file_perm(char *file, int access_type);
 
 // Standard Library like functions
 char		*strcdup(char *basestr, char *matchchrs);
-void		*xfree(void *ptr);
 char		**array_realloc(char **ptr, int size);
 char		*free_array(char **array);
 int 		arraylen(char **array);
