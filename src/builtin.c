@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/07 14:53:46 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/07 16:09:09 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,14 +92,18 @@ void	builtin_pwd(t_params *params)
 // Checks is variable name is valid
 static bool	valid_name(char *name)
 {
-	int	i;
+	int		i;
+	int		j;
+	char	**split_name;
 
+	split_name = ft_split(name, '=');
 	if (ft_isalpha(name[0]) == false && name[0] != '_')
 		return (false);
+	j = 0;
 	i = 1;
-	while (name[i] != '=')
+	while (split_name[i])
 	{
-		if (ft_isalnum(name[i]) == true || name[i] == '_')
+		if (ft_isalnum(split_name[0][j]) == true || split_name[0][j] == '_')
 			i++;
 		else
 			return (false);
@@ -112,17 +116,16 @@ int	env_var_exists(char *new_var)
 {
 	t_data	*data;
 	int		pos;
+	char	**new_split_var;
 
 	data = get_data();
 	pos = 0;
+	new_split_var = ft_split(new_var, '=');
 	while (data->envp[pos])
 	{
-		if (ft_strncmp(data->envp[pos], new_var,
-				ft_strlen_until(new_var, '=')) == 0)
-		{
-			printf("pos dans fonction = %d\n", pos);
+		if (ft_strncmp(data->envp[pos], new_split_var[0],
+				ft_strlen(new_split_var[0])) == 0)
 			return (pos);
-		}
 		pos++;
 	}
 	return (-1);
@@ -185,7 +188,6 @@ void	builtin_unset(t_params *params)
 		return ;
 	while (params->exec_arg[i])
 	{
-		printf("params->exec_arg[i] = %s\n", params->exec_arg[i]);
 		if (valid_name(params->exec_arg[i]) == false)
 		{
 			perror("Not a valid variable name: ");
@@ -195,6 +197,8 @@ void	builtin_unset(t_params *params)
 		data->envp = array_del_one(data->envp, pos);
 		++i;
 	}
+	close_file(params->fd_in);
+	close_file(params->fd_out);
 	return ;
 }
 
