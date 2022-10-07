@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/06 20:18:21 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 21:12:00 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ unsigned	cmd_index(char *arg)
 	i = 0;
 	while (data->cmd_names[i])
 	{
-		if (ft_strncmp(arg, data->cmd_names[i], strlen(data->cmd_names[i] + 1)))
+		if (!ft_strncmp(arg, data->cmd_names[i], strlen(data->cmd_names[i] + 1)))
 			break ;
 		++i;
 	}
