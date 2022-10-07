@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/06 21:18:16 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/06 21:28:08 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,47 +133,49 @@ void	builtin_export(t_params *params)
 	t_data	*d;
 	int		i;
 	int		j;
+	int		new_position;
 
 	i = 0;
 	new_position = 0;
-	if (params->exec_arg == NULL)
+	if (params->exec_arg[1] == NULL)
 	{
-		builtin_env(params);
+		builtin_env(STDOUT_FILENO);
 		return ;
 	}
+	/*if (valid_name(new_vars) == false)
+	{
+		perror("Not a valid variable name: ");
+		return ;
+	}*/
 	d = get_data();
+	d->envp = array_realloc(d->envp, arraylen(d->envp) + 1);
 	while (d->envp[i])
 	{
 		j = 1;
 		while (params->exec_arg[j])
 		{
-			if (valid_name(new_vars[j]) == false)
-			{
-				perror("Not a valid variable name: ");
-				return ;
-			}
-			if (env_var_exists(new_vars[j], i) == true)
+			if (ft_strncmp(params->exec_arg[j], d->envp[i], ft_strlen_until(params->exec_arg[j], '=')) == 0)
 			{
 				free(d->envp[i]);
-				d->envp[i] = ft_strdup(new_vars[j]);
-				i++;
+				d->envp[i] = ft_strdup(params->exec_arg[j]);
+				new_position = j + 1;
+				break ;
 			}
 			j++;
 		}
 		i++;
 	}
-	i = 0;
-	j = 1;
-	while (new_vars[j])
+	i = arraylen(d->envp) - 1;
+	j = new_position;
+	while (params->exec_arg[j])
 	{
-		i = 0;
-		while (env_var_exists(new_vars[j], i) == false)
-		{
-			i++;
-			if (d->envp[i] == NULL)
-				insert_new_var(new_vars[j]);
-		}
+		d->envp[i] = ft_strdup(params->exec_arg[j]);
 		j++;
+		if (params->exec_arg[j])
+		{
+			d->envp = array_realloc(d->envp, arraylen(d->envp) + 1);
+			i++;
+		}
 	}
 	close_file(params->fd_in);
 	close_file(params->fd_out);
