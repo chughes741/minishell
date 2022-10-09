@@ -3,7 +3,7 @@
 #*-----------------------------------------------------------------------------#
 
 # Special variables
-DEFAULT_GOAL: debug
+DEFAULT_GOAL: all
 .DELETE_ON_ERROR: $(NAME)
 .PHONY: all bonus clean fclean re debug test
 
