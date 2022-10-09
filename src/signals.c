@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:05:28 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/01 14:54:29 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/09 17:49:24 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,18 @@ void	init_signals(void)
 void	handle_interupt(int signum)
 {
 	t_data	*data;
+	int		i;
 
 	(void)signum;
 	data = get_data();
-	if (data->params[0]->id != 0) //! Need a different way to check if child
-		kill(data->params[0]->id, 0); //TODO check leaks from killed child
+	i = 0;
+	while (data->params[i])
+	{
+		if (data->params[i]->id != 0
+			&& cmd_index(data->params[i]->exec_arg[i]) == 8)
+			kill(data->params[i]->id, 0); //TODO check leaks from killed child
+		++i;
+	}
 	return ; //TODO Handle how this returns prompt
 }
 
@@ -37,7 +44,7 @@ void	handle_interupt(int signum)
 void	handle_quit(int signum)
 {
 	(void)signum;
-	exit(0);
+	builtin_exit(NULL);
 }
 
 // Handles SIGABRT (^\)
