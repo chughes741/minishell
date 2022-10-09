@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:05:28 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/09 18:41:12 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/09 18:51:33 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 void	init_signals(void)
 {
 	signal(SIGINT, handle_interupt);
-	signal(SIGQUIT, handle_quit);
-	// signal(SIGABRT, SIG_IGN);
+	signal(SIGABRT, handle_abort);
+	signal(SIGQUIT, SIG_IGN);
 	return ;
 }
 
@@ -40,8 +40,8 @@ void	handle_interupt(int signum)
 	return ; //TODO Handle how this returns prompt
 }
 
-// Handles SIGQUIT (^D)
-void	handle_quit(int signum)
+// Handles SIGABRT (^D)
+void	handle_abort(int signum)
 {
 	(void)signum;
 	builtin_exit(NULL);
