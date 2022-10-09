@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/09 17:46:55 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/09 18:02:26 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int argc, char *argv[], char *envp[])
 	init_data(envp);
 	if (argc != 1 || argv[0] == NULL)
 		data->run = false;
-	init_signals();
+	// init_signals();
 	while (data->run == true)
 	{
 		data->n_cmds = 0;
