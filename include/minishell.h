@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/10 15:21:07 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/10 15:27:25 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@
 # include <stdbool.h> // true, false, bool
 
 // Libs
-# include "../librl/include/readline.h" // readline
-# include "../librl/include/history.h" // readline
+# include "../librl/readline.h" // readline
+# include "../librl/history.h" // readline
 # include "../libft/include/libft.h"
 
 // Struct for storing initialization info for exec
@@ -61,6 +61,7 @@ typedef struct s_data {
 	int			*fd_io;
 	void		(*run_cmd[9])(t_params *);
 	char		**cmd_names;
+	int			exit_status;
 }		t_data;
 
 // Macros
