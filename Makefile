@@ -8,7 +8,7 @@ DEFAULT_GOAL: all
 .PHONY: all bonus clean fclean re debug test
 
 # Hide calls
-export VERBOSE	=	FALSE
+export VERBOSE	=	TRUE
 ifeq ($(VERBOSE),TRUE)
 	HIDE =
 else
@@ -26,10 +26,9 @@ RM		=	rm -rf
 #*                                LIBRARIES                                    #
 #*-----------------------------------------------------------------------------#
 
-LIBS	=	-lreadline
-
 LDIR	=	libft/
-LIBFT	=	libft.a
+LIBFT	=	libft.a 
+LIBS	=	librl/libhistory.a librl/libreadline.a
 
 # Generates libft.a
 $(LDIR)/$(LIBFT):
