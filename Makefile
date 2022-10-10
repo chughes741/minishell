@@ -17,7 +17,7 @@ endif
 
 # Compiler and flags
 CC		=	gcc
-CFLAGS	=	-Wall -Werror -Wextra
+CFLAGS	=	-Wall -Werror -Wextra -I./librl
 DFLAG	=	-g -D DEBUG -Wall -Werror -Wextra
 RM		=	rm -rf
 
@@ -33,20 +33,10 @@ LIBFT	=	libft.a
 $(LFTDIR)/$(LIBFT):
 	$(HIDE)$(MAKE) -C $(LFTDIR)
 
-
-#*-----------------------------------------------------------------------------#
-#*                               READLINE                                      #
-#*-----------------------------------------------------------------------------#
-
-LRLDIR	=	librl/
-LIBRL	=	librl/libhistory.a librl/libreadline.a
-RLCONF	=	config.log
-
-$(LRLDIR)/$(RLCONF):
-	./$(LRLDIR)configure
-
-$(LRLDIR)/$(LIBRL): $(LRLDIR)/$(RLCONF)
-	$(MAKE) -C $(LRLDIR)
+readline:
+ifeq (,$(wildcard ./readline-8.1/config.log))
+	$(HIDE)cd librl && ./configure --silent && $(MAKE) -s
+endif
 
 
 #*-----------------------------------------------------------------------------#
@@ -61,10 +51,10 @@ OBJDIR	=	bin/
 SRCS	=	$(wildcard $(SRCDIR)*.c) #! RBS
 OBJS	=	$(patsubst $(SRCDIR)%.c,$(OBJDIR)%.o,$(SRCS))
 
-all: $(LRLDIR)/$(LIBRL) #$(LFTDIR)/$(LIBFT) $(NAME)
+all: readline $(NAME) $(LFTDIR)/$(LIBFT)
 
 $(NAME): $(OBJS) $(LFTDIR)/$(LIBFT)
-	$(HIDE)$(CC) $(CFLAGS) $(LIBS) $(OBJS) $(LFTDIR)$(LIBFT) -o $@
+	$(HIDE)$(CC) $(CFLAGS) $(OBJS) $(LFTDIR)$(LIBFT) -Llibrl -o $@ 
 
 $(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c $(OBJDIR)
 	$(HIDE)$(CC) $(CFLAGS) -c $< -o $@
@@ -80,8 +70,7 @@ clean:
 
 # Removes objects and executables
 fclean: clean
-	$(HIDE)$(RM) $(NAME)
-	$(HIDE)$(RM) $(DEBUG)
+	$(HIDE)$(RM) $(NAME) $(DEBUG)
 #!	$(HIDE)$(MAKE) -C $(LFTDIR) $(MAKE) fclean
 
 # Removes objects and executables and remakes
