@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/07 16:09:51 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/10 15:21:07 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 					//execve, dup, dup2, pipe, isatty, ttyname, ttyslot
 # include <stdio.h> // readline, printf, perror
 # include <stdlib.h> // malloc, free, exit, getenv, 
-# include <readline/readline.h> // readline
-# include <readline/history.h> // readline
 # include <fcntl.h> // open
 # include <sys/wait.h> // wait, wait3, wait4
 # include <sys/types.h> // waitpid, wait3, opendir, closedir
@@ -36,7 +34,9 @@
 # include <errno.h> // errno
 # include <stdbool.h> // true, false, bool
 
-// Libft
+// Libs
+# include "../librl/include/readline.h" // readline
+# include "../librl/include/history.h" // readline
 # include "../libft/include/libft.h"
 
 // Struct for storing initialization info for exec
@@ -59,7 +59,6 @@ typedef struct s_data {
 	char		*last_cmd;
 	int			n_cmds;
 	int			*fd_io;
-	int			exit_status;
 	void		(*run_cmd[9])(t_params *);
 	char		**cmd_names;
 }		t_data;
@@ -82,10 +81,9 @@ void		free_params(t_params **params);
 void		error_handler(void);
 
 // Signal handling
-void		init_signals(void);
-void		handle_interupt(int signum);
-void		handle_quit(int signum);
-void		handle_abort(int signum);
+void		reset_sig(void);
+void		sig_int_handler(int signum);
+void		sig_quit_handler(int signum);
 
 // Parsing functions
 t_params	**parse_args(char *cmd);
