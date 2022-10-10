@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/09 18:24:18 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/10 11:31:41 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	t_data	*data;
 
-	init_signals();
+	// init_signals();
 	int		i;
 	data = get_data();
 	init_data(envp);
@@ -55,5 +55,6 @@ int	main(int argc, char *argv[], char *envp[])
 			data->exit_status = wait_all(data);
 			free_params(data->params);
 		}
+		xfree(data->last_cmd);
 	}
 }
