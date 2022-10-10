@@ -15,55 +15,55 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-RL_LIBRARY_VERSION = 8.2
+RL_LIBRARY_VERSION = @LIBVERSION@
 RL_LIBRARY_NAME = readline
 
-PACKAGE = readline
-VERSION = 8.2
+PACKAGE = @PACKAGE_NAME@
+VERSION = @PACKAGE_VERSION@
 
-PACKAGE_BUGREPORT = bug-readline@gnu.org
-PACKAGE_NAME = readline
-PACKAGE_STRING = readline 8.2
-PACKAGE_VERSION = 8.2
+PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
+PACKAGE_NAME = @PACKAGE_NAME@
+PACKAGE_STRING = @PACKAGE_STRING@
+PACKAGE_VERSION = @PACKAGE_VERSION@
 
-PACKAGE_TARNAME = readline
+PACKAGE_TARNAME = @PACKAGE_TARNAME@
 
-srcdir = ./librl
-VPATH = ./librl
-top_srcdir = ./librl
-BUILD_DIR = /Users/cole/42/minishell
+srcdir = @srcdir@
+VPATH = @srcdir@
+top_srcdir = @top_srcdir@
+BUILD_DIR = @BUILD_DIR@
 
-INSTALL = /usr/bin/install -c
-INSTALL_PROGRAM = ${INSTALL}
-INSTALL_DATA = ${INSTALL} -m 644
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
 
-CC = gcc
-RANLIB = ranlib
-AR = ar
-ARFLAGS = cr
+CC = @CC@
+RANLIB = @RANLIB@
+AR = @AR@
+ARFLAGS = @ARFLAGS@
 RM = rm -f
 CP = cp
 MV = mv
 
+@SET_MAKE@
+SHELL = @MAKE_SHELL@
 
-SHELL = /bin/sh
+prefix = @prefix@
+exec_prefix = @exec_prefix@
 
-prefix = /usr/local
-exec_prefix = ${prefix}
+datarootdir = @datarootdir@
 
-datarootdir = ${prefix}/share
-
-bindir = ${exec_prefix}/bin
-libdir = ${exec_prefix}/lib
-mandir = ${datarootdir}/man
-includedir = ${prefix}/include
-datadir = ${datarootdir}
-localedir = ${datarootdir}/locale
+bindir = @bindir@
+libdir = @libdir@
+mandir = @mandir@
+includedir = @includedir@
+datadir = @datadir@
+localedir = @localedir@
 pkgconfigdir = ${libdir}/pkgconfig
 
-infodir = ${datarootdir}/info
+infodir = @infodir@
 
-docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
+docdir = @docdir@
 
 man3dir = $(mandir)/man3
 
@@ -74,14 +74,14 @@ DESTDIR =
 ETAGS = etags
 CTAGS = ctags -w
 
-CFLAGS = -g -O2 -Wno-parentheses -Wno-format-security -Wno-tautological-constant-out-of-range-compare
-LOCAL_CFLAGS =  -DRL_LIBRARY_VERSION='"$(RL_LIBRARY_VERSION)"' -DBRACKETED_PASTE_DEFAULT=1
-CPPFLAGS = 
+CFLAGS = @CFLAGS@
+LOCAL_CFLAGS = @LOCAL_CFLAGS@ -DRL_LIBRARY_VERSION='"$(RL_LIBRARY_VERSION)"' @BRACKETED_PASTE@
+CPPFLAGS = @CPPFLAGS@
 
-DEFS = -DHAVE_CONFIG_H 
-LOCAL_DEFS = 
+DEFS = @DEFS@ @CROSS_COMPILE@
+LOCAL_DEFS = @LOCAL_DEFS@
 
-TERMCAP_LIB = -ltermcap
+TERMCAP_LIB = @TERMCAP_LIB@
 
 # For libraries which include headers from other libraries.
 INCLUDES = -I. -I$(srcdir)
@@ -93,12 +93,12 @@ CCFLAGS = $(XCCFLAGS) $(LOCAL_CFLAGS) $(CFLAGS)
 GCC_LINT_FLAGS = -ansi -Wall -Wshadow -Wpointer-arith -Wcast-qual \
 		 -Wwrite-strings -Wstrict-prototypes \
 		 -Wmissing-prototypes -Wno-implicit -pedantic
-GCC_LINT_CFLAGS = $(XCCFLAGS) $(GCC_LINT_FLAGS) -g -O2 -Wno-parentheses -Wno-format-security -Wno-tautological-constant-out-of-range-compare 
+GCC_LINT_CFLAGS = $(XCCFLAGS) $(GCC_LINT_FLAGS) @CFLAGS@ @LOCAL_CFLAGS@
 
 ASAN_XCFLAGS = -fsanitize=address -fno-omit-frame-pointer
 ASAN_XLDFLAGS = -fsanitize=address
 
-install_examples = install-examples
+install_examples = @EXAMPLES_INSTALL_TARGET@
 
 .c.o:
 	${RM} $@
@@ -159,8 +159,8 @@ OTHER_DOCS = $(srcdir)/CHANGES $(srcdir)/INSTALL $(srcdir)/README
 OTHER_INSTALLED_DOCS = CHANGES INSTALL README
 
 ##########################################################################
-TARGETS = static shared
-INSTALL_TARGETS = install-static install-shared
+TARGETS = @STATIC_TARGET@ @SHARED_TARGET@
+INSTALL_TARGETS = @STATIC_INSTALL_TARGET@ @SHARED_INSTALL_TARGET@
 
 all: $(TARGETS)
 
