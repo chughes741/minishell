@@ -6,14 +6,48 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:05:28 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/10 20:25:46 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/11 10:08:27 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
+// Initialize signals for interactive or runtime
+void	init_signals(int mode)
+{
+	if (mode == INTERACTIVE)
+	{
+		signal(SIGINT, sigint_interactive);
+		signal(SIGQUIT, sigquit_interactive);
+	}
+	else if (mode == RUNTIME)
+	{
+		signal(SIGINT, sigint_runtime);
+		signal(SIGQUIT, sigquit_runtime);
+	}
+	return ;
+}
+
 // Handles interupt signal "^C"
-void	sig_int_handler(int signum)
+void	sigint_interactive(int signum)
+{
+	(void)signum;
+	ft_putchar_fd('\n', STDOUT_FILENO);
+	rl_on_new_line();
+	rl_redisplay();
+    return ;
+}
+
+// Handles quit signal "^\"
+void	sigquit_interactive(int signum)
+{
+	(void)signum;
+	rl_redisplay();
+	return ;
+}
+
+// Handles interupt signal "^C"
+void	sigint_runtime(int signum)
 {
 	//TODO add child killer
 	(void)signum;
@@ -24,10 +58,10 @@ void	sig_int_handler(int signum)
 }
 
 // Handles quit signal "^\"
-void	sig_quit_handler(int signum)
+void	sigquit_runtime(int signum)
 {
+	// TODO add quit
 	(void)signum;
 	rl_redisplay();
 	return ;
 }
-

@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/10 15:27:25 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/11 10:09:22 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ typedef struct s_data {
 # define WRFLAGS O_WRONLY | O_CREAT |O_TRUNC
 # define WRAPPEND O_WRONLY | O_CREAT | O_APPEND
 # define WRMODE S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH
+# define INTERACTIVE 1
+# define RUNTIME 2
 
 // Data struct functions
 void		init_data(char	*envp[]);
@@ -82,9 +84,11 @@ void		free_params(t_params **params);
 void		error_handler(void);
 
 // Signal handling
-void		reset_sig(void);
-void		sig_int_handler(int signum);
-void		sig_quit_handler(int signum);
+void		init_signals(int mode);
+void		sigint_interactive(int signum);
+void		sigquit_interactive(int signum);
+void		sigint_runtime(int signum);
+void		sigquit_runtime(int signum);
 
 // Parsing functions
 t_params	**parse_args(char *cmd);
