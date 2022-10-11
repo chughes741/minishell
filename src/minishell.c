@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/10 20:11:07 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/10 20:30:18 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,23 @@ int	main(int argc, char *argv[], char *envp[])
 		data->run = false;
 	signal(SIGINT, sig_int_handler);
 	signal(SIGQUIT, sig_quit_handler);
-	while (data->run == true)
+	while (1)
 	{
 		data->n_cmds = 0;
-		xfree(data->last_cmd);
 		data->last_cmd = readline(MSH_PROMPT);
-		if (data->last_cmd != NULL)
+		if (data->last_cmd == NULL)
+			break ;
+		add_history(data->last_cmd);
+		data->params = parse_args(data->last_cmd);
+		i = 0;
+		while (i < data->n_cmds)
 		{
-			add_history(data->last_cmd);
-			data->params = parse_args(data->last_cmd);
-			i = 0;
-			while (i < data->n_cmds)
-			{
-				data->run_cmd[cmd_index(data->params[i]->exec_arg[0])](data->params[i]);
-				i++;
-			} //TODO wc isn't hanging, prompt is just returned
-			wait_all(data);
-			free_params(data->params);
-		}
+			data->run_cmd[cmd_index(data->params[i]->exec_arg[0])](data->params[i]);
+			i++;
+		} //TODO wc isn't hanging, prompt is just returned
+		wait_all(data);
+		free_params(data->params);
+		xfree(data->last_cmd);
 	}
+	del_data();
 }
