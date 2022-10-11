@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/07 15:39:09 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/11 17:42:21 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,63 +39,99 @@ t_params	**parse_args(char *cmd)
 	return (params);
 }
 
-// Gets the value of a variable from envp
-/*char	*find_var(char *var_name)
+// Returns allocated copy of contents of var_name, frees var_name
+char	*get_var(char *var_name)
 {
 	t_data	*data;
 	char	*var_value;
-	int		pos;
+	int		position;
 
 	data = get_data();
-	while (data->envp[pos] != NULL
-		&& ft_strncmp(var_name, data->envp[pos], ft_strlen(var_name)))
-		pos++;
-	if (data->envp[pos] == NULL)
+	var_name = ft_strtrim_free(var_name, " ");
+	if (ft_strncmp("?", var_name, 2) == 0)
+	{
+		xfree(var_name);
+		var_name = ft_itoa(data->exit_status);
+		return (var_name);
+	}
+	position = env_var_exists(var_name);
+	if (position >= 0)
+		var_value = ft_strdup(&data->envp[position][ft_strlen(var_name) + 1]);
+	else
+		var_value = ft_strdup("");
+	xfree(var_name);
+	return (var_value);
+}
+
+// Splits a string at the index
+char	**strnsplit(char *str, int index)
+{
+	char	**split;
+
+	if (!str)
 		return (NULL);
-	return (ft_strdup(&data->envp[pos][ft_strlen(var_name) + 1]));
-}*/
+	split = (char **)ft_calloc(3, sizeof(char *));
+	if (index == 0)
+		split[0] = ft_strdup("");
+	else
+		split[0] = ft_strndup(str, index);
+	split[1] = ft_strdup(&str[index]);
+	xfree(str);
+	return (split);
+}
 
 // Finds and substitutes variables from envp
-/*char	*sub_vars(char *arg)
+char	*sub_vars(char *arg)
 {
-	char	**split_tokens;
-	char	*var_name;
-	char	*var_value;
-	char	*result_str;
-	int		i;
+	//TODO fix leaks
+	t_data	*data;
+	char	**split_str;
+	char	**var_name;
+	int		i_arg;
 
-	i = 1;
-	if (arg[0] == '$')
-		i = 0;
-	split_tokens = ft_split(arg, '$');
-	xfree(arg);
-	while (split_tokens[i])
+	i_arg = 0;
+	data = get_data();
+	while (arg)
 	{
-		//TODO Get var name
-		var_value = find_var(var_name);
-		//TODO Remove var name from split_tokens[i]
-		split_tokens[i] = join_free_both(var_value, split_tokens[i]);
-		++i;
+		i_arg += ft_strlen_before(&arg[i_arg], "$");
+		if (!arg[i_arg])
+			break ;
+		split_str = strnsplit(arg, i_arg);
+		split_str[1] = strpop(split_str[1], 0);
+		var_name = strnsplit(split_str[1], ft_strlen_before(split_str[1], " $"));
+		var_name[0] = get_var(var_name[0]);
+		if (var_name[0])
+			i_arg += ft_strlen(var_name[0]);
+		split_str[1] = join_free_both(var_name[0], var_name[1]);
+		xfree(var_name);
+		// xfree(arg);
+		arg = join_free_both(split_str[0], split_str[1]);
+		xfree(split_str);
 	}
-	result_str = array_join(split_tokens);
-	return (result_str);
-}*/
+	return (arg);
+}
 
 // Inserts env variables into arguments
-/*void	insert_vars(char **args)
+void	insert_vars(char **args)
 {
-	for (int i = 0; args[i]; ++i)
+	int	i;
+
+	i = 1;
+	while (args && args[i])
 	{
 		if (args[i][0] == '\'' && args[i][ft_strlen(args[i]) - 1] == '\'')
-			ft_strtrim(args[i], "\'");
+		{
+			args[i] = ft_strtrim_free(args[i], "\'");
+		}
 		else
 		{
-			ft_strtrim(args[i], "\"");
+			args[i] = ft_strtrim_free(args[i], "\"");
 			args[i] = sub_vars(args[i]);
 		}
+		++i;
 	}
 	return ;
-}*/
+}
 
 // Parses commands into struct ready to be executed
 t_params	*cmd_parse(char *line)
@@ -104,7 +140,7 @@ t_params	*cmd_parse(char *line)
 
 	params = (t_params *)ft_calloc(1, sizeof(t_params));
 	params->exec_arg = split_args(line);
-	//insert_vars(params->exec_arg);
+	insert_vars(params->exec_arg);
 	params->path = get_path(params->exec_arg[0]);
 	return (params);
 }
