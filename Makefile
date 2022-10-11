@@ -28,6 +28,7 @@ RM		=	rm -rf
 
 LFTDIR	=	libft/
 LIBFT	=	libft.a 
+LIBRL	=	librl/libreadline.a librl/libhistory.a -lcurses
 
 # Generates libft.a
 $(LFTDIR)/$(LIBFT):
@@ -51,10 +52,10 @@ OBJDIR	=	bin/
 SRCS	=	$(wildcard $(SRCDIR)*.c) #! RBS
 OBJS	=	$(patsubst $(SRCDIR)%.c,$(OBJDIR)%.o,$(SRCS))
 
-all: readline $(NAME) $(LFTDIR)/$(LIBFT)
+all: $(NAME)
 
-$(NAME): $(OBJS) $(LFTDIR)/$(LIBFT)
-	$(HIDE)$(CC) $(CFLAGS) $(OBJS) $(LFTDIR)$(LIBFT) -Llibrl -o $@ 
+$(NAME): readline $(LFTDIR)/$(LIBFT) $(OBJS)
+	$(HIDE)$(CC) $(CFLAGS) $(OBJS) $(LFTDIR)$(LIBFT) $(LIBRL) -o $@ 
 
 $(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c $(OBJDIR)
 	$(HIDE)$(CC) $(CFLAGS) -c $< -o $@
