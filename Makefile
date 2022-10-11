@@ -34,10 +34,14 @@ LIBRL	=	librl/libreadline.a librl/libhistory.a -lcurses
 $(LFTDIR)/$(LIBFT):
 	$(HIDE)$(MAKE) -C $(LFTDIR)
 
-readline:
-ifeq (,$(wildcard ./readline-8.1/config.log))
-	$(HIDE)cd librl && ./configure --silent && $(MAKE) -s
-endif
+# Readline library targetes
+RLCONF	=	librl/config.log
+
+$(RLCONF):
+	$(HIDE)cd librl && ./configure --silent
+
+$(LIBRL): $(RLCONF)
+	$(MAKE) -s -C librl/
 
 
 #*-----------------------------------------------------------------------------#
@@ -54,9 +58,10 @@ OBJS	=	$(patsubst $(SRCDIR)%.c,$(OBJDIR)%.o,$(SRCS))
 
 all: $(NAME)
 
-$(NAME): readline $(LFTDIR)/$(LIBFT) $(OBJS)
+$(NAME): $(LIBRL) $(LFTDIR)/$(LIBFT) $(OBJS)
 	$(HIDE)$(CC) $(CFLAGS) $(OBJS) $(LFTDIR)$(LIBFT) $(LIBRL) -o $@ 
 
+# TODO fix relinking
 $(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c $(OBJDIR)
 	$(HIDE)$(CC) $(CFLAGS) -c $< -o $@
 
