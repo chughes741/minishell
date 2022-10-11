@@ -17,7 +17,7 @@ endif
 
 # Compiler and flags
 CC		=	gcc
-CFLAGS	=	-Wall -Werror -Wextra
+CFLAGS	=	-Wall -Werror -Wextra -I./librl
 DFLAG	=	-g -D DEBUG -Wall -Werror -Wextra
 RM		=	rm -rf
 
@@ -26,14 +26,22 @@ RM		=	rm -rf
 #*                                LIBRARIES                                    #
 #*-----------------------------------------------------------------------------#
 
-LIBS	=	-lreadline
-
-LDIR	=	libft/
-LIBFT	=	libft.a
+LFTDIR	=	libft/
+LIBFT	=	libft.a 
+LIBRL	=	librl/libreadline.a librl/libhistory.a -lcurses
 
 # Generates libft.a
-$(LDIR)/$(LIBFT):
-	$(HIDE)$(MAKE) -C $(LDIR)
+$(LFTDIR)/$(LIBFT):
+	$(HIDE)$(MAKE) -C $(LFTDIR)
+
+# Readline library targetes
+RLCONF	=	librl/config.log
+
+$(RLCONF):
+	$(HIDE)cd librl && ./configure --silent
+
+$(LIBRL): $(RLCONF)
+	$(HIDE)$(MAKE) -s -C librl/
 
 
 #*-----------------------------------------------------------------------------#
@@ -48,27 +56,28 @@ OBJDIR	=	bin/
 SRCS	=	$(wildcard $(SRCDIR)*.c) #! RBS
 OBJS	=	$(patsubst $(SRCDIR)%.c,$(OBJDIR)%.o,$(SRCS))
 
-all: $(LDIR)/$(LIBFT) $(NAME)
+all: $(NAME)
 
-$(NAME): $(OBJS) $(LDIR)/$(LIBFT)
-	$(HIDE)$(CC) $(CFLAGS) $(LIBS) $(OBJS) $(LDIR)$(LIBFT) -o $@
+$(NAME): $(LIBRL) $(LFTDIR)/$(LIBFT) $(OBJS)
+	$(HIDE)$(CC) $(CFLAGS) $(OBJS) $(LFTDIR)$(LIBFT) $(LIBRL) -o $@ 
 
+# TODO fix relinking
 $(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c $(OBJDIR)
 	$(HIDE)$(CC) $(CFLAGS) -c $< -o $@
 
+# Creates binary directory
 $(OBJDIR):
 	$(HIDE)mkdir -p $(OBJDIR)
 
 # Removes objects
 clean:
 	$(HIDE)$(RM) $(OBJS)
-#!	$(HIDE)$(MAKE) -C $(LDIR) $(MAKE) clean
+#!	$(HIDE)$(MAKE) -C $(LFTDIR) $(MAKE) clean
 
 # Removes objects and executables
 fclean: clean
-	$(HIDE)$(RM) $(NAME)
-	$(HIDE)$(RM) $(DEBUG)
-#!	$(HIDE)$(MAKE) -C $(LDIR) $(MAKE) fclean
+	$(HIDE)$(RM) $(NAME) $(DEBUG)
+#!	$(HIDE)$(MAKE) -C $(LFTDIR) $(MAKE) fclean
 
 # Removes objects and executables and remakes
 re: fclean all
@@ -79,7 +88,7 @@ re: fclean all
 #*-----------------------------------------------------------------------------#
 
 $(DEBUG): fclean
-	$(HIDE)$(CC) $(DFLAG) $(LIBS) -o $(DEBUG) $(SRCS) $(LDIR)$(LIBFT)
+	$(HIDE)$(CC) $(DFLAG) $(LIBS) -o $(DEBUG) $(SRCS) $(LFTDIR)$(LIBFT)
 
 debug: $(DEBUG)
 	$(HIDE)leaks --atExit -- ./$(DEBUG)
