@@ -22,19 +22,9 @@
 #ifndef _KEYMAPS_H_
 #define _KEYMAPS_H_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#if defined (READLINE_LIBRARY)
-#  include "rlstdc.h"
-#  include "chardefs.h"
-#  include "rltypedefs.h"
-#else
-#  include <readline/rlstdc.h>
-#  include <readline/chardefs.h>
-#  include <readline/rltypedefs.h>
-#endif
+#include "rlstdc.h"
+#include "chardefs.h"
+#include "rltypedefs.h"
 
 /* A keymap contains one entry for each key in the ASCII set.
    Each entry consists of a type and a pointer.
