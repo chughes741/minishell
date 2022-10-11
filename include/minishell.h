@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/11 10:21:47 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/11 14:05:38 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,12 @@ typedef struct s_data {
 // Macros
 # define MSH_PROMPT "msh > "
 # define HD_PROMPT "> "
-# define WRFLAGS O_WRONLY | O_CREAT |O_TRUNC
-# define WRAPPEND O_WRONLY | O_CREAT | O_APPEND
-# define WRMODE S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH
+// O_WRONLY | O_CREAT | O_TRUNC 
+# define WRFLAGS 0x0601
+// O_WRONLY | O_CREAT | O_APPEND
+# define WRAPPEND 0x0209
+// S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH
+# define WRMODE 0000644
 # define INTERACTIVE 1
 # define RUNTIME 2
 
@@ -115,7 +118,7 @@ bool		check_file_perm(char *file, int access_type);
 char		*strcdup(char *basestr, char *matchchrs);
 char		**array_realloc(char **ptr, int size);
 char		*free_array(char **array);
-int 		arraylen(char **array);
+int			arraylen(char **array);
 char		**arraydup(char **array);
 char		**array_del_one(char **array, int position);
 void		find_and_replace(char *str, char *chrs, char replace, int len);
