@@ -42,6 +42,7 @@ minishell
 *.su
 *.idb
 *.pdb
+*.log
 *_debug
 
 # Kernel Module Compile Results
@@ -55,3 +56,14 @@ dkms.conf
 
 # IDE
 .vscode
+
+# Readline bullshit
+librl/Makefile
+librl/doc/Makefile
+librl/examples/Makefile
+librl/shlib/Makefile
+librl/config.h
+librl/config.status
+librl/history.pc
+librl/readline.pc
+librl/stamp-h
