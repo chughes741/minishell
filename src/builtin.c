@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/07 16:09:09 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/11 13:07:12 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,28 @@ void	builtin_echo(t_params *params)
 // Replicates the UNIX command cd
 void	builtin_cd(t_params *params)
 {
+	char	*buf;
+	int		size;
+	int		pos;
+
+	size = 0;
+	buf = (char *)ft_calloc(size, sizeof(char));
 	if (chdir(params->exec_arg[1]) == -1)
 	{
 		perror("cd: ");
 	}
-	return ;
+	else
+	{
+		while (getcwd(buf, size) == NULL)
+		{
+			xfree(buf);
+			size++;
+			buf = (char *)ft_calloc(size, sizeof(char));
+		}
+		buf = str_prepend("PWD=", buf);
+		pos = env_var_exists(buf);
+		insert_new_var(buf, pos);
+	}
 }
 
 // Replicated the UNIX command pwd
@@ -224,6 +241,7 @@ void	builtin_exit(t_params *params)
 {
 	(void)params;
 	del_data();
+	printf("exit\n");
 	exit(0);
 }
 
