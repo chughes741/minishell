@@ -42,7 +42,6 @@ minishell
 *.su
 *.idb
 *.pdb
-*.log
 *_debug
 
 # Kernel Module Compile Results
