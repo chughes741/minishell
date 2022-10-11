@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:05:28 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/11 10:08:27 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/11 11:00:26 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	sigint_interactive(int signum)
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	rl_on_new_line();
 	rl_redisplay();
-    return ;
+	return ;
 }
 
 // Handles quit signal "^\"
@@ -49,19 +49,24 @@ void	sigquit_interactive(int signum)
 // Handles interupt signal "^C"
 void	sigint_runtime(int signum)
 {
-	//TODO add child killer
 	(void)signum;
+	kill(0, 0);
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	rl_on_new_line();
-	rl_redisplay();
-    return ;
+	return ;
 }
 
 // Handles quit signal "^\"
 void	sigquit_runtime(int signum)
 {
-	// TODO add quit
+	t_data	*data;
+
+	data = get_data();
 	(void)signum;
-	rl_redisplay();
+	kill(0, 0);
+	ft_putstr_fd("Quit : ", STDOUT_FILENO);
+	ft_putnbr_fd(data->exit_status, STDOUT_FILENO);
+	ft_putchar_fd('\n', STDOUT_FILENO);
+	rl_on_new_line();
 	return ;
 }
