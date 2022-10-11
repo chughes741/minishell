@@ -41,7 +41,7 @@ $(RLCONF):
 	$(HIDE)cd librl && ./configure --silent
 
 $(LIBRL): $(RLCONF)
-	$(MAKE) -s -C librl/
+	$(HIDE)$(MAKE) -s -C librl/
 
 
 #*-----------------------------------------------------------------------------#
