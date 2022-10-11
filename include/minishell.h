@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/11 10:09:22 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/11 10:21:47 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ char		**split_paths(void);
 char		*get_path(char *command);
 void		exe(t_params *params);
 t_params	*cmd_parse(char *line);
+void		wait_all(t_data	*data);
 
 // I/O functions
 int			*init_io(int n_cmds, int *fd_io);
