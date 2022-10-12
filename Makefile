@@ -5,7 +5,7 @@
 # Special variables
 DEFAULT_GOAL: all
 .DELETE_ON_ERROR: $(NAME)
-.PHONY: all bonus clean fclean re debug test valgrind
+.PHONY: all bonus clean fclean re test valgrind
 
 # Hide calls
 export VERBOSE	=	TRUE
@@ -18,7 +18,6 @@ endif
 # Compiler and flags
 CC		=	gcc
 CFLAGS	=	-Wall -Werror -Wextra -I./librl
-DFLAG	=	-g -D DEBUG -Wall -Werror -Wextra
 RM		=	rm -rf
 
 
@@ -88,12 +87,6 @@ re: fclean all
 #*-----------------------------------------------------------------------------#
 #*                                TESTING                                      #
 #*-----------------------------------------------------------------------------#
-
-$(DEBUG): fclean
-	$(HIDE)$(CC) $(DFLAG) $(LIBS) -o $(DEBUG) $(SRCS) $(LFTDIR)$(LIBFT)
-
-debug: $(DEBUG)
-	$(HIDE)leaks --atExit -- ./$(DEBUG)
 
 test:
 	$(HIDE)$(MAKE) -C test
