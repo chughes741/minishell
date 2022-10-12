@@ -3,14 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/11 17:42:21 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/12 14:25:15 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int	*count_quotes(char *arg)
+{
+	int	index;
+	int	j;
+	int	*quotes;
+	int	size;
+
+	index = 0;
+	j = 0;
+	size = 1;
+	quotes = ft_calloc(sizeof(int), size);
+	while (arg[index])
+	{
+		if (arg[index] == '\"')
+		{
+			quotes[j] = index;
+			j++;
+			size++;
+			quotes = int_realloc(quotes, size);
+		}
+		index++;
+	}
+	return (quotes);
+}
+
+char	*extract_string(char *arg, int start, int end)
+{
+	char	*extracted;
+	int		i;
+
+	i = 0;
+	extracted = ft_substr(arg, start, (end - start) - 1);
+	printf("Extracted contient : %s\n", extracted);
+	return (extracted);
+}
 
 // Parse return from rl into t_params structs
 t_params	**parse_args(char *cmd)
