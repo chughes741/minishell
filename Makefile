@@ -95,3 +95,11 @@ debug: $(DEBUG)
 
 test:
 	$(HIDE)$(MAKE) -C test
+
+valgrind: all
+	$(HIDE)valgrind									\
+			--leak-check=full						\
+			--show-reachable=yes					\
+			--error-limit=no						\
+			--suppressions=./config/minishell.supp	\
+			./minishell 
