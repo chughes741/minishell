@@ -5,10 +5,10 @@
 # Special variables
 DEFAULT_GOAL: all
 .DELETE_ON_ERROR: $(NAME)
-.PHONY: all bonus clean fclean re debug test
+.PHONY: all bonus clean fclean re debug test valgrind
 
 # Hide calls
-export VERBOSE	=	FALSE
+export VERBOSE	=	TRUE
 ifeq ($(VERBOSE),TRUE)
 	HIDE =
 else
@@ -58,11 +58,10 @@ OBJS	=	$(patsubst $(SRCDIR)%.c,$(OBJDIR)%.o,$(SRCS))
 
 all: $(NAME)
 
-$(NAME): $(LIBRL) $(LFTDIR)/$(LIBFT) $(OBJS)
+$(NAME): $(OBJDIR) $(LIBRL) $(LFTDIR)/$(LIBFT) $(OBJS)
 	$(HIDE)$(CC) $(CFLAGS) $(OBJS) $(LFTDIR)$(LIBFT) $(LIBRL) -o $@ 
 
-# TODO fix relinking
-$(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c $(OBJDIR)
+$(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c
 	$(HIDE)$(CC) $(CFLAGS) -c $< -o $@
 
 # Creates binary directory
@@ -77,6 +76,7 @@ clean:
 # Removes objects and executables
 fclean: clean
 	$(HIDE)$(RM) $(NAME) $(DEBUG)
+	$(HIDE)$(RM) $(NAME).dSYM
 #!	$(HIDE)$(MAKE) -C $(LFTDIR) $(MAKE) fclean
 
 # Removes objects and executables and remakes
