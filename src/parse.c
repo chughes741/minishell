@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/12 15:57:03 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/12 17:27:46 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,29 +56,40 @@ int	quote_skip(char *str)
 int	*get_split_indices(char *arg)
 {	//TODO handle -1 return from quote skip
 	int	index;
-	int	j;
+	int	len;
 	int	*quotes;
 
 	index = 0;
-	j = 1;
-	quotes = ft_calloc(j + 1, sizeof(int));
+	len = 1;
+	quotes = ft_calloc(len + 1, sizeof(int));
 	while (arg[index])
 	{
 		if (arg[index] == '\"' || arg[index] == '\'')
 			index += quote_skip(&arg[index]) - 1;
-		else if (arg[index] == '|' || ft_strncmp(&arg[index], "<<", 2))
+		else if (arg[index] == '|' || !ft_strncmp(&arg[index], "<<", 2)
+			|| arg[index + 1] == '\0')
 		{
-			quotes = int_realloc(quotes, j + 1);
-			quotes[j] = index;
-			j++;
+			quotes = int_realloc(quotes, len + 1);
+			quotes[len] = index;
+			len++;
 		}
-		if (ft_strncmp(&arg[index], "<<", 2))
+		if (!ft_strncmp(&arg[index], "<<", 2))
 			index++;
 		index++;
 	}
-	quotes = int_realloc(quotes, j + 1);
-	quotes[j] = -1;
+	quotes[len] = -1;
 	return (quotes);
+}
+
+// Returns number of ints in an int*, until first -1
+int	intlen(int *intstr)
+{
+	int	len;
+
+	len = 0;
+	while (intstr && intstr[len] != -1)
+		len++;
+	return (len);
 }
 
 // Returns array of strings, splits cmd on | and <<, accounts for quotes
@@ -91,10 +102,13 @@ char	**need_a_better_name(char *cmd)
 	indices = get_split_indices(cmd);
 	cmd_strs = (char **)ft_calloc(intlen(indices) + 1, sizeof(char *));
 	i = 0;
-	while (indices[i] >= 0)
+	while (indices && indices[i + 1] >= 0)
 	{
-		cmd_strs[i] = ft_substr(cmd, indices[i], indices[i + 1] - indices[i]);
+		cmd_strs[i] = ft_substr(cmd, indices[i], indices[i + 1] - indices[i] + 1);
 		++i;
+	}
+	for (int i = 0; cmd_strs[i]; ++i) {
+		;
 	}
 	return (cmd_strs);
 }
@@ -108,7 +122,9 @@ t_params	**parse_args(char *cmd)
 	int			i;
 
 	data = get_data();
-	cmds = ft_split(cmd, '|');
+	cmds = need_a_better_name(cmd);
+	for (int i = 0; cmds[i]; ++i)
+			printf("cmd[%i]: |%s|\n", i, cmds[i]);
 	data->n_cmds = arraylen(cmds);
 	data->fd_io = init_io(data->n_cmds, data->fd_io);
 	params = ft_calloc(data->n_cmds + 1, sizeof(t_params *));
