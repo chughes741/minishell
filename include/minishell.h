@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/11 14:26:43 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/12 12:45:45 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void		init_data(char	*envp[]);
 char		**init_cmd_names(void);
 t_data		*get_data(void);
 void		del_data(void);
-void		free_params(t_params **params);
+t_params	**free_params(t_params **params);
 
 // Error handling
 void		error_handler(void);

@@ -6,14 +6,14 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:17:10 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/10 20:33:30 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/12 12:45:35 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 // Frees all param structs in an array, returns NULL
-void	free_params(t_params **params)
+t_params	**free_params(t_params **params)
 {
 	int	i;
 
@@ -30,6 +30,5 @@ void	free_params(t_params **params)
 		}
 		free_array((char **)params);
 	}
-	params = NULL;
-	return ;
+	return (NULL);
 }

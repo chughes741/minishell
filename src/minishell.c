@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/11 10:20:55 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/12 12:45:00 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int argc, char *argv[], char *envp[])
 			i++;
 		}
 		wait_all(data);
-		free_params(data->params);
+		data->params = free_params(data->params);
 		xfree(data->last_cmd);
 	}
 	del_data();

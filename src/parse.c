@@ -6,9 +6,10 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/12 14:25:15 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/12 14:29:41 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../include/minishell.h"
 
@@ -119,7 +120,6 @@ char	**strnsplit(char *str, int index)
 // Finds and substitutes variables from envp
 char	*sub_vars(char *arg)
 {
-	//TODO fix leaks
 	t_data	*data;
 	char	**split_str;
 	char	**var_name;
@@ -140,7 +140,6 @@ char	*sub_vars(char *arg)
 			i_arg += ft_strlen(var_name[0]);
 		split_str[1] = join_free_both(var_name[0], var_name[1]);
 		xfree(var_name);
-		// xfree(arg);
 		arg = join_free_both(split_str[0], split_str[1]);
 		xfree(split_str);
 	}
@@ -150,7 +149,7 @@ char	*sub_vars(char *arg)
 // Inserts env variables into arguments
 void	insert_vars(char **args)
 {
-	int	i;
+	int		i;
 
 	i = 1;
 	while (args && args[i])
@@ -220,8 +219,8 @@ char	**split_args(char *str)
 			rtn = array_realloc(rtn, arraylen(rtn) + 1);
 			rtn[arraylen(rtn)] = ft_substr(temp, start, end - start);
 		}
-		start = end + 1;
+		start = end;
 	}
-	xfree(temp);
+	temp = xfree(temp);
 	return (rtn);
 }

@@ -5,10 +5,10 @@
 # Special variables
 DEFAULT_GOAL: all
 .DELETE_ON_ERROR: $(NAME)
-.PHONY: all bonus clean fclean re debug test
+.PHONY: all bonus clean fclean re debug test valgrind
 
 # Hide calls
-export VERBOSE	=	FALSE
+export VERBOSE	=	TRUE
 ifeq ($(VERBOSE),TRUE)
 	HIDE =
 else
@@ -27,11 +27,12 @@ RM		=	rm -rf
 #*-----------------------------------------------------------------------------#
 
 LFTDIR	=	libft/
-LIBFT	=	libft.a 
+LIBFT	=	libft.a
+LFTDEP	=	libft/include/libft.h
 LIBRL	=	librl/libreadline.a librl/libhistory.a -lcurses
 
 # Generates libft.a
-$(LFTDIR)/$(LIBFT):
+$(LFTDIR)/$(LIBFT): $(LFTDEP)
 	$(HIDE)$(MAKE) -C $(LFTDIR)
 
 # Readline library targetes
@@ -55,14 +56,14 @@ SRCDIR	=	src/
 OBJDIR	=	bin/
 SRCS	=	$(wildcard $(SRCDIR)*.c) #! RBS
 OBJS	=	$(patsubst $(SRCDIR)%.c,$(OBJDIR)%.o,$(SRCS))
+DEP		=	include/minishell.h
 
 all: $(NAME)
 
-$(NAME): $(LIBRL) $(LFTDIR)/$(LIBFT) $(OBJS)
+$(NAME): $(OBJDIR) $(LIBRL) $(LFTDIR)/$(LIBFT) $(OBJS)
 	$(HIDE)$(CC) $(CFLAGS) $(OBJS) $(LFTDIR)$(LIBFT) $(LIBRL) -o $@ 
 
-# TODO fix relinking
-$(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c $(OBJDIR)
+$(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c $(DEP)
 	$(HIDE)$(CC) $(CFLAGS) -c $< -o $@
 
 # Creates binary directory
@@ -77,6 +78,7 @@ clean:
 # Removes objects and executables
 fclean: clean
 	$(HIDE)$(RM) $(NAME) $(DEBUG)
+	$(HIDE)$(RM) $(NAME).dSYM
 #!	$(HIDE)$(MAKE) -C $(LFTDIR) $(MAKE) fclean
 
 # Removes objects and executables and remakes
@@ -95,3 +97,11 @@ debug: $(DEBUG)
 
 test:
 	$(HIDE)$(MAKE) -C test
+
+valgrind: all
+	$(HIDE)valgrind									\
+			--leak-check=full						\
+			--show-reachable=yes					\
+			--error-limit=no						\
+			--suppressions=./config/minishell.supp	\
+			./minishell 
