@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/12 12:45:45 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/12 15:06:01 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ void		find_and_replace(char *str, char *chrs, char replace, int len);
 int			find_first(char *str, char *chrs);
 int			find_last(char *str, char *chrs);
 char		*join_free_both(char *s1, char *s2);
+char		**strnsplit(char *str, int index);
 
 // Builtins
 int			cmd_index(char *arg);

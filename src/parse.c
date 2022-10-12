@@ -6,47 +6,97 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/12 14:29:41 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/12 15:57:03 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../include/minishell.h"
 
-int	*count_quotes(char *arg)
-{
+// Returns index of closing quote, skips nested quotes
+int	quote_skip(char *str)
+{	//TODO make this shorter
+	int	i;
+	int	nest_level;
+	int	quote;
+
+	i = 0;
+	nest_level = 0;
+	quote = 0;
+	while (str && str[i])
+	{
+		if (str[i] == '\'' && quote != 1)
+		{
+			quote = 1;
+			nest_level += 1;
+		}
+		else if (str[i] == '\"' && quote != 2)
+		{
+			quote = 2;
+			nest_level += 1;
+		}
+		else if (str[i] == '\'' && quote == 1)
+		{
+			quote = 2;
+			nest_level -= 1;
+		}
+		else if (str[i] == '\"' && quote == 2)
+		{
+			quote = 1;
+			nest_level -= 1;
+		}
+		if (nest_level == 0)
+			return (i) ;
+		++i;
+	}
+	return (-1);
+}
+
+// Returns an array of integers containing the positions of quotes in a string
+int	*get_split_indices(char *arg)
+{	//TODO handle -1 return from quote skip
 	int	index;
 	int	j;
 	int	*quotes;
-	int	size;
 
 	index = 0;
-	j = 0;
-	size = 1;
-	quotes = ft_calloc(sizeof(int), size);
+	j = 1;
+	quotes = ft_calloc(j + 1, sizeof(int));
 	while (arg[index])
 	{
-		if (arg[index] == '\"')
+		if (arg[index] == '\"' || arg[index] == '\'')
+			index += quote_skip(&arg[index]) - 1;
+		else if (arg[index] == '|' || ft_strncmp(&arg[index], "<<", 2))
 		{
+			quotes = int_realloc(quotes, j + 1);
 			quotes[j] = index;
 			j++;
-			size++;
-			quotes = int_realloc(quotes, size);
 		}
+		if (ft_strncmp(&arg[index], "<<", 2))
+			index++;
 		index++;
 	}
+	quotes = int_realloc(quotes, j + 1);
+	quotes[j] = -1;
 	return (quotes);
 }
 
-char	*extract_string(char *arg, int start, int end)
+// Returns array of strings, splits cmd on | and <<, accounts for quotes
+char	**need_a_better_name(char *cmd)
 {
-	char	*extracted;
+	char	**cmd_strs;
+	int		*indices;
 	int		i;
 
+	indices = get_split_indices(cmd);
+	cmd_strs = (char **)ft_calloc(intlen(indices) + 1, sizeof(char *));
 	i = 0;
-	extracted = ft_substr(arg, start, (end - start) - 1);
-	printf("Extracted contient : %s\n", extracted);
-	return (extracted);
+	while (indices[i] >= 0)
+	{
+		cmd_strs[i] = ft_substr(cmd, indices[i], indices[i + 1] - indices[i]);
+		++i;
+	}
+	return (cmd_strs);
 }
 
 // Parse return from rl into t_params structs
@@ -98,23 +148,6 @@ char	*get_var(char *var_name)
 		var_value = ft_strdup("");
 	xfree(var_name);
 	return (var_value);
-}
-
-// Splits a string at the index
-char	**strnsplit(char *str, int index)
-{
-	char	**split;
-
-	if (!str)
-		return (NULL);
-	split = (char **)ft_calloc(3, sizeof(char *));
-	if (index == 0)
-		split[0] = ft_strdup("");
-	else
-		split[0] = ft_strndup(str, index);
-	split[1] = ft_strdup(&str[index]);
-	xfree(str);
-	return (split);
 }
 
 // Finds and substitutes variables from envp
@@ -178,17 +211,6 @@ t_params	*cmd_parse(char *line)
 	insert_vars(params->exec_arg);
 	params->path = get_path(params->exec_arg[0]);
 	return (params);
-}
-
-// Returns index of next chr match in str
-int	find_next(char *str, char *chr)
-{
-	int i;
-
-	i = 0;
-	while(str[i] && ft_strchr(chr, str[i]) == NULL)
-		++i;
-	return (i);
 }
 
 // Splits arguments keeping quoted sections together
