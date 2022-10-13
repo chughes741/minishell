@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/13 13:18:19 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/13 15:49:31 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ void	insert_new_var(char *new_var, int pos)
 
 // Replicates variable exporting
 void	builtin_export(t_params *params)
-{
+{	//TODO string with spaces doesn't work properly, quotes or not
 	int		i;
 	int		pos;
 
