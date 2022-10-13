@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/13 15:49:31 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/13 15:52:34 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	cmd_index(char *arg)
 
 // Replicates the UNIX program echo
 void	builtin_echo(t_params *params)
-{
+{	// TODO echo allo | cat -e returns cd: No such file or directory
 	bool	newline;
 	int		i;
 
