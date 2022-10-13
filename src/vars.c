@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:13:49 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/13 10:14:05 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/13 12:12:25 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,26 @@ char	*get_var(char *var_name)
 // Finds and substitutes variables from envp
 char	*sub_vars(char *arg)
 {
-	//t_data	*data;
-	char	**split_str;
+	char	**splitstr;
 	char	**var_name;
 	int		i_arg;
 
 	i_arg = 0;
-	//data = get_data();
 	while (arg)
 	{
 		i_arg += ft_strlen_before(&arg[i_arg], "$");
 		if (!arg[i_arg])
 			break ;
-		split_str = strnsplit(arg, i_arg);
-		split_str[1] = strpop(split_str[1], 0);
-		var_name = strnsplit(split_str[1], ft_strlen_before(split_str[1], " $"));
+		splitstr = strnsplit(arg, i_arg);
+		splitstr[1] = strpop(splitstr[1], 0);
+		var_name = strnsplit(splitstr[1], ft_strlen_before(splitstr[1], " $"));
 		var_name[0] = get_var(var_name[0]);
 		if (var_name[0])
 			i_arg += ft_strlen(var_name[0]);
-		split_str[1] = join_free_both(var_name[0], var_name[1]);
+		splitstr[1] = join_free_both(var_name[0], var_name[1]);
 		xfree(var_name);
-		arg = join_free_both(split_str[0], split_str[1]);
-		xfree(split_str);
+		arg = join_free_both(splitstr[0], splitstr[1]);
+		xfree(splitstr);
 	}
 	return (arg);
 }
