@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/12 21:32:50 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/13 10:15:55 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ char	**need_a_better_name(char *cmd)
 	int		*indices;
 	int		i;
 
+	printf("cmd: |%s|\n", cmd);
 	indices = get_split_indices(cmd);
 	cmd_strs = (char **)ft_calloc(intlen(indices) + 1, sizeof(char *));
 	i = 0;
@@ -105,9 +106,6 @@ char	**need_a_better_name(char *cmd)
 	{
 		cmd_strs[i] = ft_substr(cmd, indices[i], indices[i + 1] - indices[i] + 1);
 		++i;
-	}
-	for (int i = 0; cmd_strs[i]; ++i) {
-		;
 	}
 	return (cmd_strs);
 }
@@ -125,6 +123,7 @@ t_params	**parse_args(char *cmd)
 	for (int i = 0; cmds[i]; ++i)
 			printf("cmd[%i]: |%s|\n", i, cmds[i]);
 	data->n_cmds = arraylen(cmds);
+	printf("n_cmds: %i\n", data->n_cmds);
 	data->fd_io = init_io(data->n_cmds, data->fd_io);
 	params = ft_calloc(data->n_cmds + 1, sizeof(t_params *));
 	i = 0;
@@ -139,81 +138,6 @@ t_params	**parse_args(char *cmd)
 	}
 	free_array(cmds);
 	return (params);
-}
-
-// Returns allocated copy of contents of var_name, frees var_name
-char	*get_var(char *var_name)
-{
-	t_data	*data;
-	char	*var_value;
-	int		position;
-
-	data = get_data();
-	var_name = ft_strtrim_free(var_name, " ");
-	if (ft_strncmp("?", var_name, 2) == 0)
-	{
-		xfree(var_name);
-		var_name = ft_itoa(data->exit_status);
-		return (var_name);
-	}
-	position = env_var_exists(var_name);
-	if (position >= 0)
-		var_value = ft_strdup(&data->envp[position][ft_strlen(var_name) + 1]);
-	else
-		var_value = ft_strdup("");
-	xfree(var_name);
-	return (var_value);
-}
-
-// Finds and substitutes variables from envp
-char	*sub_vars(char *arg)
-{
-	//t_data	*data;
-	char	**split_str;
-	char	**var_name;
-	int		i_arg;
-
-	i_arg = 0;
-	//data = get_data();
-	while (arg)
-	{
-		i_arg += ft_strlen_before(&arg[i_arg], "$");
-		if (!arg[i_arg])
-			break ;
-		split_str = strnsplit(arg, i_arg);
-		split_str[1] = strpop(split_str[1], 0);
-		var_name = strnsplit(split_str[1], ft_strlen_before(split_str[1], " $"));
-		var_name[0] = get_var(var_name[0]);
-		if (var_name[0])
-			i_arg += ft_strlen(var_name[0]);
-		split_str[1] = join_free_both(var_name[0], var_name[1]);
-		xfree(var_name);
-		arg = join_free_both(split_str[0], split_str[1]);
-		xfree(split_str);
-	}
-	return (arg);
-}
-
-// Inserts env variables into arguments
-void	insert_vars(char **args)
-{
-	int		i;
-
-	i = 1;
-	while (args && args[i])
-	{
-		if (args[i][0] == '\'' && args[i][ft_strlen(args[i]) - 1] == '\'')
-		{
-			args[i] = ft_strtrim_free(args[i], "\'");
-		}
-		else
-		{
-			args[i] = ft_strtrim_free(args[i], "\"");
-			args[i] = sub_vars(args[i]);
-		}
-		++i;
-	}
-	return ;
 }
 
 // Parses commands into struct ready to be executed
@@ -244,7 +168,7 @@ char	**split_args(char *str)
 		if (ft_strchr(" \"\'", temp[start]) == NULL)
 			end = find_next(&temp[start], " <>") + start;
 		else if (temp[start] == ' ')
-			;
+			end++;
 		else if (ft_strchr("\'", temp[start]) != NULL)
 			end = find_next(&temp[start + 1], "\'") + start + 2;
 		else if (ft_strchr("\"", temp[start]) != NULL)

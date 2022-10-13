@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/12 15:06:01 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/13 10:14:33 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,10 @@ t_params	**parse_args(char *cmd);
 int			find_next(char *str, char *chr);
 char		**split_args(char *str);
 void		setup_files(t_params *param);
+char		*get_var(char *var_name);
+char		*sub_vars(char *arg);
+void		insert_vars(char **args);
+
 
 // Exec setup functions
 char		**split_paths(void);
