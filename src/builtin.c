@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/11 14:06:49 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/13 10:19:40 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ void	builtin_echo(t_params *params)
 	while (params->exec_arg[++i] != NULL)
 	{
 		ft_putstr_fd(params->exec_arg[i], params->fd_out);
-		if (params->exec_arg[i + 1] != NULL)
-			ft_putchar_fd(' ', params->fd_out);
 	}
 	if (newline == true)
 		ft_putchar_fd('\n', params->fd_out);
