@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/13 15:35:32 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/13 15:55:29 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	cmd_index(char *arg)
 
 // Replicates the UNIX program echo
 void	builtin_echo(t_params *params)
-{
+{	// TODO echo allo | cat -e returns cd: No such file or directory
 	bool	newline;
 	int		i;
 
@@ -166,7 +166,7 @@ void	insert_new_var(char *new_var, int pos)
 
 // Replicates variable exporting
 void	builtin_export(t_params *params)
-{ //TODO assigning strings
+{	//TODO string with spaces doesn't work properly, quotes or not
 	int		i;
 	int		pos;
 
