@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 13:18:21 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/13 13:18:31 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/13 13:49:01 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,11 @@ void	here_doc(t_params *params)
 	while (1)
 	{
 		line = readline(HD_PROMPT);
-		if (ft_strncmp(line, params->exec_arg[1], ft_strlen(line)) != 0)
-		{
-			if (params->fd_out > 2)
-				ft_putstr_fd(line, params->fd_out);
-			xfree(line);
-		}
+		if (line && params->fd_out > 2
+			&& ft_strncmp(line, &params->exec_arg[0][2], ft_strlen(line)) != 0)
+			ft_putstr_fd(line, params->fd_out);
 		else
-		{
-			xfree(line);
 			break ;
-		}
 	}
 	close_file(params->fd_in);
 	close_file(params->fd_out);
