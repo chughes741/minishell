@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/13 10:15:55 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/13 12:06:04 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	quote_skip(char *str)
 			quote = 1;
 			nest_level--;
 		}
-		if (nest_level == 0)
+		if (nest_level == 0 || str[i] == '\0')
 			return (i);
 		i++;
 	}
@@ -65,18 +65,17 @@ int	*get_split_indices(char *arg)
 	{
 		if (arg[index] == '\"' || arg[index] == '\'')
 			index += (quote_skip(&arg[index]));
-		else if (arg[index] == '|' || !ft_strncmp(&arg[index], "<<", 2)
-			|| arg[index + 1] == '\0')
+		else if (arg[index] == '|' || !ft_strncmp(&arg[index], "<<", 2))
 		{
-			quotes = int_realloc(quotes, len + 1);
+			quotes = int_realloc(quotes, len, len + 1);
 			quotes[len] = index;
 			len++;
 		}
-		if (!ft_strncmp(&arg[index], "<<", 2))
-			index++;
 		index++;
 	}
-	quotes[len] = -1;
+	quotes = int_realloc(quotes, len, len + 1);
+	quotes[len] = index;
+	quotes[len + 1] = -1;
 	return (quotes);
 }
 
@@ -98,7 +97,6 @@ char	**need_a_better_name(char *cmd)
 	int		*indices;
 	int		i;
 
-	printf("cmd: |%s|\n", cmd);
 	indices = get_split_indices(cmd);
 	cmd_strs = (char **)ft_calloc(intlen(indices) + 1, sizeof(char *));
 	i = 0;
@@ -120,10 +118,7 @@ t_params	**parse_args(char *cmd)
 
 	data = get_data();
 	cmds = need_a_better_name(cmd);
-	for (int i = 0; cmds[i]; ++i)
-			printf("cmd[%i]: |%s|\n", i, cmds[i]);
 	data->n_cmds = arraylen(cmds);
-	printf("n_cmds: %i\n", data->n_cmds);
 	data->fd_io = init_io(data->n_cmds, data->fd_io);
 	params = ft_calloc(data->n_cmds + 1, sizeof(t_params *));
 	i = 0;
@@ -162,7 +157,7 @@ char	**split_args(char *str)
 
 	rtn = (char **)ft_calloc(1, sizeof(char *));
 	start = 0;
-	temp = ft_strtrim(str, " ");
+	temp = ft_strtrim(str, " |");
 	while (temp[start])
 	{
 		if (ft_strchr(" \"\'", temp[start]) == NULL)
@@ -180,7 +175,7 @@ char	**split_args(char *str)
 			rtn = array_realloc(rtn, arraylen(rtn) + 1);
 			rtn[arraylen(rtn)] = ft_substr(temp, start, end - start);
 		}
-		start = end;
+		start = end + 1;
 	}
 	temp = xfree(temp);
 	return (rtn);
