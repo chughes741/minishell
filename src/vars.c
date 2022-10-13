@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:13:49 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/13 12:12:25 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/13 15:57:37 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	insert_vars(char **args)
 {
 	int		i;
 
-	i = 1;
+	i = 0;
 	while (args && args[i])
 	{
 		if (args[i][0] == '\'' && args[i][ft_strlen(args[i]) - 1] == '\'')
