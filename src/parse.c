@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/13 13:21:18 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/13 13:49:54 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ t_params	**parse_args(char *cmd)
 	int			i;
 
 	data = get_data();
+	if (cmd[0] == '\0')
+		return (NULL);
 	cmds = need_a_better_name(cmd);
 	data->n_cmds = arraylen(cmds);
 	data->fd_io = init_io(data->n_cmds, data->fd_io);
