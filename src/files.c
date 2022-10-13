@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 20:28:51 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/13 13:03:56 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/13 13:39:16 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ void	open_infiles(t_params *param)
 	i = 0;
 	while (param->exec_arg[i])
 	{
-		if ((param->exec_arg[i][0] == '<' && param->exec_arg[i][1] != '<')
+		if (param->exec_arg[i][0] == '<' && param->exec_arg[i][1] == '<')
+			;
+		else if (param->exec_arg[i][0] == '<'
 			|| param->exec_arg[i][ft_strlen(param->exec_arg[i]) - 1] == '<')
 		{
 			if (check_file_perm(param->exec_arg[0], R_OK) == true)
