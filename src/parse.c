@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/12 17:27:46 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/12 21:32:50 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../include/minishell.h"
 
@@ -23,31 +22,31 @@ int	quote_skip(char *str)
 	i = 0;
 	nest_level = 0;
 	quote = 0;
-	while (str && str[i])
+	while (str[i])
 	{
 		if (str[i] == '\'' && quote != 1)
 		{
 			quote = 1;
-			nest_level += 1;
+			nest_level++;
 		}
 		else if (str[i] == '\"' && quote != 2)
 		{
 			quote = 2;
-			nest_level += 1;
+			nest_level++;
 		}
 		else if (str[i] == '\'' && quote == 1)
 		{
 			quote = 2;
-			nest_level -= 1;
+			nest_level--;
 		}
 		else if (str[i] == '\"' && quote == 2)
 		{
 			quote = 1;
-			nest_level -= 1;
+			nest_level--;
 		}
 		if (nest_level == 0)
-			return (i) ;
-		++i;
+			return (i);
+		i++;
 	}
 	return (-1);
 }
@@ -65,7 +64,7 @@ int	*get_split_indices(char *arg)
 	while (arg[index])
 	{
 		if (arg[index] == '\"' || arg[index] == '\'')
-			index += quote_skip(&arg[index]) - 1;
+			index += (quote_skip(&arg[index]));
 		else if (arg[index] == '|' || !ft_strncmp(&arg[index], "<<", 2)
 			|| arg[index + 1] == '\0')
 		{
@@ -169,13 +168,13 @@ char	*get_var(char *var_name)
 // Finds and substitutes variables from envp
 char	*sub_vars(char *arg)
 {
-	t_data	*data;
+	//t_data	*data;
 	char	**split_str;
 	char	**var_name;
 	int		i_arg;
 
 	i_arg = 0;
-	data = get_data();
+	//data = get_data();
 	while (arg)
 	{
 		i_arg += ft_strlen_before(&arg[i_arg], "$");
