@@ -3,19 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/13 13:52:58 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/13 16:09:42 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../include/minishell.h"
 
+// Fuck norminette
+static void	fuck_norm(int *level, int *quote, int i_lvl, int new_quote)
+{
+	*level += i_lvl;
+	*quote = new_quote;
+}
+
 // Returns index of closing quote, skips nested quotes
 int	quote_skip(char *str)
-{	//TODO make this shorter
+{
 	int	i;
 	int	nest_level;
 	int	quote;
@@ -26,25 +33,13 @@ int	quote_skip(char *str)
 	while (str[i])
 	{
 		if (str[i] == '\'' && quote != 1)
-		{
-			quote = 1;
-			nest_level++;
-		}
+			fuck_norm(&nest_level, &quote, 1, 1);
 		else if (str[i] == '\"' && quote != 2)
-		{
-			quote = 2;
-			nest_level++;
-		}
+			fuck_norm(&nest_level, &quote, 1, 2);
 		else if (str[i] == '\'' && quote == 1)
-		{
-			quote = 2;
-			nest_level--;
-		}
+			fuck_norm(&nest_level, &quote, -1, 2);
 		else if (str[i] == '\"' && quote == 2)
-		{
-			quote = 1;
-			nest_level--;
-		}
+			fuck_norm(&nest_level, &quote, -1, 1);
 		if (nest_level == 0 || str[i] == '\0')
 			return (i);
 		i++;
@@ -120,7 +115,8 @@ char	**need_a_better_name(char *cmd)
 
 // Parse return from rl into t_params structs
 t_params	**parse_args(char *cmd)
-{
+{ //TODO error for invalid cmds
+	//SIGSEGV on only spaces
 	t_data		*data;
 	t_params	**params;
 	char		**cmds;

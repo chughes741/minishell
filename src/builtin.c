@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/13 15:52:34 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/13 15:55:29 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,7 +238,7 @@ void	builtin_env(t_params *params)
 }
 
 void	builtin_exit(t_params *params)
-{
+{ //TODO double exit
 	(void)params;
 	del_data();
 	printf("exit\n");

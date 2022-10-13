@@ -8,7 +8,7 @@ DEFAULT_GOAL: all
 .PHONY: all bonus clean fclean re test valgrind
 
 # Hide calls
-export VERBOSE	=	TRUE
+export VERBOSE	=	FALSE
 ifeq ($(VERBOSE),TRUE)
 	HIDE =
 else
