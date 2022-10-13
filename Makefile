@@ -83,6 +83,8 @@ fclean: clean
 # Removes objects and executables and remakes
 re: fclean all
 
+segfault:  $(OBJDIR) $(LIBRL) $(LFTDIR)/$(LIBFT) $(OBJS)
+	$(HIDE)$(CC) $(CFLAGS) -fsanitize=address $(OBJS) $(LFTDIR)$(LIBFT) $(LIBRL) -o $@ 
 
 #*-----------------------------------------------------------------------------#
 #*                                TESTING                                      #
