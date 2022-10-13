@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/13 13:18:19 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/13 15:35:32 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ void	insert_new_var(char *new_var, int pos)
 
 // Replicates variable exporting
 void	builtin_export(t_params *params)
-{
+{ //TODO assigning strings
 	int		i;
 	int		pos;
 
@@ -238,7 +238,7 @@ void	builtin_env(t_params *params)
 }
 
 void	builtin_exit(t_params *params)
-{
+{ //TODO double exit
 	(void)params;
 	del_data();
 	printf("exit\n");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/13 13:52:58 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/13 15:39:46 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,8 @@ char	**need_a_better_name(char *cmd)
 
 // Parse return from rl into t_params structs
 t_params	**parse_args(char *cmd)
-{
+{ //TODO error for invalid cmds
+	//SIGSEGV on only spaces
 	t_data		*data;
 	t_params	**params;
 	char		**cmds;
@@ -154,6 +155,7 @@ t_params	*cmd_parse(char *line)
 
 	params = (t_params *)ft_calloc(1, sizeof(t_params));
 	params->exec_arg = split_args(line);
+	//TODO var sub need to happen before command is checked?
 	insert_vars(params->exec_arg);
 	params->path = get_path(params->exec_arg[0]);
 	return (params);
