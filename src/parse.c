@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/13 16:09:42 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/13 17:12:55 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	*get_split_indices(char *arg)
 }
 
 // Returns number of ints in an int*, until first -1
-int	intlen(int *intstr)
+static int	intlen(int *intstr)
 {
 	int	len;
 
@@ -109,7 +109,6 @@ char	**need_a_better_name(char *cmd)
 		cmd_strs[i] = ft_substr(cmd, indices[i], indices[i + 1] - indices[i] + 1);
 		++i;
 	}
-	xfree(indices);
 	return (cmd_strs);
 }
 
@@ -168,8 +167,10 @@ char	**split_args(char *str)
 	temp = ft_strtrim(str, " |");
 	while (temp[start])
 	{
+		//TODO add quote skip
 		if (ft_strchr(" \"\'", temp[start]) == NULL)
-			end = find_next(&temp[start], " ") + start; //TODO check if <> are needed here
+			//TODO check if <> are needed here
+			end = find_next(&temp[start], " ") + start;
 		else if (temp[start] == ' ')
 			end++;
 		else if (ft_strchr("\'", temp[start]) != NULL)
