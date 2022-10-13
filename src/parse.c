@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/13 13:17:39 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/13 13:21:18 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,6 @@ int	*get_split_indices(char *arg)
 	quotes = int_realloc(quotes, len, len + 1);
 	quotes[len] = index;
 	quotes[len + 1] = -1;
-	for (int i = 0; quotes[i] >= 0; ++i)
-		printf("quotes[%i]: %i\n", i, quotes[i]);
 	return (quotes);
 }
 
