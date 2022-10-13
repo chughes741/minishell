@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/13 11:19:07 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/13 16:15:13 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	t_data	*data;
 	int		i;
+	int		j;
 
+	j = 0;
 	data = get_data();
 	init_data(envp);
 	if (argc != 1 || argv[0] == NULL)
@@ -29,7 +31,9 @@ int	main(int argc, char *argv[], char *envp[])
 		if (data->last_cmd == NULL)
 			break ;
 		add_history(data->last_cmd);
-		data->params = parse_args(data->last_cmd);
+		while (ft_isspace(data->last_cmd[j]) == 1) // moving index to remove spaces before the first command
+			j++;
+		data->params = parse_args(&data->last_cmd[j]);
 		i = 0;
 		init_signals(RUNTIME);
 		while (i < data->n_cmds)
