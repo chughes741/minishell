@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:13:49 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/13 15:57:37 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 15:09:49 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_var(char *var_name)
 	if (ft_strncmp("?", var_name, 2) == 0)
 	{
 		xfree(var_name);
-		var_name = ft_itoa(data->exit_status);
+		var_name = ft_itoa(WEXITSTATUS(data->exit_status));
 		return (var_name);
 	}
 	position = env_var_exists(var_name);
