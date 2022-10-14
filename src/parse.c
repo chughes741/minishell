@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 11:17:05 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 11:19:29 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,8 @@ char	**split_args(char *str)
 			rtn = array_realloc(rtn, arraylen(rtn) + 1);
 			rtn[arraylen(rtn)] = ft_substr(temp, start, end - start);
 		}
+		if (!temp[start + end])
+			break ;
 		start = end + 1;
 	}
 	temp = xfree(temp);
