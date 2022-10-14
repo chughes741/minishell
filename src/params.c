@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:25:42 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 13:34:16 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 14:50:58 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ t_params	**init_params(char *cmd)
 	char		**cmds;
 	int			i;
 
-	if (cmd[0] == '\0')
-		return (NULL);
 	data = get_data();
 	cmds = split_command_groups(cmd);
+	if (cmds == NULL)
+		return (NULL);
 	data->n_cmds = arraylen(cmds);
 	if (data->n_cmds == 0)
 		return (error_handler("Syntax error: "));

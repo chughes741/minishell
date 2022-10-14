@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 14:37:37 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 14:53:43 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ char	**split_command_groups(char *cmd)
 	int		i;
 
 	temp = ft_strtrim(cmd, " ");
+	if (temp == NULL || temp[0] == '\0')
+		return (xfree(temp));
 	indices = get_split_indices(temp);
 	if (indices == NULL)
 		return (NULL);
