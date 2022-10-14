@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   params.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:25:42 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 16:47:24 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/14 16:53:25 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,10 @@ t_params	**init_params(char *cmd)
 	int			i;
 
 	data = get_data();
-	if (cmd[0] == '\0')
-		return (NULL);
 	cmds = split_command_groups(cmd);
+	if (cmd[0] == '\0' || cmds == NULL)
+		return (NULL);
 	data->n_cmds = arraylen(cmds);
-	if (cmds == NULL || data->n_cmds == 0)	
-		return (error_handler("Syntax error: "));
 	data->fd_io = init_io(data->n_cmds, data->fd_io);
 	params = ft_calloc(data->n_cmds + 1, sizeof(t_params *));
 	i = 0;

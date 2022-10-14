@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:18:58 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 15:03:04 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/14 16:54:09 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ int	quote_skip(char *str)
 	}
 	if (str[0] == str[i - 1] && check_quotes(str) == true)
 		return (i);
+	perror("Syntax error: ");
 	return (-1);
 }
