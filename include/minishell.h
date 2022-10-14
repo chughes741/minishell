@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 13:06:02 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 13:20:29 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void		setup_files(t_params *param);
 char		*get_var(char *var_name);
 char		*sub_vars(char *arg);
 void		insert_vars(char **args);
+int			quote_skip(char *str);
 
 
 // Exec setup functions
