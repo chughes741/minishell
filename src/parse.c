@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 11:53:34 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 13:07:30 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int	quote_skip(char *str)
 
 // Returns an array of integers containing the positions of quotes in a string
 int	*get_split_indices(char *arg)
-{	//TODO handle -1 return from quote skip
+{
+	//TODO handle -1 return from quote skip
 	int	index;
 	int	len;
 	int	*quotes;
@@ -60,9 +61,13 @@ int	*get_split_indices(char *arg)
 	while (arg[index])
 	{
 		if (arg[index] == '\"' || arg[index] == '\'')
+		{
+			if (quote_skip(&arg[index]) == -1)
+				return (xfree(quotes));
 			index += (quote_skip(&arg[index]));
-		else if (arg[index] == '|' || (ft_strncmp(&arg[index], "<<", 2) == 0 
-			&& index != 0))
+		}
+		else if (arg[index] == '|' 
+			|| (ft_strncmp(&arg[index], "<<", 2) == 0 && index != 0))
 		{
 			quotes = int_realloc(quotes, len, len + 1);
 			quotes[len] = index;
@@ -102,6 +107,8 @@ char	**need_a_better_name(char *cmd)
 	int		i;
 
 	indices = get_split_indices(cmd);
+	if (indices == NULL)
+		return (NULL);
 	cmd_strs = (char **)ft_calloc(intlen(indices) + 1, sizeof(char *));
 	i = 0;
 	while (indices && indices[i + 1] >= 0)
@@ -126,6 +133,8 @@ t_params	**parse_args(char *cmd)
 	data = get_data();
 	cmds = need_a_better_name(cmd);
 	data->n_cmds = arraylen(cmds);
+	if (data->n_cmds == 0)
+		return (error_handler("Syntax error: "));
 	data->fd_io = init_io(data->n_cmds, data->fd_io);
 	params = ft_calloc(data->n_cmds + 1, sizeof(t_params *));
 	i = 0;
