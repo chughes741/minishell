@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 14:53:43 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 15:32:53 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 // Returns an array of integers containing the positions of quotes in a string
 int	*get_split_indices(char *arg)
 {
-	//TODO handle -1 return from quote skip
 	int	index;
 	int	len;
 	int	*quotes;
