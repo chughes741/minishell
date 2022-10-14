@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:05:28 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 10:01:34 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/14 14:42:31 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-// TODO ctrl-D doesn't print exit
 // Initialize signals for interactive or runtime
 void	init_signals(int mode)
 {
@@ -59,6 +58,7 @@ void	sigint_runtime(int signum)
 // Handles quit signal "^\"
 void	sigquit_runtime(int signum)
 {
+	// TODO handle quit when child process is running
 	t_data	*data;
 
 	data = get_data();
