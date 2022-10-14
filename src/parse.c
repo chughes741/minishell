@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 11:19:29 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 11:24:05 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,16 +170,13 @@ char	**split_args(char *str)
 	temp = ft_strtrim(str, " |");
 	while (temp[start])
 	{
-		//TODO add quote skip
 		if (ft_strchr(" \"\'", temp[start]) == NULL)
 			//TODO check if <> are needed here
 			end = find_next(&temp[start], " ") + start;
 		else if (temp[start] == ' ')
 			end++;
-		else if (ft_strchr("\'", temp[start]) != NULL)
-			end = find_next(&temp[start + 1], "\'") + start + 2;
-		else if (ft_strchr("\"", temp[start]) != NULL)
-			end = find_next(&temp[start + 1], "\"") + start + 2;
+		else if (ft_strchr("\'\"", temp[start]))
+			end = quote_skip(&temp[start]) + start;
 		else
 			end = ft_strlen(&temp[start] - 1);
 		if (end > start && start < (int)ft_strlen(temp) - 1)
