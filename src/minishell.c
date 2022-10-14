@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 11:05:25 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 11:07:26 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	run_minishell(t_data *dat)
 	{
 		i = 0;
 		init_signals(INTERACTIVE);
-		dat->n_cmds = 0;
 		dat->last_cmd = readline(MSH_PROMPT);
 		if (dat->last_cmd == NULL)
 			return ;
