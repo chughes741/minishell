@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/13 15:55:29 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 08:22:41 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 // Returns index of cmd to call cmd function pointer from cmd array
-int	cmd_index(char *arg)
+int	cmd_idx(char *arg)
 {
 	t_data	*data;
 	int		i;

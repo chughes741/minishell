@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wait.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 10:20:57 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/11 10:22:36 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 08:24:10 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	wait_all(t_data	*data)
 	i = 0;
 	while (i < data->n_cmds)
 	{
-		if (cmd_index(data->params[i]->exec_arg[0]) == 8)
+		if (cmd_idx(data->params[i]->exec_arg[0]) == 8)
 			waitpid(data->params[i]->id, &data->exit_status, 0);
 		++i;
 	}
