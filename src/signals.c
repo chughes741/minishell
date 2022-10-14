@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:05:28 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 14:42:31 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 15:12:16 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	init_signals(int mode)
 // Handles interupt signal "^C"
 void	sigint_interactive(int signum)
 {
+	// TODO should clear the line and not add to the buffer
 	(void)signum;
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	rl_on_new_line();

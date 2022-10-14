@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 13:17:34 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 15:14:38 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	builtin_echo(t_params *params)
 // Replicates the UNIX command cd
 void	builtin_cd(t_params *params)
 {
+	// TODO cd . gives bad address
 	char	*buf;
 	int		size;
 	int		pos;
