@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 08:23:37 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/14 10:04:15 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	run_minishell(t_data *dat)
 }
 
 int	main(int argc, char *argv[], char *envp[])
-{
+{	//TODO no errors written on command not found
 	t_data	*data;
 
 	data = get_data();

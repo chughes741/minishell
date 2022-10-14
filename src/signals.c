@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:05:28 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/11 11:00:26 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 10:01:34 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
+// TODO ctrl-D doesn't print exit
 // Initialize signals for interactive or runtime
 void	init_signals(int mode)
 {
