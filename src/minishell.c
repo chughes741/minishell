@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 11:07:26 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 11:34:52 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	run_minishell(t_data *dat)
 		}
 		wait_all(dat);
 		dat->params = free_params(dat->params);
-		xfree(dat->last_cmd);
 	}
 }
 
