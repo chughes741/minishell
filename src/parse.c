@@ -6,9 +6,10 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 16:46:50 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/14 16:50:57 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 
 #include "../include/minishell.h"
@@ -16,7 +17,6 @@
 // Returns an array of integers containing the positions of quotes in a string
 int	*get_split_indices(char *arg)
 {
-	//TODO handle -1 return from quote skip
 	int	index;
 	int	len;
 	int	*quotes;
