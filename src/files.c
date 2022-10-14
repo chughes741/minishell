@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 20:28:51 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 14:12:27 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 14:14:03 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ bool	check_file_perm(char *file, int access_type)
 // Opens all output files needed by program to be run
 void	open_outfiles(t_params *param)
 {
-	// SIGSEGV infiles are not being found and segfaulting
-	// TODO input files can't be found
 	int	i;
 
 	i = 0;
