@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 13:28:52 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 14:18:17 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ char	**split_args(char *str)
 	temp = ft_strtrim(str, " |");
 	while (temp[start])
 	{
+		// TODO invalid read on temp
 		if (ft_strchr(" \"\'", temp[start]) == NULL)
-			//TODO check if <> are needed here
 			end = find_next(&temp[start], " ") + start;
 		else if (temp[start] == ' ')
 			end++;
