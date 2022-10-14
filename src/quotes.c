@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:18:58 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 14:23:57 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/14 15:03:04 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,10 @@ int	quote_skip(char *str)
 	int	i;
 	int	nest_level;
 	int	quote;
-	int	nb_quotes;
 
 	i = 0;
 	nest_level = 0;
 	quote = 0;
-	nb_quotes = 0;
 	while (str[i])
 	{
 		if (str[i] == '\'' && quote != 1)
