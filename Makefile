@@ -96,6 +96,8 @@ test:
 valgrind: all
 	$(HIDE)valgrind									\
 			--leak-check=full						\
+			--show-leak-kinds=all					\
+			--track-fds=yes							\
 			--show-reachable=yes					\
 			--error-limit=no						\
 			--suppressions=./config/minishell.supp	\
