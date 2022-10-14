@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:42:42 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/06 16:25:12 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 13:15:53 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	exe(t_params *param)
 {
 	t_data	*data;
 
+	if (param->path == NULL)
+		return ;
 	param->id = fork();
 	data = get_data();
 	if (param->id != 0)
