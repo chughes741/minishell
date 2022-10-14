@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 17:04:14 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 17:14:01 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	builtin_cd(t_params *params)
 		buf = str_prepend("PWD=", buf);
 		pos = env_var_exists(buf);
 		insert_new_var(buf, pos);
+		buf = xfree(buf);
 	}
 }
 
@@ -142,9 +143,13 @@ int	env_var_exists(char *new_var)
 	{
 		if (ft_strncmp(data->envp[pos], new_split_var[0],
 				ft_strlen(new_split_var[0])) == 0)
+		{
+			free_array(new_split_var);
 			return (pos);
+		}
 		pos++;
 	}
+	free_array(new_split_var);
 	return (-1);
 }
 
