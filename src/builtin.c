@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 08:22:41 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/14 10:11:38 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	cmd_idx(char *arg)
 	i = 0;
 	while (data->cmd_names[i])
 	{
-		if (!ft_strncmp(arg, data->cmd_names[i], strlen(data->cmd_names[i] + 1)))
+		if (!ft_strncmp(arg, data->cmd_names[i], ft_strlen(data->cmd_names[i]) + 1))
 			break ;
 		++i;
 	}
@@ -85,7 +85,7 @@ void	builtin_cd(t_params *params)
 
 // Replicated the UNIX command pwd
 void	builtin_pwd(t_params *params)
-{
+{	
 	char	*buf;
 	int		size;
 
