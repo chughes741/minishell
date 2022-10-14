@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 10:04:15 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/14 11:05:25 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+extern char	**environ;
 
 void	run_minishell(t_data *dat)
 {
@@ -23,7 +25,7 @@ void	run_minishell(t_data *dat)
 		dat->n_cmds = 0;
 		dat->last_cmd = readline(MSH_PROMPT);
 		if (dat->last_cmd == NULL)
-			break ;
+			return ;
 		add_history(dat->last_cmd);
 		while (ft_isspace(dat->last_cmd[i]) == 1)
 			i++;
@@ -41,15 +43,13 @@ void	run_minishell(t_data *dat)
 	}
 }
 
-int	main(int argc, char *argv[], char *envp[])
-{	//TODO no errors written on command not found
+int	main(void)
+{
 	t_data	*data;
 
 	data = get_data();
-	init_data(envp);
-	if (argc != 1 || argv[0] == NULL)
-		data->run = false;
+	init_data(environ);
 	run_minishell(data);
-	del_data();
+	builtin_exit(NULL);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/13 17:12:55 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 11:05:38 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,10 @@ char	**need_a_better_name(char *cmd)
 
 // Parse return from rl into t_params structs
 t_params	**parse_args(char *cmd)
-{ //TODO error for invalid cmds
+{
+	//TODO error for invalid cmds
 	//SIGSEGV on only spaces
+	//TODO no errors written on command not found
 	t_data		*data;
 	t_params	**params;
 	char		**cmds;
