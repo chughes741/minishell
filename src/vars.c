@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vars.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:13:49 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 15:09:49 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 16:09:21 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,10 @@ void	insert_vars(char **args)
 	while (args && args[i])
 	{
 		if (args[i][0] == '\'' && args[i][ft_strlen(args[i]) - 1] == '\'')
-		{
-			args[i] = ft_strtrim_free(args[i], "\'");
-		}
+			args[i] = ft_strtrim_free(args[i], "\' ");
 		else
 		{
-			args[i] = ft_strtrim_free(args[i], "\"");
+			args[i] = ft_strtrim_free(args[i], "\" ");
 			args[i] = sub_vars(args[i]);
 		}
 		++i;

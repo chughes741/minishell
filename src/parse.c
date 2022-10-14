@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 14:53:43 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 16:46:50 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ char	**split_args(char *str)
 		if (end > start && start < (int)ft_strlen(temp) - 1)
 		{
 			rtn = array_realloc(rtn, arraylen(rtn) + 1);
-			rtn[arraylen(rtn)] = ft_substr(temp, start, end - start);
+			rtn[arraylen(rtn)] = ft_substr(temp, start, end - start + 1);
 		}
 		if (!temp[start + end])
 			break ;
