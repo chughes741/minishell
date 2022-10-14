@@ -6,15 +6,15 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:04:12 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 18:41:18 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 13:05:47 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-// Manages errors from children, writes to debug file
-void	error_handler(void)
+// Prints message to STDERR and returns NULL
+void	*error_handler(char *message)
 {
-	perror("Testing");
-	return ;
+	perror(message);
+	return (NULL);
 }
