@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 20:28:51 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 14:14:03 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 14:44:12 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	open_outfiles(t_params *param)
 			param->exec_arg = array_del_one(param->exec_arg, i);
 			if (check_file_perm(param->out_path, W_OK) == true)
 				param->err = true;
-
 		}
 		else
 			++i;
