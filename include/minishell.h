@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 13:20:29 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 13:34:38 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ void		sigint_runtime(int signum);
 void		sigquit_runtime(int signum);
 
 // Parsing functions
-t_params	**parse_args(char *cmd);
 int			find_next(char *str, char *chr);
+char		**split_command_groups(char *cmd);
 char		**split_args(char *str);
 void		setup_files(t_params *param);
 char		*get_var(char *var_name);
@@ -105,10 +105,11 @@ int			quote_skip(char *str);
 
 
 // Exec setup functions
+t_params	**init_params(char *cmd);
+t_params	*init_cmd(int i, char *line);
 char		**split_paths(void);
 char		*get_path(char *command);
 void		exe(t_params *params);
-t_params	*cmd_parse(char *line);
 void		wait_all(t_data	*data);
 
 // I/O functions

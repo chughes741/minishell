@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 13:19:09 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 14:18:17 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	intlen(int *intstr)
 }
 
 // Returns array of strings, splits cmd on | and <<, accounts for quotes
-char	**need_a_better_name(char *cmd)
+char	**split_command_groups(char *cmd)
 {
 	char	**cmd_strs;
 	int		*indices;
@@ -86,49 +86,6 @@ char	**need_a_better_name(char *cmd)
 	return (cmd_strs);
 }
 
-// Parse return from rl into t_params structs
-t_params	**parse_args(char *cmd)
-{
-	t_data		*data;
-	t_params	**params;
-	char		**cmds;
-	int			i;
-
-	if (cmd[0] == '\0')
-		return (NULL);
-	data = get_data();
-	cmds = need_a_better_name(cmd);
-	data->n_cmds = arraylen(cmds);
-	if (data->n_cmds == 0)
-		return (error_handler("Syntax error: "));
-	data->fd_io = init_io(data->n_cmds, data->fd_io);
-	params = ft_calloc(data->n_cmds + 1, sizeof(t_params *));
-	i = 0;
-	while (cmds && cmds[i] != NULL)
-	{
-		params[i] = cmd_parse(cmds[i]);
-		params[i]->fd_in = data->fd_io[i * 2];
-		params[i]->fd_out = data->fd_io[(i * 2) + 1];
-		open_outfiles(params[i]);
-		open_infiles(params[i]);
-		i++;
-	}
-	free_array(cmds);
-	return (params);
-}
-
-// Parses commands into struct ready to be executed
-t_params	*cmd_parse(char *line)
-{
-	t_params	*params;
-
-	params = (t_params *)ft_calloc(1, sizeof(t_params));
-	params->exec_arg = split_args(line);
-	insert_vars(params->exec_arg);
-	params->path = get_path(params->exec_arg[0]);
-	return (params);
-}
-
 // Splits arguments keeping quoted sections together
 char	**split_args(char *str)
 {
@@ -142,8 +99,8 @@ char	**split_args(char *str)
 	temp = ft_strtrim(str, " |");
 	while (temp[start])
 	{
+		// TODO invalid read on temp
 		if (ft_strchr(" \"\'", temp[start]) == NULL)
-			//TODO check if <> are needed here
 			end = find_next(&temp[start], " ") + start;
 		else if (temp[start] == ' ')
 			end++;
