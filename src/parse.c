@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 11:24:05 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 11:50:30 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,15 +124,15 @@ t_params	**parse_args(char *cmd)
 	char		**cmds;
 	int			i;
 
-	data = get_data();
 	if (cmd[0] == '\0')
 		return (NULL);
+	data = get_data();
 	cmds = need_a_better_name(cmd);
 	data->n_cmds = arraylen(cmds);
 	data->fd_io = init_io(data->n_cmds, data->fd_io);
 	params = ft_calloc(data->n_cmds + 1, sizeof(t_params *));
 	i = 0;
-	while (cmds[i] != NULL)
+	while (cmds && cmds[i] != NULL)
 	{
 		params[i] = cmd_parse(cmds[i]);
 		params[i]->fd_in = data->fd_io[i * 2];

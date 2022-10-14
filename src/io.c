@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 16:40:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/06 16:26:15 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 11:47:38 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	*init_io(int n_cmds, int *fd_io)
 	int	temp[2];
 	int	i;
 
+	if (n_cmds == 0)
+		return (NULL);
 	xfree(fd_io);
 	fd_io = (int *)ft_calloc(n_cmds * 2, sizeof(int));
 	i = 1;

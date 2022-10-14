@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 12:16:09 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/05 15:10:55 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 11:39:44 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	arraylen(char **array)
 	int	len;
 
 	len = 0;
-	while (array[len])
+	while (array && array[len])
 		len++;
 	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:32:35 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/13 15:54:04 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 11:51:55 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ char	*get_path(char *command)
 		}
 		path = xfree(path);
 	}
+	if (cmd_idx(command) == 8)
+		perror("Command not found");
 	free_array(paths);
 	return (NULL);
 }
