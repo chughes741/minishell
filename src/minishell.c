@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 13:24:59 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 14:35:51 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	run_minishell(t_data *dat)
 		if (dat->last_cmd == NULL)
 			return ;
 		add_history(dat->last_cmd);
-		while (ft_isspace(dat->last_cmd[i]) == 1)
-			i++;
 		dat->params = init_params(&dat->last_cmd[i]);
 		i = 0;
 		init_signals(RUNTIME);
@@ -38,6 +36,7 @@ void	run_minishell(t_data *dat)
 		}
 		wait_all(dat);
 		dat->params = free_params(dat->params);
+		dat->n_cmds = 0;
 	}
 }
 

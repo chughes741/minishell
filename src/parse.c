@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 14:18:17 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 14:37:37 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,19 +69,22 @@ static int	intlen(int *intstr)
 char	**split_command_groups(char *cmd)
 {
 	char	**cmd_strs;
+	char	*temp;
 	int		*indices;
 	int		i;
 
-	indices = get_split_indices(cmd);
+	temp = ft_strtrim(cmd, " ");
+	indices = get_split_indices(temp);
 	if (indices == NULL)
 		return (NULL);
 	cmd_strs = (char **)ft_calloc(intlen(indices) + 1, sizeof(char *));
 	i = 0;
 	while (indices && indices[i + 1] >= 0)
 	{
-		cmd_strs[i] = ft_substr(cmd, indices[i], indices[i + 1] - indices[i] + 1);
+		cmd_strs[i] = ft_substr(temp, indices[i], indices[i + 1] - indices[i] + 1);
 		++i;
 	}
+	temp = xfree(temp);
 	indices = xfree(indices);
 	return (cmd_strs);
 }
