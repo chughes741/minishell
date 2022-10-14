@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:25:42 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 13:29:21 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 13:30:58 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_params	**init_params(char *cmd)
 	i = 0;
 	while (cmds && cmds[i] != NULL)
 	{
-		params[i] = parse_param(cmds[i]);
+		params[i] = init_cmd(cmds[i]);
 		params[i]->fd_in = data->fd_io[i * 2];
 		params[i]->fd_out = data->fd_io[(i * 2) + 1];
 		open_outfiles(params[i]);
@@ -44,7 +44,7 @@ t_params	**init_params(char *cmd)
 }
 
 // Parses commands into struct ready to be executed
-t_params	*parse_param(char *line)
+t_params	*init_cmd(char *line)
 {
 	t_params	*params;
 

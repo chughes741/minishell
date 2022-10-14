@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 13:29:04 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 13:31:08 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int			quote_skip(char *str);
 
 // Exec setup functions
 t_params	**init_params(char *cmd);
-t_params	*parse_param(char *line);
+t_params	*init_cmd(char *line);
 char		**split_paths(void);
 char		*get_path(char *command);
 void		exe(t_params *params);
