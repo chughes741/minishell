@@ -17,7 +17,7 @@ endif
 
 # Compiler and flags
 CC		=	gcc
-CFLAGS	=	-Wall -Werror -Wextra -I./librl
+CFLAGS	=	-Wall -Werror -Wextra -I./include -I./librl
 RM		=	rm -rf
 
 
