@@ -6,11 +6,11 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 13:55:39 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/04 18:51:58 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/17 10:46:10 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 // Finds and replaces all chrs in str with replace for len number of chars
 void	find_and_replace(char *str, char *chrs, char replace, int len)

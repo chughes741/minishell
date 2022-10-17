@@ -6,11 +6,11 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 17:14:01 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/17 10:45:39 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 // Returns index of cmd to call cmd function pointer from cmd array
 int	cmd_idx(char *arg)

@@ -6,11 +6,11 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 20:28:51 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 10:41:11 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/17 10:46:05 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 // Checks if a file is accessible
 bool	check_file_perm(char *file, int access_type)

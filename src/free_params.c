@@ -6,11 +6,11 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:17:10 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/12 12:45:35 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/17 10:46:19 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 // Frees all param structs in an array, returns NULL
 t_params	**free_params(t_params **params)

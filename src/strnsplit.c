@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   strnsplit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:05:16 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/12 15:05:41 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/17 10:47:32 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 // Splits a string at the index
 char	**strnsplit(char *str, int index)

@@ -6,11 +6,11 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 13:18:21 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 15:17:14 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/17 10:46:29 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 // Writes here_doc input to fd
 void	here_doc(t_params *params)

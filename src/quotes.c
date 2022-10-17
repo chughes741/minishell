@@ -6,11 +6,11 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:18:58 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 16:54:09 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/17 10:47:20 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 // Fuck norminette
 static void	fuck_norm(int *level, int *quote, int i_lvl, int new_quote)

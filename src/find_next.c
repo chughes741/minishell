@@ -6,11 +6,11 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:04:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/13 12:13:10 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/17 10:46:14 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 // Returns index of next chr match in str
 int	find_next(char *str, char *chr)
