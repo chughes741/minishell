@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:05:16 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 10:47:32 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/17 10:48:38 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ char	**strnsplit(char *str, int index)
 	else
 		split[0] = ft_strndup(str, index);
 	split[1] = ft_strdup(&str[index]);
-	xfree(str);
+	str = xfree(str);
 	return (split);
 }
