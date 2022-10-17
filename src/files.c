@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 20:28:51 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 14:44:12 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/17 08:58:46 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	open_outfiles(t_params *param)
 			|| param->exec_arg[i][ft_strlen(param->exec_arg[i]) - 1] == '>')
 		{
 			param->out_path = xfree(param->out_path);
-			param->out_path = ft_strtrim(param->exec_arg[i], ">");
+			param->out_path = ft_strtrim(param->exec_arg[i + 1], ">"); // + 1 to exec_arg to check the file name
 			close_file(param->fd_out);
 			if (param->exec_arg[i][1] == '>')
 				param->fd_out = open(param->out_path, WRAPPEND, WRMODE);
@@ -48,6 +48,7 @@ void	open_outfiles(t_params *param)
 		else
 			++i;
 	}
+	printf("Contenu de param->out_path = %s\n", param->out_path);
 	return ;
 }
 

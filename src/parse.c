@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 16:50:57 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/17 08:55:02 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ char	**split_args(char *str)
 			rtn = array_realloc(rtn, arraylen(rtn) + 1);
 			rtn[arraylen(rtn)] = ft_substr(temp, start, end - start + 1);
 		}
-		if (!temp[start + end])
+		if (!temp[end + 1]) // Couldn't be if (!temp[start + end])
 			break ;
 		start = end + 1;
 	}
