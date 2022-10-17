@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 14:43:36 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/17 11:10:00 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_data {
 	char		*last_cmd;
 	int			n_cmds;
 	int			*fd_io;
-	void		(*run_cmd[9])(t_params *);
+	void		(*run_cmd[8])(t_params *);
 	char		**cmd_names;
 	int			exit_status;
 }		t_data;

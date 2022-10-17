@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:58:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 10:45:49 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/17 11:09:52 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ void	init_data(char *envp[])
 	data->run_cmd[4] = builtin_unset;
 	data->run_cmd[5] = builtin_env;
 	data->run_cmd[6] = builtin_exit;
-	data->run_cmd[7] = here_doc;
-	data->run_cmd[8] = exe;
+	data->run_cmd[7] = exe;
 	data->cmd_names = init_cmd_names();
 	data->run = true;
 	data->envp = arraydup(envp);
@@ -49,7 +48,6 @@ char	**init_cmd_names(void)
 	cmd_names[4] = ft_strdup("unset");
 	cmd_names[5] = ft_strdup("env");
 	cmd_names[6] = ft_strdup("exit");
-	cmd_names[7] = ft_strdup("<<");
 	return (cmd_names);
 }
 
