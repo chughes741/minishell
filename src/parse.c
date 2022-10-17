@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 13:01:57 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/17 15:17:28 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,37 +83,74 @@ char	**split_command_groups(char *cmd)
 	return (cmd_strs);
 }
 
-// Splits arguments keeping quoted sections together
-char	**split_args(char *str)
+// Returns index of 
+int	skip_spaces(char *str)
 {
-	char	**rtn;
-	char	*temp;
-	int		start;
-	int		end;
+	int	i;
 
-	rtn = (char **)ft_calloc(1, sizeof(char *));
-	start = 0;
-	temp = ft_strtrim(str, " |");
-	while (temp[start])
+	i = 0;
+	while (str && (str[i] == '<' || str[i] == '>'))
+		++i;
+	while (str && str[i] == ' ')
+		++i;
+	return (i);
+}
+
+//! TESTING
+int	*get_arg_indices(char *arg)
+{
+	int	index;
+	int	len;
+	int	*quotes;
+
+	index = 0;
+	len = 1;
+	quotes = ft_calloc(len + 1, sizeof(int));
+	while (arg[index])
 	{
-		// TODO invalid read on temp
-		if (ft_strchr(" \"\'", temp[start]) == NULL)
-			end = find_next(&temp[start], " ") + start;
-		else if (temp[start] == ' ')
-			end++;
-		else if (ft_strchr("\'\"", temp[start]))
-			end = quote_skip(&temp[start]) + start;
-		else
-			end = ft_strlen(&temp[start] - 1);
-		if (end > start && start < (int)ft_strlen(temp) - 1)
+		if (arg[index] == '\"' || arg[index] == '\'')
 		{
-			rtn = array_realloc(rtn, arraylen(rtn) + 1);
-			rtn[arraylen(rtn)] = ft_substr(temp, start, end - start + 1);
+			if (quote_skip(&arg[index]) == -1)
+				return (xfree(quotes));
+			index += (quote_skip(&arg[index]));
 		}
-		if (!temp[end + 1]) // Couldn't be if (!temp[start + end])
-			break ;
-		start = end + 1;
+		else if (arg[index] == ' ' || arg[index] == '<' || arg[index] == '>')
+		{
+			quotes = int_realloc(quotes, len, len + 1);
+			quotes[len] = index;
+			index += skip_spaces(&arg[index]);
+			len++;
+		}
+		index++;
+	}
+	quotes = int_realloc(quotes, len, len + 1);
+	quotes[len] = index;
+	quotes[len + 1] = -1;
+	return (quotes);
+}
+
+//! TESTING
+char	**split_args(char *cmd)
+{
+	char	**args;
+	char	*temp;
+	int		*indices;
+	int		i;
+
+	temp = ft_strtrim(cmd, " |");
+	if (temp == NULL || temp[0] == '\0')
+		return (xfree(temp));
+	indices = get_arg_indices(temp);
+	if (indices == NULL)
+		return (NULL);
+	args = (char **)ft_calloc(intlen(indices) + 1, sizeof(char *));
+	i = 0;
+	while (indices && indices[i + 1] >= 0)
+	{
+		args[i] = ft_substr(temp, indices[i], indices[i + 1] - indices[i]);
+		++i;
 	}
 	temp = xfree(temp);
-	return (rtn);
+	indices = xfree(indices);
+	return (args);
 }
