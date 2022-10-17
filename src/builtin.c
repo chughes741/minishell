@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/14 15:14:38 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/14 17:14:01 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,16 @@ void	builtin_echo(t_params *params)
 // Replicates the UNIX command cd
 void	builtin_cd(t_params *params)
 {
-	// TODO cd . gives bad address
 	char	*buf;
 	int		size;
 	int		pos;
 
 	size = 0;
+	if (params->exec_arg[1] == NULL)
+		return ;
 	buf = (char *)ft_calloc(size, sizeof(char));
 	if (chdir(params->exec_arg[1]) == -1)
-	{
 		perror("cd: ");
-	}
 	else
 	{
 		while (getcwd(buf, size) == NULL)
@@ -81,6 +80,7 @@ void	builtin_cd(t_params *params)
 		buf = str_prepend("PWD=", buf);
 		pos = env_var_exists(buf);
 		insert_new_var(buf, pos);
+		buf = xfree(buf);
 	}
 }
 
@@ -143,9 +143,13 @@ int	env_var_exists(char *new_var)
 	{
 		if (ft_strncmp(data->envp[pos], new_split_var[0],
 				ft_strlen(new_split_var[0])) == 0)
+		{
+			free_array(new_split_var);
 			return (pos);
+		}
 		pos++;
 	}
+	free_array(new_split_var);
 	return (-1);
 }
 

@@ -5,7 +5,6 @@
    ...
    fun:add_history
    ...
-   fun:main
 }
 {
    <readline>
@@ -14,5 +13,4 @@
    ...
    fun:readline
    ...
-   fun:main
 }

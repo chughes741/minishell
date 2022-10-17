@@ -17,7 +17,7 @@ endif
 
 # Compiler and flags
 CC		=	gcc
-CFLAGS	=	-Wall -Werror -Wextra -I./librl
+CFLAGS	=	-Wall -Werror -Wextra -I./include -I./librl
 RM		=	rm -rf
 
 
@@ -53,7 +53,7 @@ NAME	=	minishell
 DEBUG	=	minishell_debug
 SRCDIR	=	src/
 OBJDIR	=	bin/
-SRCS	=	$(wildcard $(SRCDIR)*.c) #! RBS
+SRCS	=	$(wildcard $(SRCDIR)*.c) # RBS
 OBJS	=	$(patsubst $(SRCDIR)%.c,$(OBJDIR)%.o,$(SRCS))
 DEP		=	include/minishell.h
 
