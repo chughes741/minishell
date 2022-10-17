@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 15:45:54 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/17 16:39:03 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	run_minishell(t_data *dat)
 		dat->params = init_params(dat->last_cmd);
 		i = 0;
 		init_signals(RUNTIME);
-		while (i < dat->n_cmds)
+		while (i < dat->n_cmds && dat->params[i]->exec_arg[0] != NULL)
 		{
 			if (dat->params[i]->err == false)
 				dat->run_cmd[cmd_idx(dat->params[i]->exec_arg[0])](dat->params[i]);
