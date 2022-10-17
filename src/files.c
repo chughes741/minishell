@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 20:28:51 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 13:03:01 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/17 13:48:31 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	open_infiles(t_params *param)
 	{
 		if (param->exec_arg[i][0] == '<')
 		{
+			close_file(param->fd_in);
 			param->in_path = xfree(param->in_path);
 			if (param->exec_arg[i][1] == '<')
 				param->fd_in = here_doc(param->exec_arg[i]);
@@ -75,7 +76,6 @@ void	open_infiles(t_params *param)
 				param->fd_in = open(param->in_path, O_RDONLY);
 			}
 			param->exec_arg = array_del_one(param->exec_arg, i);
-			close_file(param->fd_in);
 		}
 		else
 			++i;
