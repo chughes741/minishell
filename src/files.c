@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 20:28:51 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 10:57:27 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/17 13:03:01 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ void	open_outfiles(t_params *param)
 	return ;
 }
 
+/*
+	Need to use farthest one to the right as the input
+*/
+
 // Opens all input files needed by program to be run
 void	open_infiles(t_params *param)
 {
@@ -58,15 +62,20 @@ void	open_infiles(t_params *param)
 	i = 0;
 	while (param->exec_arg[i])
 	{
-		if (param->exec_arg[i][0] == '<' && param->exec_arg[i][1] != '<')
+		if (param->exec_arg[i][0] == '<')
 		{
 			param->in_path = xfree(param->in_path);
-			param->in_path = ft_strtrim(param->exec_arg[i], "< ");
-			if (check_file_perm(param->in_path, R_OK) == true)
-				param->err = true;
+			if (param->exec_arg[i][1] == '<')
+				param->fd_in = here_doc(param->exec_arg[i]);
+			else
+			{
+				param->in_path = ft_strtrim(param->exec_arg[i], "< ");
+				if (check_file_perm(param->in_path, R_OK) == true)
+					param->err = true;
+				param->fd_in = open(param->in_path, O_RDONLY);
+			}
 			param->exec_arg = array_del_one(param->exec_arg, i);
 			close_file(param->fd_in);
-			param->fd_in = open(param->in_path, O_RDONLY);
 		}
 		else
 			++i;
