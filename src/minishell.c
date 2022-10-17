@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 10:46:40 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/17 15:45:54 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	run_minishell(t_data *dat)
 		init_signals(RUNTIME);
 		while (i < dat->n_cmds)
 		{
-			dat->run_cmd[cmd_idx(dat->params[i]->exec_arg[0])](dat->params[i]);
+			if (dat->params[i]->err == false)
+				dat->run_cmd[cmd_idx(dat->params[i]->exec_arg[0])](dat->params[i]);
 			i++;
 		}
 		wait_all(dat);
