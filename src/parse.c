@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 08:55:02 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/17 13:01:57 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,9 @@ int	*get_split_indices(char *arg)
 				return (xfree(quotes));
 			index += (quote_skip(&arg[index]));
 		}
-		else if (arg[index] == '|' 
-			|| (ft_strncmp(&arg[index], "<<", 2) == 0 && index != 0))
+		else if (arg[index] == '|')
 		{
 			quotes = int_realloc(quotes, len, len + 1);
-			quotes[len] = index;
-			len++;
-		}
-		else if (ft_strncmp(&arg[index], "<<", 2) == 0)
-		{
-			quotes = int_realloc(quotes, len, len + 1);
-			index += find_next(&arg[index], " ");
 			quotes[len] = index;
 			len++;
 		}
