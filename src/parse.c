@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 15:17:28 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/17 15:42:55 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ int	skip_spaces(char *str)
 	int	i;
 
 	i = 0;
+	while (str && str[i] == ' ')
+		++i;
 	while (str && (str[i] == '<' || str[i] == '>'))
 		++i;
 	while (str && str[i] == ' ')
@@ -150,6 +152,8 @@ char	**split_args(char *cmd)
 		args[i] = ft_substr(temp, indices[i], indices[i + 1] - indices[i]);
 		++i;
 	}
+	if (indices[1] == 0)
+		args = array_del_one(args, 0);
 	temp = xfree(temp);
 	indices = xfree(indices);
 	return (args);
