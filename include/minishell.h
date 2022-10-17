@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 12:31:41 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/17 12:54:24 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void		close_file(int fd);
 void		open_outfiles(t_params *param);
 void		open_infiles(t_params *param);
 bool		check_file_perm(char *file, int access_type);
-void		here_doc(char *eof, int fd);
+int			here_doc(char *eof);
 
 // Standard Library like functions
 char		*strcdup(char *basestr, char *matchchrs);
