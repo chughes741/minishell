@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 20:28:51 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 08:58:46 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/17 10:41:11 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,10 @@ void	open_outfiles(t_params *param)
 	i = 0;
 	while (param->exec_arg[i])
 	{
-		if (param->exec_arg[i][0] == '>'
-			|| param->exec_arg[i][ft_strlen(param->exec_arg[i]) - 1] == '>')
+		if (param->exec_arg[i][0] == '>')
 		{
 			param->out_path = xfree(param->out_path);
-			param->out_path = ft_strtrim(param->exec_arg[i + 1], ">"); // + 1 to exec_arg to check the file name
+			param->out_path = ft_strtrim(param->exec_arg[i], "> ");
 			close_file(param->fd_out);
 			if (param->exec_arg[i][1] == '>')
 				param->fd_out = open(param->out_path, WRAPPEND, WRMODE);
@@ -48,7 +47,6 @@ void	open_outfiles(t_params *param)
 		else
 			++i;
 	}
-	printf("Contenu de param->out_path = %s\n", param->out_path);
 	return ;
 }
 
@@ -62,18 +60,18 @@ void	open_infiles(t_params *param)
 	{
 		if (param->exec_arg[i][0] == '<' && param->exec_arg[i][1] == '<')
 			;
-		else if (param->exec_arg[i][0] == '<'
-			|| param->exec_arg[i][ft_strlen(param->exec_arg[i]) - 1] == '<')
+		else if (param->exec_arg[i][0] == '<')
 		{
 			param->in_path = xfree(param->in_path);
-			param->in_path = ft_strtrim(param->exec_arg[i], "<");
+			param->in_path = ft_strtrim(param->exec_arg[i], "< ");
 			if (check_file_perm(param->in_path, R_OK) == true)
 				param->err = true;
 			param->exec_arg = array_del_one(param->exec_arg, i);
 			close_file(param->fd_in);
 			param->fd_in = open(param->in_path, O_RDONLY);
 		}
-		++i;
+		else
+			++i;
 	}
 	return ;
 }
