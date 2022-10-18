@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:13:49 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 11:05:13 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 15:06:17 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_var(char *var_name)
 	var_name = ft_strtrim_free(var_name, " ");
 	if (ft_strncmp("?", var_name, 2) == 0)
 	{
-		xfree(var_name);
+		var_name = xfree(var_name);
 		var_name = ft_itoa(WEXITSTATUS(data->exit_status));
 		return (var_name);
 	}
@@ -32,7 +32,7 @@ char	*get_var(char *var_name)
 		var_value = ft_strdup(&data->envp[position][ft_strlen(var_name) + 1]);
 	else
 		var_value = ft_strdup("");
-	xfree(var_name);
+	var_name = xfree(var_name);
 	return (var_value);
 }
 
