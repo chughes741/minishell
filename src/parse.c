@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 15:42:55 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 10:35:23 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,18 +110,16 @@ int	*get_arg_indices(char *arg)
 	quotes = ft_calloc(len + 1, sizeof(int));
 	while (arg[index])
 	{
-		if (arg[index] == '\"' || arg[index] == '\'')
-		{
-			if (quote_skip(&arg[index]) == -1)
-				return (xfree(quotes));
-			index += (quote_skip(&arg[index]));
-		}
-		else if (arg[index] == ' ' || arg[index] == '<' || arg[index] == '>')
+		if (arg[index] == ' ' || arg[index] == '<' || arg[index] == '>'
+			|| arg[index] == '\"' || arg[index] == '\'')
 		{
 			quotes = int_realloc(quotes, len, len + 1);
 			quotes[len] = index;
-			index += skip_spaces(&arg[index]);
 			len++;
+			if (arg[index] == '\'' || arg[index] == '\"')
+				index += quote_skip(&arg[index]);
+			else
+				index += skip_spaces(&arg[index]) - 1;
 		}
 		index++;
 	}
@@ -129,6 +127,7 @@ int	*get_arg_indices(char *arg)
 	quotes[len] = index;
 	quotes[len + 1] = -1;
 	return (quotes);
+	exit(0);
 }
 
 //! TESTING
