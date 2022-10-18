@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:05:28 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 10:47:26 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 11:18:15 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	init_signals(int mode)
 	return ;
 }
 
-// Handles interupt signal "^C"
+// Handles interupt signal "^C" during interactive mode
 void	sigint_interactive(int signum)
 {
 	// TODO should clear the line and not add to the buffer
@@ -38,7 +38,7 @@ void	sigint_interactive(int signum)
 	return ;
 }
 
-// Handles quit signal "^\"
+// Handles quit signal "^\" during interactive mode
 void	sigquit_interactive(int signum)
 {
 	(void)signum;
@@ -46,7 +46,7 @@ void	sigquit_interactive(int signum)
 	return ;
 }
 
-// Handles interupt signal "^C"
+// Handles interupt signal "^C" while programs are running
 void	sigint_runtime(int signum)
 {
 	(void)signum;
@@ -56,7 +56,7 @@ void	sigint_runtime(int signum)
 	return ;
 }
 
-// Handles quit signal "^\"
+// Handles quit signal "^\" while programs are running
 void	sigquit_runtime(int signum)
 {
 	// TODO handle quit when child process is running
@@ -65,7 +65,7 @@ void	sigquit_runtime(int signum)
 	data = get_data();
 	(void)signum;
 	kill(0, 0);
-	ft_putstr_fd("Quit : ", STDOUT_FILENO);
+	ft_putstr_fd("Quit: ", STDOUT_FILENO);
 	ft_putnbr_fd(data->exit_status, STDOUT_FILENO);
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	rl_on_new_line();
