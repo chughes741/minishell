@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:13:49 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 10:47:37 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 11:05:13 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,12 @@ void	insert_vars(char **args)
 	i = 0;
 	while (args && args[i])
 	{
+		args[i] = ft_strtrim_free(args[i], " ");
 		if (args[i][0] == '\'' && args[i][ft_strlen(args[i]) - 1] == '\'')
-			args[i] = ft_strtrim_free(args[i], "\' ");
+			args[i] = ft_strtrim_free(args[i], "\'");
 		else
 		{
-			args[i] = ft_strtrim_free(args[i], "\" ");
+			args[i] = ft_strtrim_free(args[i], "\"");
 			args[i] = sub_vars(args[i]);
 		}
 		++i;

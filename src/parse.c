@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 10:35:23 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 11:05:44 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,18 +110,15 @@ int	*get_arg_indices(char *arg)
 	quotes = ft_calloc(len + 1, sizeof(int));
 	while (arg[index])
 	{
-		if (arg[index] == ' ' || arg[index] == '<' || arg[index] == '>'
-			|| arg[index] == '\"' || arg[index] == '\'')
-		{
-			quotes = int_realloc(quotes, len, len + 1);
-			quotes[len] = index;
-			len++;
-			if (arg[index] == '\'' || arg[index] == '\"')
-				index += quote_skip(&arg[index]);
-			else
-				index += skip_spaces(&arg[index]) - 1;
-		}
-		index++;
+		while (arg[index] == ' ')
+			++index;
+		quotes = int_realloc(quotes, len, len + 1);
+		quotes[len] = index;
+		len++;
+		if (arg[index] == '\'' || arg[index] == '\"')
+			index += quote_skip(&arg[index]);
+		while (arg[index] && arg[index] != ' ')
+			++index;
 	}
 	quotes = int_realloc(quotes, len, len + 1);
 	quotes[len] = index;
