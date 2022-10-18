@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 12:17:54 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 12:24:15 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	skip_spaces(char *str)
 }
 
 // strpop without allocation
-void	strpopmove(char *str, int position)
+static void	strpopmove(char *str, int position)
 {
 	int	i;
 
@@ -128,14 +128,16 @@ int	*get_arg_indices(char *arg)
 	{
 		while (arg[index] == ' ')
 			++index;
-		// if ((arg[index] == '>' || arg[index] == '<') && arg[index + 1] == ' ')
-		// {
-			// while (arg[index + 1] == ' ')
-				// strpopmove(arg, index + 1);
-		// }
 		quotes = int_realloc(quotes, len, len + 1);
 		quotes[len] = index;
 		len++;
+		if (ft_strncmp(&arg[index], ">>", 2) == 0)
+			++index;
+		if ((arg[index] == '>' || arg[index] == '<') && arg[index + 1] == ' ')
+		{
+			while (arg[index + 1] == ' ')
+				strpopmove(arg, index + 1);
+		}
 		if (arg[index] == '\'' || arg[index] == '\"')
 			index += quote_skip(&arg[index]);
 		while (arg[index] && arg[index] != ' ')
@@ -160,8 +162,6 @@ char	**split_args(char *cmd)
 	if (temp == NULL || temp[0] == '\0')
 		return (xfree(temp));
 	indices = get_arg_indices(temp);
-	for (int i = 0; i < 7; i++)
-		printf("indices[i] = %d\n", indices[i]);
 	if (indices == NULL)
 		return (NULL);
 	args = (char **)ft_calloc(intlen(indices) + 1, sizeof(char *));
@@ -175,7 +175,5 @@ char	**split_args(char *cmd)
 		args = array_del_one(args, 0);
 	temp = xfree(temp);
 	indices = xfree(indices);
-	for (int i = 0; args[i]; i++)
-		printf("args[i] = |%s|\n", args[i]);
 	return (args);
 }
