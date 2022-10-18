@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 14:39:31 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 15:38:31 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,10 @@ static bool	valid_name(char *name)
 
 	split_name = ft_split(name, '=');
 	if (ft_isalpha(name[0]) == false && name[0] != '_')
+	{
+		split_name = free_array(split_name);
 		return (false);
+	}
 	j = 0;
 	i = 1;
 	while (split_name[i])
@@ -126,8 +129,12 @@ static bool	valid_name(char *name)
 		if (ft_isalnum(split_name[0][j]) == true || split_name[0][j] == '_')
 			i++;
 		else
+		{
+			split_name = free_array(split_name);
 			return (false);
+		}
 	}
+	split_name = free_array(split_name);
 	return (true);
 }
 
