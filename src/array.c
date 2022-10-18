@@ -66,9 +66,7 @@ char	**array_del_one(char **array, int position)
 	j = 0;
 	while (array[i] != NULL)
 	{
-		if (i == position)
-			array[i] = xfree(array[i]);
-		else
+		if (i != position)
 		{
 			new_array[j] = ft_strdup(array[i]);
 			j++;
