@@ -150,8 +150,8 @@ int	env_var_exists(char *new_var)
 	new_var_name = strcdup(new_var, "=");
 	while (data->envp[pos])
 	{
-		if (ft_strncmp(data->envp[pos], new_var_name[0],
-				ft_strlen(new_var_name[0])) == 0)
+		if (ft_strncmp(data->envp[pos], new_var_name,
+				ft_strlen(new_var_name)) == 0)
 		{
 			new_var_name = xfree(new_var_name);
 			return (pos);
