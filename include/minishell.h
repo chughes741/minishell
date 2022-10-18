@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 15:15:22 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 15:41:04 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_data {
 # define RUNTIME 2
 
 // Data struct functions
-void		init_data(char	*envp[]);
+void		init_data(void);
 char		**init_cmd_names(void);
 t_data		*get_data(void);
 void		del_data(void);

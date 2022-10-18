@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 16:39:03 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/18 15:42:02 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern char	**environ;
 
 void	run_minishell(t_data *dat)
 {
@@ -45,7 +43,7 @@ int	main(void)
 	t_data	*data;
 
 	data = get_data();
-	init_data(environ);
+	init_data();
 	run_minishell(data);
 	builtin_exit(NULL);
 	return (0);

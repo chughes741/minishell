@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:58:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 15:01:27 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 15:41:32 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 #define RL_HIST "log/rl_history.log"
 #define ERROR_LOG "log/error.log"
 
+extern char	**environ;
+
 // Initializes data struct
-void	init_data(char *envp[])
+void	init_data(void)
 {
 	t_data	*data;
 
@@ -31,7 +33,7 @@ void	init_data(char *envp[])
 	data->run_cmd[7] = exe;
 	data->cmd_names = init_cmd_names();
 	data->run = true;
-	data->envp = arraydup(envp);
+	data->envp = arraydup(environ);
 	return ;
 }
 

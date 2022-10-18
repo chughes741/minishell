@@ -6,13 +6,13 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 12:24:15 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 15:42:16 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 // Returns an array of integers containing the positions of quotes in a string
 int	*get_split_indices(char *arg)
