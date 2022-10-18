@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 15:38:31 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 17:01:08 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,23 +142,23 @@ static bool	valid_name(char *name)
 int	env_var_exists(char *new_var)
 {
 	t_data	*data;
+	char	*new_var_name;
 	int		pos;
-	char	**new_split_var;
 
 	data = get_data();
 	pos = 0;
-	new_split_var = ft_split(new_var, '=');
+	new_var_name = strcdup(new_var, "=");
 	while (data->envp[pos])
 	{
-		if (ft_strncmp(data->envp[pos], new_split_var[0],
-				ft_strlen(new_split_var[0])) == 0)
+		if (ft_strncmp(data->envp[pos], new_var_name[0],
+				ft_strlen(new_var_name[0])) == 0)
 		{
-			free_array(new_split_var);
+			new_var_name = xfree(new_var_name);
 			return (pos);
 		}
 		pos++;
 	}
-	free_array(new_split_var);
+	new_var_name = xfree(new_var_name);
 	return (-1);
 }
 
