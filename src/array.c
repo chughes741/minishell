@@ -70,7 +70,7 @@ char	**array_del_one(char **array, int position)
 			array[i] = xfree(array[i]);
 		else
 		{
-			new_array[j] = array[i];
+			new_array[j] = ft_strdup(array[i]);
 			j++;
 		}
 		i++;
