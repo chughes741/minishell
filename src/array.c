@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 12:16:09 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 14:37:44 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 15:15:29 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	**array_del_one(char **array, int position)
 }
 
 // Frees all pointers in array and array
-char	*free_array(char **array)
+char	**free_array(char **array)
 {
 	int	i;
 

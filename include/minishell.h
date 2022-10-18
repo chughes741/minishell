@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 12:54:24 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 15:15:22 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int			here_doc(char *eof);
 // Standard Library like functions
 char		*strcdup(char *basestr, char *matchchrs);
 char		**array_realloc(char **ptr, int size);
-char		*free_array(char **array);
+char		**free_array(char **array);
 int			arraylen(char **array);
 char		**arraydup(char **array);
 char		**array_del_one(char **array, int position);
