@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 12:16:09 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 15:15:29 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 15:26:02 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	**array_del_one(char **array, int position)
 	while (array[i] != NULL)
 	{
 		if (i == position)
-			xfree(array[i]);
+			array[i] = xfree(array[i]);
 		else
 		{
 			new_array[j] = array[i];
@@ -75,6 +75,7 @@ char	**array_del_one(char **array, int position)
 		}
 		i++;
 	}
+	array = free_array(array);
 	return (new_array);
 }
 
