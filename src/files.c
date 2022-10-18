@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 20:28:51 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 13:48:31 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 18:50:20 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,6 @@ void	open_outfiles(t_params *param)
 	}
 	return ;
 }
-
-/*
-	Need to use farthest one to the right as the input
-*/
 
 // Opens all input files needed by program to be run
 void	open_infiles(t_params *param)

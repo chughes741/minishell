@@ -6,11 +6,13 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:42:42 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 10:45:58 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 18:49:59 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern char	**envp;
 
 // Executes program specified in param
 void	exe(t_params *param)
@@ -34,5 +36,5 @@ void	exe(t_params *param)
 	close_io(data->fd_io, data->n_cmds, param->fd_in, param->fd_out);
 	dup2(param->fd_in, STDIN_FILENO);
 	dup2(param->fd_out, STDOUT_FILENO);
-	execve(param->path, param->exec_arg, data->envp);
+	execve(param->path, param->exec_arg, envp);
 }

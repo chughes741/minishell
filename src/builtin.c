@@ -6,11 +6,13 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 17:01:08 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 18:55:03 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern char	**envp;
 
 // Returns index of cmd to call cmd function pointer from cmd array
 int	cmd_idx(char *arg)
@@ -141,17 +143,14 @@ static bool	valid_name(char *name)
 // Returns position of var in envp, -1 if it does not exist
 int	env_var_exists(char *new_var)
 {
-	t_data	*data;
 	char	*new_var_name;
 	int		pos;
 
-	data = get_data();
 	pos = 0;
 	new_var_name = strcdup(new_var, "=");
-	while (data->envp[pos])
+	while (envp[pos])
 	{
-		if (ft_strncmp(data->envp[pos], new_var_name,
-				ft_strlen(new_var_name)) == 0)
+		if (ft_strncmp(envp[pos], new_var_name, ft_strlen(new_var_name)) == 0)
 		{
 			new_var_name = xfree(new_var_name);
 			return (pos);
@@ -165,22 +164,19 @@ int	env_var_exists(char *new_var)
 // Inserts new_var at pos, appends if pos is -1
 void	insert_new_var(char *new_var, int pos)
 {
-	t_data	*data;
-
-	data = get_data();
 	if (pos == -1)
 	{
-		pos = arraylen(data->envp);
-		data->envp = array_realloc(data->envp, pos + 1);
+		pos = arraylen(envp);
+		envp = array_realloc(envp, pos + 1);
 	}
 	else
-		xfree(data->envp[pos]);
-	data->envp[pos] = ft_strdup(new_var);
+		envp[pos] = xfree(envp[pos]);
+	envp[pos] = ft_strdup(new_var);
 }
 
 // Replicates variable exporting
 void	builtin_export(t_params *params)
-{	//TODO string with spaces doesn't work properly, quotes or not
+{
 	int		i;
 	int		pos;
 
@@ -209,11 +205,9 @@ void	builtin_export(t_params *params)
 // Replicates variable unset
 void	builtin_unset(t_params *params)
 {
-	t_data	*data;
 	int		pos;
 	int		i;
 
-	data = get_data();
 	i = 1;
 	if (params->exec_arg[1] == NULL)
 		return ;
@@ -226,7 +220,7 @@ void	builtin_unset(t_params *params)
 		}
 		pos = env_var_exists(params->exec_arg[i]);
 		if (pos != -1)
-			data->envp = array_del_one(data->envp, pos);
+			envp = array_del_one(envp, pos);
 		++i;
 	}
 	close_file(params->fd_in);
@@ -237,14 +231,12 @@ void	builtin_unset(t_params *params)
 // Replicates the UNIX command env
 void	builtin_env(t_params *params)
 {
-	t_data	*data;
-	int		i;
+	int	i;
 
-	data = get_data();
 	i = -1;
-	while (data->envp[++i] != NULL)
+	while (envp[++i] != NULL)
 	{
-		ft_putstr_fd(data->envp[i], params->fd_out);
+		ft_putstr_fd(envp[i], params->fd_out);
 		ft_putchar_fd('\n', params->fd_out);
 	}
 	close_file(params->fd_in);

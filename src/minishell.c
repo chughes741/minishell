@@ -6,11 +6,13 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 15:42:02 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 18:44:09 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	**envp;
 
 void	run_minishell(t_data *dat)
 {

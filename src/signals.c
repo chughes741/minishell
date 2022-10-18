@@ -6,11 +6,12 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:05:28 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 11:18:15 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 18:51:56 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 // Initialize signals for interactive or runtime
 void	init_signals(int mode)
 {

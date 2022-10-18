@@ -6,11 +6,13 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:13:49 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 15:06:17 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 18:55:20 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern char	**envp;
 
 // Returns allocated copy of contents of var_name, frees var_name
 char	*get_var(char *var_name)
@@ -29,7 +31,7 @@ char	*get_var(char *var_name)
 	}
 	position = env_var_exists(var_name);
 	if (position >= 0)
-		var_value = ft_strdup(&data->envp[position][ft_strlen(var_name) + 1]);
+		var_value = ft_strdup(&envp[position][ft_strlen(var_name) + 1]);
 	else
 		var_value = ft_strdup("");
 	var_name = xfree(var_name);

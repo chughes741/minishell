@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:58:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 15:41:32 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 18:49:32 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #define ERROR_LOG "log/error.log"
 
 extern char	**environ;
+extern char	**envp;
 
 // Initializes data struct
 void	init_data(void)
@@ -33,7 +34,7 @@ void	init_data(void)
 	data->run_cmd[7] = exe;
 	data->cmd_names = init_cmd_names();
 	data->run = true;
-	data->envp = arraydup(environ);
+	envp = arraydup(environ);
 	return ;
 }
 
@@ -69,7 +70,7 @@ void	del_data(void)
 	t_data	*data;
 
 	data = get_data();
-	free_array(data->envp);
+	envp = free_array(envp);
 	free_params(data->params);
 	xfree(data->last_cmd);
 	xfree(data->fd_io);
