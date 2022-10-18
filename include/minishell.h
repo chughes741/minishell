@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 15:41:04 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 17:41:50 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,5 +144,7 @@ void		builtin_env(t_params *params);
 void		builtin_exit(t_params *params);
 int			env_var_exists(char *new_var);
 void		insert_new_var(char *new_var, int pos);
+
+bool		strncmpsafe(char *str1, char *str2, int n);
 
 #endif // MINISHELL_H
