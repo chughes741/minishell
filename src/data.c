@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:58:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 16:11:29 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/18 15:01:27 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	**init_cmd_names(void)
 {
 	char	**cmd_names;
 
-	cmd_names = (char **)ft_calloc(7, sizeof(char *));
+	cmd_names = (char **)ft_calloc(8, sizeof(char *));
 	cmd_names[0] = ft_strdup("echo");
 	cmd_names[1] = ft_strdup("cd");
 	cmd_names[2] = ft_strdup("pwd");
