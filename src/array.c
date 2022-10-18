@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 12:16:09 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 10:45:34 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 14:37:44 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ char	*free_array(char **array)
 	int	i;
 
 	i = -1;
+	if (array == NULL)
+		return (NULL);
 	while (array[++i] != NULL)
 		xfree(array[i]);
 	xfree(array);

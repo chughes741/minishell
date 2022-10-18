@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:32:35 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 10:47:13 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 14:41:27 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ char	*get_path(char *command)
 	if (access(command, F_OK) == 0)
 		return (ft_strdup(command));
 	i = -1;
-	paths = split_paths();
-	while (paths[++i] != NULL)
+	paths = ft_split(get_var(ft_strdup("PATH")), ':');
+	while (paths && paths[++i] != NULL)
 	{
 		path = ft_strjoin(paths[i], "/");
 		path = str_append(path, command);
@@ -35,25 +35,11 @@ char	*get_path(char *command)
 		}
 		path = xfree(path);
 	}
-	if (cmd_idx(command) == 8)
+	if (paths == NULL || cmd_idx(command) == 8)
+	{
 		perror("Command not found");
+		return (NULL);
+	}
 	free_array(paths);
 	return (NULL);
-}
-
-// Returns a new string with the PATH from env
-char	**split_paths(void)
-{
-	t_data	*data;
-	char	**paths;
-	int		i;
-
-	data = get_data();
-	i = -1;
-	while (data->envp[++i] != NULL)
-	{
-		if (ft_strncmp(data->envp[i], "PATH=", 5) == 0)
-			paths = ft_split(data->envp[i], ':');
-	}
-	return (paths);
 }
