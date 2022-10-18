@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:17:10 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 10:46:19 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 15:19:26 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@ t_params	**free_params(t_params **params)
 	{
 		while (params[i])
 		{
-			xfree(params[i]->path);
-			free_array(params[i]->exec_arg);
-			xfree(params[i]->in_path);
-			xfree(params[i]->out_path);
+			params[i]->path = xfree(params[i]->path);
+			params[i]->exec_arg = free_array(params[i]->exec_arg);
+			params[i]->in_path = xfree(params[i]->in_path);
+			params[i]->out_path = xfree(params[i]->out_path);
+			params[i] = xfree(params[i]);
 			++i;
 		}
-		free_array((char **)params);
+		params = xfree(params);
 	}
 	return (NULL);
 }
