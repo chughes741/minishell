@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 11:26:39 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/18 12:17:54 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,22 @@ int	skip_spaces(char *str)
 	return (i);
 }
 
+// strpop without allocation
+void	strpopmove(char *str, int position)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i] && i < position)
+		++i;
+	while (str && str[i])
+	{
+		str[i] = str[i + 1];
+		++i;
+	}
+	return ;
+}
+
 //! TESTING
 int	*get_arg_indices(char *arg)
 {
@@ -112,12 +128,11 @@ int	*get_arg_indices(char *arg)
 	{
 		while (arg[index] == ' ')
 			++index;
-		if ((arg[index] == '>' || arg[index] == '<') && arg[index + 1] == ' ')
-		{
-			while (arg[index + 1] == ' ')
-				arg = strpop(arg, index + 1);
-		}
-		printf("arg apres strpop = %s\n", arg);
+		// if ((arg[index] == '>' || arg[index] == '<') && arg[index + 1] == ' ')
+		// {
+			// while (arg[index + 1] == ' ')
+				// strpopmove(arg, index + 1);
+		// }
 		quotes = int_realloc(quotes, len, len + 1);
 		quotes[len] = index;
 		len++;
