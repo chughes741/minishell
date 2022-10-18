@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 17:01:08 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 19:37:56 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,11 @@ static bool	valid_name(char *name)
 	int		j;
 	char	**split_name;
 
+	if (!ft_strchr(name, '='))
+		return (false);
 	split_name = ft_split(name, '=');
+	/*for (int i = 0; split_name[i]; i++)
+		printf("split_name[i] = %s\n", split_name[i]);*/
 	if (ft_isalpha(name[0]) == false && name[0] != '_')
 	{
 		split_name = free_array(split_name);
@@ -184,6 +188,8 @@ void	builtin_export(t_params *params)
 	int		i;
 	int		pos;
 
+	for (int i = 0; params->exec_arg[i]; i++)
+		printf("params->exec_arg[i] = |%s|\n", params->exec_arg[i]);
 	if (params->exec_arg[1] == NULL)
 	{
 		builtin_env(params);
