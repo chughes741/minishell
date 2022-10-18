@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 11:05:44 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/18 11:26:39 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,12 @@ int	*get_arg_indices(char *arg)
 	{
 		while (arg[index] == ' ')
 			++index;
+		if ((arg[index] == '>' || arg[index] == '<') && arg[index + 1] == ' ')
+		{
+			while (arg[index + 1] == ' ')
+				arg = strpop(arg, index + 1);
+		}
+		printf("arg apres strpop = %s\n", arg);
 		quotes = int_realloc(quotes, len, len + 1);
 		quotes[len] = index;
 		len++;
@@ -139,6 +145,8 @@ char	**split_args(char *cmd)
 	if (temp == NULL || temp[0] == '\0')
 		return (xfree(temp));
 	indices = get_arg_indices(temp);
+	for (int i = 0; i < 7; i++)
+		printf("indices[i] = %d\n", indices[i]);
 	if (indices == NULL)
 		return (NULL);
 	args = (char **)ft_calloc(intlen(indices) + 1, sizeof(char *));
@@ -152,5 +160,7 @@ char	**split_args(char *cmd)
 		args = array_del_one(args, 0);
 	temp = xfree(temp);
 	indices = xfree(indices);
+	for (int i = 0; args[i]; i++)
+		printf("args[i] = |%s|\n", args[i]);
 	return (args);
 }
