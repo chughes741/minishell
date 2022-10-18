@@ -225,7 +225,8 @@ void	builtin_unset(t_params *params)
 			break ;
 		}
 		pos = env_var_exists(params->exec_arg[i]);
-		data->envp = array_del_one(data->envp, pos);
+		if (pos != -1)
+			data->envp = array_del_one(data->envp, pos);
 		++i;
 	}
 	close_file(params->fd_in);
