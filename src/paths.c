@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:32:35 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 15:08:47 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/19 14:16:55 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 // Uses access to find the correct path 
 char	*get_path(char *command)
 {
-	// SIGSEGV when $PATH is unset
 	char	*path;
 	char	**paths;
 	int		i;
