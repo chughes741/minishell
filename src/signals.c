@@ -32,6 +32,7 @@ void	sigint_interactive(int signum)
 {
 	// TODO should clear the line and not add to the buffer
 	(void)signum;
+	rl_replace_line("", 0);
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	rl_on_new_line();
 	rl_redisplay();
