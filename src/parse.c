@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 17:26:42 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/19 19:34:39 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,11 @@ int	*get_arg_indices(char *arg)
 		if (arg[index] == '\'' || arg[index] == '\"')
 			index += quote_skip(&arg[index]);
 		while (arg[index] && arg[index] != ' ')
+		{
 			++index;
+			if (arg[index] == '<' || arg[index] == '>')
+				break;
+		}
 	}
 	quotes = int_realloc(quotes, len, len + 1);
 	quotes[len] = index;
