@@ -195,6 +195,7 @@ void	builtin_export(t_params *params)
 		return ;
 	}
 	i = 1;
+	invalid = false;
 	while (params->exec_arg[i])
 	{
 		if (valid_name(params->exec_arg[i]) == false)
