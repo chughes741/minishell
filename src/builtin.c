@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/19 13:03:17 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/19 13:11:25 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,8 +190,6 @@ void	builtin_export(t_params *params)
 	int		pos;
 	bool	invalid;
 
-	for (int i = 0; params->exec_arg[i]; i++)
-		printf("params->exec_arg[i] = %s\n", params->exec_arg[i]);
 	if (params->exec_arg[1] == NULL)
 	{
 		builtin_env(params);
