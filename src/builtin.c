@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 19:37:56 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/18 20:32:09 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,9 +187,8 @@ void	builtin_export(t_params *params)
 {	//TODO string with spaces doesn't work properly, quotes or not
 	int		i;
 	int		pos;
+	bool	invalid;
 
-	for (int i = 0; params->exec_arg[i]; i++)
-		printf("params->exec_arg[i] = |%s|\n", params->exec_arg[i]);
 	if (params->exec_arg[1] == NULL)
 	{
 		builtin_env(params);
@@ -200,11 +199,21 @@ void	builtin_export(t_params *params)
 	{
 		if (valid_name(params->exec_arg[i]) == false)
 		{
-			perror("Not a valid variable name: ");
-			break ;
+			if (ft_strchr(params->exec_arg[i - 1], '=') && ft_strchr(params->exec_arg[i], '='))
+				;
+			else
+			{
+				perror("Not a valid variable name: ");
+				invalid = true;
+			}
 		}
-		pos = env_var_exists(params->exec_arg[i]);
-		insert_new_var(params->exec_arg[i], pos);
+		if (invalid == false)
+		{
+			pos = env_var_exists(params->exec_arg[i]);
+			insert_new_var(params->exec_arg[i], pos);
+		}
+		else
+			invalid = false;
 		++i;
 	}
 	close_file(params->fd_in);
@@ -225,11 +234,6 @@ void	builtin_unset(t_params *params)
 		return ;
 	while (params->exec_arg[i])
 	{
-		if (valid_name(params->exec_arg[i]) == false)
-		{
-			perror("Not a valid variable name: ");
-			break ;
-		}
 		pos = env_var_exists(params->exec_arg[i]);
 		if (pos != -1)
 			data->envp = array_del_one(data->envp, pos);
