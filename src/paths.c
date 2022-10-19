@@ -37,7 +37,7 @@ char	*get_path(char *command)
 		}
 		path = xfree(path);
 	}
-	if (paths == NULL || cmd_idx(command) == 8)
+	if (cmd_idx(command) == 7)
 		perror("Command not found");
 	free_array(paths);
 	return (NULL);
