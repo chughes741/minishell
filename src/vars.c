@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:13:49 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 15:06:17 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/19 15:29:52 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ char	*sub_vars(char *arg)
 	int		i_arg;
 
 	i_arg = 0;
+	if (arg && ft_strncmp(arg, "$", 2) == 0)
+		return (arg);
 	while (arg)
 	{
 		i_arg += ft_strlen_before(&arg[i_arg], "$");
