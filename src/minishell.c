@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 15:42:02 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/19 18:43:40 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	run_minishell(t_data *dat)
 	{
 		init_signals(INTERACTIVE);
 		dat->last_cmd = readline(MSH_PROMPT);
-		if (dat->last_cmd == NULL)
-			return ;
+		while (dat->last_cmd[0] == '\0')
+			dat->last_cmd = readline(MSH_PROMPT);
 		add_history(dat->last_cmd);
 		dat->params = init_params(dat->last_cmd);
 		i = 0;
