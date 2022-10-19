@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 17:26:42 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/19 15:23:21 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,6 @@ int	*get_arg_indices(char *arg)
 	quotes[len] = index;
 	quotes[len + 1] = -1;
 	return (quotes);
-	exit(0);
 }
 
 //! TESTING
