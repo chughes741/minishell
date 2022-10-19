@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/19 13:11:25 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/19 13:14:43 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,7 @@ static bool	valid_name(char *name)
 	char	**split_name;
 
 	if (!ft_strchr(name, '='))
-	{
-		printf("IN\n");
 		return (false);
-	}
 	split_name = ft_split(name, '=');
 	if (ft_isalpha(name[0]) == false && name[0] != '_')
 	{
