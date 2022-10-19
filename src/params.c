@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:25:42 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 10:46:46 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/19 15:25:18 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ t_params	*init_cmd(int i, char *line)
 	data = get_data();
 	params = (t_params *)ft_calloc(1, sizeof(t_params));
 	params->exec_arg = split_args(line);
-	insert_vars(params->exec_arg);
 	params->fd_in = data->fd_io[i * 2];
 	params->fd_out = data->fd_io[(i * 2) + 1];
 	open_outfiles(params);
 	open_infiles(params);
+	insert_vars(params->exec_arg);
 	params->path = get_path(params->exec_arg[0]);
 	return (params);
 }
