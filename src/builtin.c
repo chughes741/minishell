@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 20:32:09 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/19 13:03:17 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,11 @@ static bool	valid_name(char *name)
 	char	**split_name;
 
 	if (!ft_strchr(name, '='))
+	{
+		printf("IN\n");
 		return (false);
+	}
 	split_name = ft_split(name, '=');
-	/*for (int i = 0; split_name[i]; i++)
-		printf("split_name[i] = %s\n", split_name[i]);*/
 	if (ft_isalpha(name[0]) == false && name[0] != '_')
 	{
 		split_name = free_array(split_name);
@@ -189,6 +190,8 @@ void	builtin_export(t_params *params)
 	int		pos;
 	bool	invalid;
 
+	for (int i = 0; params->exec_arg[i]; i++)
+		printf("params->exec_arg[i] = %s\n", params->exec_arg[i]);
 	if (params->exec_arg[1] == NULL)
 	{
 		builtin_env(params);
@@ -200,21 +203,15 @@ void	builtin_export(t_params *params)
 	{
 		if (valid_name(params->exec_arg[i]) == false)
 		{
-			if (ft_strchr(params->exec_arg[i - 1], '=') && ft_strchr(params->exec_arg[i], '='))
-				;
-			else
-			{
-				perror("Not a valid variable name: ");
-				invalid = true;
-			}
+			invalid = true;
+			perror("Not a valid variable name: ");
 		}
 		if (invalid == false)
 		{
 			pos = env_var_exists(params->exec_arg[i]);
 			insert_new_var(params->exec_arg[i], pos);
 		}
-		else
-			invalid = false;
+		invalid = false;
 		++i;
 	}
 	close_file(params->fd_in);
