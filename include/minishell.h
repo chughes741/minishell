@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/20 14:07:18 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/20 14:15:38 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,10 @@
 # define MINISHELL_H
 
 // STDLIB Includes
-# include <unistd.h> // write, access, read, close, fork, getcwd, chdir, unlink,
-					//execve, dup, dup2, pipe, isatty, ttyname, ttyslot
-# include <stdio.h> // readline, printf, perror
-# include <stdlib.h> // malloc, free, exit, getenv, 
-# include <fcntl.h> // open
-# include <sys/wait.h> // wait, wait3, wait4
-# include <sys/types.h> // waitpid, wait3, opendir, closedir
-# include <sys/wait.h> // waitpid
-# include <sys/time.h> // wait3
-# include <sys/resource.h> // wait3
-# include <signal.h> // signal, sigaction, sigemptyset, sigaddset, kill
-# include <sys/stat.h> // stat, lstat, fstat
-# include <dirent.h> // opendir, readdir, closedir
-# include <string.h> // strerror
-# include <sys/ioctl.h> // ioctl
-
-// Extra includes
-# include <errno.h> // errno
-# include <stdbool.h> // true, false, bool
+# include <stdlib.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <signal.h>
 
 // Libs
 # include "../librl/readline.h" // readline
@@ -53,7 +38,7 @@ typedef struct s_params {
 
 // Singleton struct for program data
 typedef struct s_data {
-	bool		run;
+	// bool		run;
 	char		**envp;
 	t_params	**params;
 	char		*last_cmd;

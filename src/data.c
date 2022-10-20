@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:58:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 15:41:32 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/20 14:15:55 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	init_data(void)
 	data->run_cmd[6] = builtin_exit;
 	data->run_cmd[7] = exe;
 	data->cmd_names = init_cmd_names();
-	data->run = true;
 	data->envp = arraydup(environ);
 	return ;
 }
