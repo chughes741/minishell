@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/20 14:07:09 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/20 14:42:22 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,10 @@ char	**split_command_groups(char *cmd)
 		return (xfree(temp));
 	idxs = get_split_indices(temp);
 	if (idxs == NULL)
+	{
+		temp = xfree(temp);
 		return (NULL);
+	}
 	cmd_strs = (char **)ft_calloc(intlen(idxs) + 1, sizeof(char *));
 	i = 0;
 	while (idxs && idxs[i + 1] >= 0)
