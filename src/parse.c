@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/20 11:34:35 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/20 13:39:17 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,24 +60,24 @@ char	**split_command_groups(char *cmd)
 {
 	char	**cmd_strs;
 	char	*temp;
-	int		*indices;
+	int		*idxs;
 	int		i;
 
 	temp = ft_strtrim(cmd, " ");
 	if (temp == NULL || temp[0] == '\0')
 		return (xfree(temp));
-	indices = get_split_indices(temp);
-	if (indices == NULL)
+	idxs = get_split_indices(temp);
+	if (idxs == NULL)
 		return (NULL);
-	cmd_strs = (char **)ft_calloc(intlen(indices) + 1, sizeof(char *));
+	cmd_strs = (char **)ft_calloc(intlen(idxs) + 1, sizeof(char *));
 	i = 0;
-	while (indices && indices[i + 1] >= 0)
+	while (idxs && idxs[i + 1] >= 0)
 	{
-		cmd_strs[i] = ft_substr(temp, indices[i], indices[i + 1] - indices[i] + 1);
+		cmd_strs[i] = ft_substr(temp, idxs[i], idxs[i + 1] - idxs[i] + 1);
 		++i;
 	}
 	temp = xfree(temp);
-	indices = xfree(indices);
+	idxs = xfree(idxs);
 	return (cmd_strs);
 }
 
