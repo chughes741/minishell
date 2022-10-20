@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:25:42 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/19 20:03:31 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/20 14:33:09 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_params	*init_cmd(int i, char *line)
 	open_outfiles(params);
 	open_infiles(params);
 	insert_vars(params->exec_arg);
-	params->path = get_path(params->exec_arg[0]);
+	if (params->exec_arg && params->exec_arg[0])
+		params->path = get_path(params->exec_arg[0]);
 	return (params);
 }
