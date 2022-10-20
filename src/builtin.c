@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/19 13:14:43 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/20 13:11:22 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,9 @@ int	env_var_exists(char *new_var)
 	while (data->envp[pos])
 	{
 		if (ft_strncmp(data->envp[pos], new_var_name,
-				ft_strlen(new_var_name)) == 0)
+				ft_strlen_before(data->envp[pos], "=")) == 0
+			&& ft_strlen_before(data->envp[pos], "=")
+			== ft_strlen_before(new_var_name, "="))
 		{
 			new_var_name = xfree(new_var_name);
 			return (pos);
@@ -182,7 +184,7 @@ void	insert_new_var(char *new_var, int pos)
 
 // Replicates variable exporting
 void	builtin_export(t_params *params)
-{	//TODO string with spaces doesn't work properly, quotes or not
+{	
 	int		i;
 	int		pos;
 	bool	invalid;
