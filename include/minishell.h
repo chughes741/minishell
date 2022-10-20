@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 17:41:50 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/20 14:07:18 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,8 @@ int			find_first(char *str, char *chrs);
 int			find_last(char *str, char *chrs);
 char		*join_free_both(char *s1, char *s2);
 char		**strnsplit(char *str, int index);
+int			*int_add(int *old, int size, int new);
+int			intlen(int *intstr);
 
 // Builtins
 int			cmd_idx(char *arg);
