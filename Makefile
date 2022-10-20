@@ -52,7 +52,29 @@ $(LIBRL): $(RLCONF)
 NAME	=	minishell
 SRCDIR	=	src/
 OBJDIR	=	bin/
-SRCS	=	$(wildcard $(SRCDIR)*.c) # RBS
+SRCS	=	src/array.c				\
+			src/builtin.c			\
+			src/builtin2.c			\
+			src/close_file.c		\
+			src/data.c				\
+			src/error.c				\
+			src/execute.c			\
+			src/files.c				\
+			src/find_and_replace.c	\
+			src/find_next.c			\
+			src/free_params.c		\
+			src/here_doc.c			\
+			src/io.c				\
+			src/minishell.c			\
+			src/params.c			\
+			src/parse.c				\
+			src/parse2.c			\
+			src/paths.c				\
+			src/quotes.c			\
+			src/signals.c			\
+			src/strnsplit.c			\
+			src/vars.c				\
+			src/wait.c
 OBJS	=	$(patsubst $(SRCDIR)%.c,$(OBJDIR)%.o,$(SRCS))
 DEP		=	include/minishell.h
 
