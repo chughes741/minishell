@@ -3,24 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2022/10/20 09:53:20 by malord           ###   ########.fr       */
+=======
+/*   Updated: 2022/10/20 10:02:13 by chughes          ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	run_minishell(t_data *dat)
+// Handles readline and history for prompt
+static char	*call_prompt(void)
+{
+	char	*line;
+
+	line = readline(MSH_PROMPT);
+	while (line && line[0] == '\0')
+		line = readline(MSH_PROMPT);
+	if (line)
+		add_history(line);
+	return (line);
+}
+
+// Runtime loop
+static void	run_minishell(t_data *dat)
 {
 	int	i;
 
 	while (1)
 	{
 		init_signals(INTERACTIVE);
+<<<<<<< Updated upstream
 		dat->last_cmd = readline(MSH_PROMPT);
 		add_history(dat->last_cmd);
+=======
+		dat->last_cmd = call_prompt();
+		if (dat->last_cmd == NULL)
+			break ;
+>>>>>>> Stashed changes
 		dat->params = init_params(dat->last_cmd);
 		i = 0;
 		init_signals(RUNTIME);
