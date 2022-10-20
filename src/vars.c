@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 10:13:49 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/19 19:37:12 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/20 13:40:21 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,46 @@ void	insert_vars(char **args)
 		++i;
 	}
 	return ;
+}
+
+// Returns position of var in envp, -1 if it does not exist
+int	env_var_exists(char *new_var)
+{
+	t_data	*data;
+	char	*new_var_name;
+	int		pos;
+
+	data = get_data();
+	pos = 0;
+	new_var_name = strcdup(new_var, "=");
+	while (data->envp[pos])
+	{
+		if (ft_strncmp(data->envp[pos], new_var_name,
+				ft_strlen_before(data->envp[pos], "=")) == 0
+			&& ft_strlen_before(data->envp[pos], "=")
+			== ft_strlen_before(new_var_name, "="))
+		{
+			new_var_name = xfree(new_var_name);
+			return (pos);
+		}
+		pos++;
+	}
+	new_var_name = xfree(new_var_name);
+	return (-1);
+}
+
+// Inserts new_var at pos, appends if pos is -1
+void	insert_new_var(char *new_var, int pos)
+{
+	t_data	*data;
+
+	data = get_data();
+	if (pos == -1)
+	{
+		pos = arraylen(data->envp);
+		data->envp = array_realloc(data->envp, pos + 1);
+	}
+	else
+		xfree(data->envp[pos]);
+	data->envp[pos] = ft_strdup(new_var);
 }
