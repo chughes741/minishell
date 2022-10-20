@@ -112,6 +112,7 @@ re: fclean all
 norm:
 	$(HIDE)norminette include/
 	$(HIDE)norminette src/
+	$(HIDE)norminette libft/
 
 valgrind: all
 	$(HIDE)valgrind									\
