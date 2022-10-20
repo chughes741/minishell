@@ -6,11 +6,21 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/20 13:39:17 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/20 14:02:06 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// int realloc with new value to set
+int	*int_add(int *old, int size, int new)
+{
+	int	*new_array;
+
+	new_array = int_realloc(old, size, size + 1);
+	new_array[size] = new;
+	return (new_array);
+}
 
 // Returns an array of integers containing the positions of quotes in a string
 int	*get_split_indices(char *arg)
@@ -32,14 +42,12 @@ int	*get_split_indices(char *arg)
 		}
 		else if (arg[index] == '|')
 		{
-			quotes = int_realloc(quotes, len, len + 1);
-			quotes[len] = index;
+			quotes = int_add(quotes, len, index);
 			len++;
 		}
 		index++;
 	}
-	quotes = int_realloc(quotes, len, len + 1);
-	quotes[len] = index;
+	quotes = int_add(quotes, len, index);
 	quotes[len + 1] = -1;
 	return (quotes);
 }
@@ -112,42 +120,46 @@ static void	strpopmove(char *str, int position)
 	return ;
 }
 
-//! TESTING
+// A garbage function to get around norm
+void	increment(char *arg, int *i)
+{
+	if (ft_strncmp(&arg[*i], ">>", 2) == 0
+		|| ft_strncmp(&arg[*i], "<<", 2) == 0)
+		*i += 1;
+	if ((arg[*i] == '>' || arg[*i] == '<') && arg[*i + 1] == ' ')
+	{
+		while (arg[*i + 1] == ' ')
+			strpopmove(arg, *i + 1);
+	}
+	if (arg[*i] == '\'' || arg[*i] == '\"')
+		*i += quote_skip(&arg[*i]);
+	while (arg[*i] && arg[*i] != ' ')
+	{
+		*i += 1;
+		if (arg[*i] == '<' || arg[*i] == '>')
+			break ;
+	}
+}
+
+// Generates a int str of indexs to split args
 int	*get_arg_indices(char *arg)
 {
-	int	index;
+	int	i;
 	int	len;
 	int	*quotes;
 
-	index = 0;
+	i = 0;
 	len = 1;
 	quotes = ft_calloc(len + 1, sizeof(int));
-	while (arg[index])
+	while (arg[i])
 	{
-		while (arg[index] == ' ')
-			++index;
-		quotes = int_realloc(quotes, len, len + 1);
-		quotes[len] = index;
+		while (arg[i] == ' ')
+			++i;
+		quotes = int_add(quotes, len, i);
 		len++;
-		if (ft_strncmp(&arg[index], ">>", 2) == 0
-			|| ft_strncmp(&arg[index], "<<", 2) == 0)
-			++index;
-		if ((arg[index] == '>' || arg[index] == '<') && arg[index + 1] == ' ')
-		{
-			while (arg[index + 1] == ' ')
-				strpopmove(arg, index + 1);
-		}
-		if (arg[index] == '\'' || arg[index] == '\"')
-			index += quote_skip(&arg[index]);
-		while (arg[index] && arg[index] != ' ')
-		{
-			++index;
-			if (arg[index] == '<' || arg[index] == '>')
-				break;
-		}
+		increment(arg, &i);
 	}
-	quotes = int_realloc(quotes, len, len + 1);
-	quotes[len] = index;
+	quotes = int_add(quotes, len, i);
 	quotes[len + 1] = -1;
 	return (quotes);
 	exit(0);
