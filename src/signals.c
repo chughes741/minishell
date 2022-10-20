@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:05:28 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/18 11:18:15 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/20 13:28:50 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	init_signals(int mode)
 // Handles interupt signal "^C" during interactive mode
 void	sigint_interactive(int signum)
 {
-	// TODO should clear the line and not add to the buffer
 	(void)signum;
 	rl_replace_line("", 0);
 	ft_putchar_fd('\n', STDOUT_FILENO);
@@ -60,7 +59,6 @@ void	sigint_runtime(int signum)
 // Handles quit signal "^\" while programs are running
 void	sigquit_runtime(int signum)
 {
-	// TODO handle quit when child process is running
 	t_data	*data;
 
 	data = get_data();

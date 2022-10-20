@@ -6,11 +6,30 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:42:42 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/19 14:19:25 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/20 13:24:48 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// Returns index of cmd to call cmd function pointer from cmd array
+int	cmd_idx(char *arg)
+{
+	t_data	*d;
+	int		i;
+
+	d = get_data();
+	i = 0;
+	if (!arg)
+		return (0);
+	while (d->cmd_names[i])
+	{
+		if (!ft_strncmp(arg, d->cmd_names[i], ft_strlen(d->cmd_names[i]) + 1))
+			break ;
+		++i;
+	}
+	return (i);
+}
 
 // Executes program specified in param
 void	exe(t_params *param)
