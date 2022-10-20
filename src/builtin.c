@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/20 13:40:17 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/20 13:41:50 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ void	builtin_export(t_params *params)
 {	
 	int		i;
 	int		pos;
-	bool	invalid;
 
 	if (params->exec_arg[1] == NULL)
 	{
@@ -134,20 +133,15 @@ void	builtin_export(t_params *params)
 		return ;
 	}
 	i = 1;
-	invalid = false;
 	while (params->exec_arg[i])
 	{
 		if (valid_name(params->exec_arg[i]) == false)
-		{
-			invalid = true;
 			perror("Not a valid variable name: ");
-		}
-		if (invalid == false)
+		else
 		{
 			pos = env_var_exists(params->exec_arg[i]);
 			insert_new_var(params->exec_arg[i], pos);
 		}
-		invalid = false;
 		++i;
 	}
 	close_file(params->fd_in);
