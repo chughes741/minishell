@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 20:28:51 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 13:48:31 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/19 19:53:06 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	open_outfiles(t_params *param)
 	int	i;
 
 	i = 0;
-	while (param->exec_arg[i])
+	while (param->exec_arg && param->exec_arg[i])
 	{
 		if (param->exec_arg[i][0] == '>')
 		{
@@ -60,7 +60,7 @@ void	open_infiles(t_params *param)
 	int	i;
 
 	i = 0;
-	while (param->exec_arg[i])
+	while (param->exec_arg && param->exec_arg[i])
 	{
 		if (param->exec_arg[i][0] == '<')
 		{

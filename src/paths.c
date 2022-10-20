@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 12:32:35 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/19 14:16:55 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/19 19:58:54 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ char	*get_path(char *command)
 
 	if (access(command, F_OK) == 0)
 		return (ft_strdup(command));
-	i = -1;
 	path = get_var(ft_strdup("PATH"));
 	paths = ft_split(path, ':');
 	path = xfree(path);
+	i = -1;
 	while (paths && paths[++i] != NULL)
 	{
 		path = ft_strjoin(paths[i], "/");

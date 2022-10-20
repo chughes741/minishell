@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/19 19:34:39 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/19 20:04:35 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,11 @@ char	**split_args(char *cmd)
 
 	temp = ft_strtrim(cmd, " |");
 	if (temp == NULL || temp[0] == '\0')
-		return (xfree(temp));
+	{
+		perror("Syntax error");
+		temp = xfree(temp);
+		return ((char **)ft_calloc(1, sizeof(char *)));
+	}
 	indices = get_arg_indices(temp);
 	if (indices == NULL)
 		return (NULL);
