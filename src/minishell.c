@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/20 10:09:02 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/20 10:11:49 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,28 @@ static char	*call_prompt(void)
 }
 
 // Runtime loop
-static void	run_minishell(t_data *dat)
+static void	run_minishell(t_data *d)
 {
 	int	i;
 
 	while (1)
 	{
 		init_signals(INTERACTIVE);
-		dat->last_cmd = call_prompt();
-		if (dat->last_cmd == NULL)
+		d->last_cmd = call_prompt();
+		if (d->last_cmd == NULL)
 			break ;
-		dat->params = init_params(dat->last_cmd);
+		d->params = init_params(d->last_cmd);
 		i = 0;
 		init_signals(RUNTIME);
-		while (i < dat->n_cmds && dat->params[i]->exec_arg[0] != NULL)
+		while (i < d->n_cmds && d->params[i]->exec_arg[0] != NULL)
 		{
-			if (dat->params[i]->err == false)
-				dat->run_cmd[cmd_idx(dat->params[i]->exec_arg[0])](dat->params[i]);
+			if (d->params[i]->err == false)
+				d->run_cmd[cmd_idx(d->params[i]->exec_arg[0])](d->params[i]);
 			i++;
 		}
-		wait_all(dat);
-		dat->params = free_params(dat->params);
-		dat->n_cmds = 0;
+		wait_all(d);
+		d->params = free_params(d->params);
+		d->n_cmds = 0;
 	}
 }
 
