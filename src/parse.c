@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/20 14:02:06 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/20 14:04:59 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ int	*get_arg_indices(char *arg)
 	exit(0);
 }
 
-//! TESTING
+// Splits arguments into an array of strs
 char	**split_args(char *cmd)
 {
 	char	**args;
@@ -184,12 +184,9 @@ char	**split_args(char *cmd)
 	if (indices == NULL)
 		return (NULL);
 	args = (char **)ft_calloc(intlen(indices) + 1, sizeof(char *));
-	i = 0;
-	while (indices && indices[i + 1] >= 0)
-	{
+	i = -1;
+	while (indices && indices[++i + 1] >= 0)
 		args[i] = ft_substr(temp, indices[i], indices[i + 1] - indices[i]);
-		++i;
-	}
 	if (indices[1] == 0)
 		args = array_del_one(args, 0);
 	temp = xfree(temp);
