@@ -6,7 +6,7 @@
 /*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/20 15:09:43 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/20 15:29:38 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@ void	builtin_echo(t_params *params)
 	return ;
 }
 
+// If you think this is a trick to pass norminette, you're right
+static void	end_cd(char *buf, int pos)
+{
+	buf = str_prepend("PWD=", buf);
+	pos = env_var_exists(buf);
+	insert_new_var(buf, pos);
+	buf = xfree(buf);
+}
+
 // Replicates the UNIX command cd
 void	builtin_cd(t_params *params)
 {
@@ -47,6 +56,7 @@ void	builtin_cd(t_params *params)
 	int		pos;
 
 	size = 0;
+	pos = 0;
 	if (params->exec_arg[1] == NULL)
 		return ;
 	buf = (char *)ft_calloc(size, sizeof(char));
@@ -63,10 +73,7 @@ void	builtin_cd(t_params *params)
 			size++;
 			buf = (char *)ft_calloc(size, sizeof(char));
 		}
-		buf = str_prepend("PWD=", buf);
-		pos = env_var_exists(buf);
-		insert_new_var(buf, pos);
-		buf = xfree(buf);
+		end_cd(buf, pos);
 	}
 }
 
@@ -90,62 +97,5 @@ void	builtin_pwd(t_params *params)
 	close_file(params->fd_in);
 	close_file(params->fd_out);
 	xfree(buf);
-	return ;
-}
-
-// Checks is variable name is valid
-static bool	valid_name(char *name)
-{
-	int		i;
-	int		j;
-	char	**split_name;
-
-	split_name = ft_split(name, '=');
-	if (!split_name[1] || (ft_isalpha(name[0]) == false && name[0] != '_'))
-	{
-		split_name = free_array(split_name);
-		return (false);
-	}
-	j = 0;
-	i = 1;
-	while (split_name[i])
-	{
-		if (ft_isalnum(split_name[0][j]) == true || split_name[0][j] == '_')
-			i++;
-		else
-		{
-			split_name = free_array(split_name);
-			return (false);
-		}
-	}
-	split_name = free_array(split_name);
-	return (true);
-}
-
-// Replicates variable exporting
-void	builtin_export(t_params *params)
-{	
-	int		i;
-	int		pos;
-
-	if (params->exec_arg[1] == NULL)
-	{
-		builtin_env(params);
-		return ;
-	}
-	i = 1;
-	while (params->exec_arg[i])
-	{
-		if (valid_name(params->exec_arg[i]) == false)
-			perror("Not a valid variable name: ");
-		else
-		{
-			pos = env_var_exists(params->exec_arg[i]);
-			insert_new_var(params->exec_arg[i], pos);
-		}
-		++i;
-	}
-	close_file(params->fd_in);
-	close_file(params->fd_out);
 	return ;
 }
