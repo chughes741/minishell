@@ -50,7 +50,6 @@ $(LIBRL): $(RLCONF)
 
 # Dir and file names
 NAME	=	minishell
-DEBUG	=	minishell_debug
 SRCDIR	=	src/
 OBJDIR	=	bin/
 SRCS	=	$(wildcard $(SRCDIR)*.c) # RBS
@@ -72,26 +71,25 @@ $(OBJDIR):
 # Removes objects
 clean:
 	$(HIDE)$(RM) $(OBJS)
-#!	$(HIDE)$(MAKE) -C $(LFTDIR) $(MAKE) clean
+	$(HIDE)$(MAKE) -C $(LFTDIR) $(MAKE) clean
 
 # Removes objects and executables
 fclean: clean
 	$(HIDE)$(RM) $(NAME) $(DEBUG)
 	$(HIDE)$(RM) $(NAME).dSYM
-#!	$(HIDE)$(MAKE) -C $(LFTDIR) $(MAKE) fclean
+	$(HIDE)$(MAKE) -C $(LFTDIR) $(MAKE) fclean
 
 # Removes objects and executables and remakes
 re: fclean all
 
-segfault:  $(OBJDIR) $(LIBRL) $(LFTDIR)/$(LIBFT) $(OBJS)
-	$(HIDE)$(CC) $(CFLAGS) -fsanitize=address $(OBJS) $(LFTDIR)$(LIBFT) $(LIBRL) -o $@ 
 
 #*-----------------------------------------------------------------------------#
 #*                                TESTING                                      #
 #*-----------------------------------------------------------------------------#
 
-test:
-	$(HIDE)$(MAKE) -C test
+norm:
+	$(HIDE)norminette include/
+	$(HIDE)norminette src/
 
 valgrind: all
 	$(HIDE)valgrind									\
