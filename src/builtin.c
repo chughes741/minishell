@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/20 13:45:08 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/20 15:09:43 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ void	builtin_cd(t_params *params)
 		return ;
 	buf = (char *)ft_calloc(size, sizeof(char));
 	if (chdir(params->exec_arg[1]) == -1)
+	{
 		perror("cd: ");
+		buf = xfree(buf);
+	}
 	else
 	{
 		while (getcwd(buf, size) == NULL)
