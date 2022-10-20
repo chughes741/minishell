@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 13:55:39 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 10:46:10 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/20 13:36:18 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	find_and_replace(char *str, char *chrs, char replace, int len)
 {
 	int	i;
-	
+
 	i = 0;
 	while (str[i] && i < len)
 	{
