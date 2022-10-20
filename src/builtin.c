@@ -3,33 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
+/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 15:56:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/20 13:11:22 by malord           ###   ########.fr       */
+/*   Updated: 2022/10/20 13:36:48 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// Returns index of cmd to call cmd function pointer from cmd array
-int	cmd_idx(char *arg)
-{
-	t_data	*data;
-	int		i;
-
-	data = get_data();
-	i = 0;
-	if (!arg)
-		return (0);
-	while (data->cmd_names[i])
-	{
-		if (!ft_strncmp(arg, data->cmd_names[i], ft_strlen(data->cmd_names[i]) + 1))
-			break ;
-		++i;
-	}
-	return (i);
-}
 
 // Replicates the UNIX program echo
 void	builtin_echo(t_params *params)
