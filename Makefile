@@ -106,6 +106,10 @@ re: fclean all
 #*                                TESTING                                      #
 #*-----------------------------------------------------------------------------#
 
+norm:
+	$(HIDE)norminette include/
+	$(HIDE)norminette src/
+
 valgrind: all
 	$(HIDE)valgrind									\
 			--leak-check=full						\
