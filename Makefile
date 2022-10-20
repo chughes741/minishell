@@ -8,7 +8,7 @@ DEFAULT_GOAL: all
 .PHONY: all bonus clean fclean re test valgrind
 
 # Hide calls
-export VERBOSE	=	FALSE
+export VERBOSE	=	TRUE
 ifeq ($(VERBOSE),TRUE)
 	HIDE =
 else
@@ -50,10 +50,29 @@ $(LIBRL): $(RLCONF)
 
 # Dir and file names
 NAME	=	minishell
-DEBUG	=	minishell_debug
 SRCDIR	=	src/
 OBJDIR	=	bin/
-SRCS	=	$(wildcard $(SRCDIR)*.c) # RBS
+SRCS	=	src/array.c				\
+			src/builtin.c			\
+			src/close_file.c		\
+			src/data.c				\
+			src/error.c				\
+			src/execute.c			\
+			src/files.c				\
+			src/find_and_replace.c	\
+			src/find_next.c			\
+			src/free_params.c		\
+			src/here_doc.c			\
+			src/io.c				\
+			src/minishell.c			\
+			src/params.c			\
+			src/parse.c				\
+			src/paths.c				\
+			src/quotes.c			\
+			src/signals.c			\
+			src/strnsplit.c			\
+			src/vars.c				\
+			src/wait.c
 OBJS	=	$(patsubst $(SRCDIR)%.c,$(OBJDIR)%.o,$(SRCS))
 DEP		=	include/minishell.h
 
@@ -72,26 +91,20 @@ $(OBJDIR):
 # Removes objects
 clean:
 	$(HIDE)$(RM) $(OBJS)
-#!	$(HIDE)$(MAKE) -C $(LFTDIR) $(MAKE) clean
+	$(HIDE)$(MAKE) -C $(LFTDIR) $(MAKE) clean
 
 # Removes objects and executables
 fclean: clean
-	$(HIDE)$(RM) $(NAME) $(DEBUG)
-	$(HIDE)$(RM) $(NAME).dSYM
-#!	$(HIDE)$(MAKE) -C $(LFTDIR) $(MAKE) fclean
+	$(HIDE)$(RM) $(NAME)
+	$(HIDE)$(MAKE) -C $(LFTDIR) $(MAKE) fclean
 
 # Removes objects and executables and remakes
 re: fclean all
 
-segfault:  $(OBJDIR) $(LIBRL) $(LFTDIR)/$(LIBFT) $(OBJS)
-	$(HIDE)$(CC) $(CFLAGS) -fsanitize=address $(OBJS) $(LFTDIR)$(LIBFT) $(LIBRL) -o $@ 
 
 #*-----------------------------------------------------------------------------#
 #*                                TESTING                                      #
 #*-----------------------------------------------------------------------------#
-
-test:
-	$(HIDE)$(MAKE) -C test
 
 valgrind: all
 	$(HIDE)valgrind									\
@@ -101,4 +114,4 @@ valgrind: all
 			--show-reachable=yes					\
 			--error-limit=no						\
 			--suppressions=./config/minishell.supp	\
-			./minishell 
+			./minishell
