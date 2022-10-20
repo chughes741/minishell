@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 16:40:01 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 10:46:34 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/20 13:35:49 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 // Returns an array with the fds of n pipes
 int	*init_io(int n_cmds, int *fd_io)
 {
-	// int	*fd_io;
 	int	temp[2];
 	int	i;
 
