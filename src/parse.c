@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/20 13:27:27 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/20 13:31:17 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	*get_split_indices(char *arg)
 }
 
 // Returns number of ints in an int*, until first -1
-static int	intlen(int *intstr)
+int	intlen(int *intstr)
 {
 	int	len;
 

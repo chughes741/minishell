@@ -54,6 +54,7 @@ SRCDIR	=	src/
 OBJDIR	=	bin/
 SRCS	=	src/array.c				\
 			src/builtin.c			\
+			src/builtin2.c			\
 			src/close_file.c		\
 			src/data.c				\
 			src/error.c				\
@@ -67,6 +68,7 @@ SRCS	=	src/array.c				\
 			src/minishell.c			\
 			src/params.c			\
 			src/parse.c				\
+			src/parse2.c			\
 			src/paths.c				\
 			src/quotes.c			\
 			src/signals.c			\

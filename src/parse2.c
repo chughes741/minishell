@@ -6,26 +6,11 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:27:48 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/20 13:28:31 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/20 13:31:46 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// Returns index of next valid non space 
-static int	skip_spaces(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str && str[i] == ' ')
-		++i;
-	while (str && (str[i] == '<' || str[i] == '>'))
-		++i;
-	while (str && str[i] == ' ')
-		++i;
-	return (i);
-}
 
 // strpop without allocation
 static void	strpopmove(char *str, int position)
