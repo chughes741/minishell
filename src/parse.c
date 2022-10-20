@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:46:23 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/20 11:02:40 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/20 11:33:02 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,5 @@ char	**split_args(char *cmd)
 		args = array_del_one(args, 0);
 	temp = xfree(temp);
 	indices = xfree(indices);
-	for (int i = 0; args[i]; ++i)
-		printf("args[%i]: |%s|\n", i, args[i]);
 	return (args);
 }
