@@ -40,7 +40,7 @@ RLCONF	=	librl/config.log
 $(RLCONF): $(OBJDIR)
 	$(HIDE)cd librl && ./configure --silent
 
-$(LIBRL):
+$(LIBRL): $(RLCONF)
 	$(HIDE)$(MAKE) -s -C librl/
 
 
