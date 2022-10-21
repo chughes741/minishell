@@ -8,7 +8,7 @@ DEFAULT_GOAL: all
 .PHONY: all bonus clean fclean re test valgrind
 
 # Hide calls
-export VERBOSE	=	FALSE
+export VERBOSE	=	TRUE
 ifeq ($(VERBOSE),TRUE)
 	HIDE =
 else
@@ -17,7 +17,7 @@ endif
 
 # Compiler and flags
 CC		=	gcc
-CFLAGS	=	-Wall -Werror -Wextra -I./include -I./librl -I./libft/include
+CFLAGS	=	-Wall -Werror -Wextra -I./include -I./librl -I./libft/include -lcurses
 RM		=	rm -rf
 
 
@@ -28,7 +28,7 @@ RM		=	rm -rf
 LFTDIR	=	libft/
 LIBFT	=	libft.a
 LFTDEP	=	libft/include/libft.h
-LIBRL	=	librl/libreadline.a librl/libhistory.a -lcurses
+LIBRL	=	librl/libreadline.a librl/libhistory.a
 
 # Generates libft.a
 $(LFTDIR)/$(LIBFT): $(LFTDEP)
@@ -37,10 +37,10 @@ $(LFTDIR)/$(LIBFT): $(LFTDEP)
 # Readline library targetes
 RLCONF	=	librl/config.log
 
-$(RLCONF): $(OBJDIR) 
+$(RLCONF): $(OBJDIR)
 	$(HIDE)cd librl && ./configure --silent
 
-$(LIBRL): $(RLCONF)
+$(LIBRL):
 	$(HIDE)$(MAKE) -s -C librl/
 
 
