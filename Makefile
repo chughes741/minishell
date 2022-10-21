@@ -17,7 +17,7 @@ endif
 
 # Compiler and flags
 CC		=	gcc
-CFLAGS	=	-Wall -Werror -Wextra -I./include -I./librl -I./libft/include -lcurses
+CFLAGS	=	-Wall -Werror -Wextra -I./include -I./librl -I./libft/include
 RM		=	rm -rf
 
 
@@ -81,7 +81,7 @@ DEP		=	include/minishell.h
 all: $(NAME)
 
 $(NAME): $(LIBRL) $(LFTDIR)/$(LIBFT) $(OBJS)
-	$(HIDE)$(CC) $(CFLAGS) $(OBJS) $(LFTDIR)$(LIBFT) $(LIBRL) -o $@ 
+	$(HIDE)$(CC) $(CFLAGS) $(OBJS) $(LFTDIR)$(LIBFT) $(LIBRL) -lcurses -o $@ 
 
 $(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c $(DEP)
 	$(HIDE)$(CC) $(CFLAGS) -c $< -o $@
