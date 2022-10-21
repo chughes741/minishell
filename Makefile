@@ -37,7 +37,7 @@ $(LFTDIR)/$(LIBFT): $(LFTDEP)
 # Readline library targetes
 RLCONF	=	librl/config.log
 
-$(RLCONF):
+$(RLCONF): $(OBJDIR) 
 	$(HIDE)cd librl && ./configure --silent
 
 $(LIBRL): $(RLCONF)
@@ -80,7 +80,7 @@ DEP		=	include/minishell.h
 
 all: $(NAME)
 
-$(NAME): $(OBJDIR) $(LIBRL) $(LFTDIR)/$(LIBFT) $(OBJS)
+$(NAME): $(LIBRL) $(LFTDIR)/$(LIBFT) $(OBJS)
 	$(HIDE)$(CC) $(CFLAGS) $(OBJS) $(LFTDIR)$(LIBFT) $(LIBRL) -o $@ 
 
 $(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c $(DEP)
@@ -118,8 +118,8 @@ valgrind: all
 	$(HIDE)valgrind									\
 			--leak-check=full						\
 			--show-leak-kinds=all					\
-			--track-fds=yes							\
 			--show-reachable=yes					\
+			--track-fds=yes							\
 			--error-limit=no						\
 			--suppressions=./config/minishell.supp	\
-			./minishell 
+			./minishell
