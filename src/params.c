@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 13:25:42 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/20 14:33:09 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/21 11:35:03 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,7 @@ t_params	*init_cmd(int i, char *line)
 	insert_vars(params->exec_arg);
 	if (params->exec_arg && params->exec_arg[0])
 		params->path = get_path(params->exec_arg[0]);
+	else
+		params->err = true;
 	return (params);
 }

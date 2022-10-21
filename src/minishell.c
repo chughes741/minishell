@@ -6,7 +6,7 @@
 /*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 11:30:00 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/20 10:11:49 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/21 11:37:42 by chughes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ static char	*call_prompt(void)
 	return (line);
 }
 
+static void	close_two(t_params *p)
+{
+	close_file(p->fd_in);
+	close_file(p->fd_out);
+}
+
 // Runtime loop
 static void	run_minishell(t_data *d)
 {
@@ -39,10 +45,12 @@ static void	run_minishell(t_data *d)
 		d->params = init_params(d->last_cmd);
 		i = 0;
 		init_signals(RUNTIME);
-		while (i < d->n_cmds && d->params[i]->exec_arg[0] != NULL)
+		while (i < d->n_cmds)
 		{
 			if (d->params[i]->err == false)
 				d->run_cmd[cmd_idx(d->params[i]->exec_arg[0])](d->params[i]);
+			else
+				close_two(d->params[i]);
 			i++;
 		}
 		wait_all(d);
