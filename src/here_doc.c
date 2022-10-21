@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chughes <chughes@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: malord <malord@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 13:18:21 by chughes           #+#    #+#             */
-/*   Updated: 2022/10/17 12:53:02 by chughes          ###   ########.fr       */
+/*   Updated: 2022/10/21 11:26:36 by malord           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	here_doc(char *eof)
 			break ;
 		else
 			ft_putstr_fd(line, fd_pipe[1]);
+		write(fd_pipe[1], "\n", 1);
 	}
 	close(fd_pipe[1]);
 	return (fd_pipe[0]);
